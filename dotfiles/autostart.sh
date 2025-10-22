@@ -10,7 +10,7 @@ pgrep -x slstatus > /dev/null || slstatus &
 pgrep -x picom > /dev/null || picom -b --backend glx --vsync &
 
 # Set wallpaper using feh
-feh --bg-scale ~/dwm-mint/wallpaper/eva.jpg 2>/dev/null &
+feh --bg-scale ~/dwm-mint/wallpaper/eva-dark.png 2>/dev/null &
 
 # Start Cinnamon settings daemon for X settings
 pgrep -x csd-xsettings > /dev/null || /usr/bin/csd-xsettings &
