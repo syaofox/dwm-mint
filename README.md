@@ -41,7 +41,7 @@ sudo apt install build-essential libxft-dev libxinerama-dev libxrandr-dev
 
 ```bash
 # 必需软件
-sudo apt install rofi alacritty picom feh maim slop xclip
+sudo apt install rofi alacritty picom feh maim slop xclip xfce4-clipman
 
 # Brave 浏览器（可选，如果不需要可跳过）
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -58,6 +58,7 @@ sudo apt install brave-browser
 - `maim` - 截图工具
 - `slop` - 区域选择工具（配合 maim 使用）
 - `xclip` - 命令行剪贴板工具
+- `xfce4-clipman` - 剪贴板管理与同步（修复复制/选择缓冲区不同步问题）
 - `brave-browser` - Brave 浏览器（可选）
 - `nemo` - 文件管理器（Mint 自带，无需安装）
 
@@ -102,7 +103,7 @@ git clone https://github.com/syaofox/dwm-mint.git
 sudo apt install build-essential libxft-dev libxinerama-dev
 
 # 运行时软件
-sudo apt install rofi alacritty picom feh maim slop xclip
+sudo apt install rofi alacritty picom feh maim slop xclip xfce4-clipman
 ```
 
 ### 3. 编译并安装 DWM
@@ -269,6 +270,7 @@ DWM 启动时会自动运行以下程序（见 `dotfiles/autostart.sh`）：
 3. **feh** - 设置壁纸
 4. **csd-xsettings** - Cinnamon 设置守护进程
 5. **csd-cursor** - Cinnamon 光标设置守护进程
+6. **xfce4-clipman** - 剪贴板守护进程（自动同步剪贴板）
 
 ## 自定义配置
 
@@ -355,7 +357,7 @@ sudo apt install build-essential libxft-dev libxinerama-dev
 ### 问题：登录后黑屏或无法启动 DWM
 
 **解决方案**：
-1. 按 `Ctrl + Alt + F3` 切换到 TTY3
+1. 按 `Ctrl + Alt + F3` 切换到 TTY3`
 2. 登录后检查日志：`cat ~/.xsession-errors`
 3. 确认 dwm 已正确安装：`which dwm`（应显示 `/usr/local/bin/dwm`）
 4. 手动测试启动：`startx /usr/local/bin/dwm`
