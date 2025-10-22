@@ -1,0 +1,9 @@
+[submodule "dwm"]
+	path = dwm
+	url = git@github.com:syaofox/dwm.git
+[submodule "slstatus"]
+	path = slstatus
+	url = git@github.com:syaofox/slstatus.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:syaofox/dotfiles.git
