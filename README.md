@@ -11,6 +11,7 @@
 - 🚀 自动启动脚本
 - 🎯 状态栏彩色支持
 - ⌨️ 优化的快捷键配置
+- 🔒 屏幕锁定 (slock)
 
 ## 系统要求
 
@@ -118,7 +119,14 @@ cd ~/dwm-mint/slstatus
 sudo make clean install
 ```
 
-### 5. 创建 DWM 会话文件
+### 5. 编译并安装 slock
+
+```bash
+cd ~/dwm-mint/slock
+sudo make clean install
+```
+
+### 6. 创建 DWM 会话文件
 
 使用脚本一键创建 `~/.xsession` 与 `/usr/share/xsessions/dwm.desktop`（适配 LightDM，使用 `/etc/X11/Xsession` 自动读取 `~/.xsession`）：
 
@@ -180,7 +188,8 @@ mkdir -p ~/dwm-mint/wallpaper
 | `Super + W` | 打开 Brave 浏览器 |
 | `Super + E` | 打开文件管理器 (Nemo) |
 | `Super + A` | 区域截图并复制到剪贴板 |
-| `Super + Shift + E` | 打开电源菜单 (logout/reboot/shutdown) |
+| `Super + Shift + L` | 锁定屏幕 |
+| `Super + Shift + E` | 打开电源菜单 (lock/logout/reboot/shutdown) |
 
 ### 窗口管理
 
@@ -296,6 +305,21 @@ killall slstatus
 slstatus &
 ```
 
+### 修改 slock 配置
+
+1. 编辑配置文件：
+```bash
+cd ~/dwm-mint/slock
+nano config.def.h  # 或使用你喜欢的编辑器
+```
+
+2. 重新编译安装：
+```bash
+sudo make clean install
+```
+
+3. 测试锁屏：`Super + Shift + L`
+
 ## 故障排除
 ### 问题：登录界面没有显示 dwm 会话
 
@@ -383,6 +407,10 @@ sudo make clean install
 # 更新 slstatus
 cd ~/dwm-mint/slstatus
 sudo make clean install
+
+# 更新 slock
+cd ~/dwm-mint/slock
+sudo make clean install
 ```
 
 然后按 `Super + Shift + Q` 登出，重新登录即可应用更改。
@@ -400,6 +428,10 @@ sudo make uninstall
 cd ~/dwm-mint/slstatus
 sudo make uninstall
 
+# 卸载 slock
+cd ~/dwm-mint/slock
+sudo make uninstall
+
 # 删除会话文件
 sudo rm /usr/share/xsessions/dwm.desktop
 ```
@@ -408,6 +440,7 @@ sudo rm /usr/share/xsessions/dwm.desktop
 
 - [DWM 官方网站](https://dwm.suckless.org/)
 - [slstatus 官方网站](https://tools.suckless.org/slstatus/)
+- [slock 官方网站](https://tools.suckless.org/slock/)
 - [Rofi 文档](https://github.com/davatorium/rofi)
 - [Alacritty 文档](https://github.com/alacritty/alacritty)
 
@@ -415,6 +448,7 @@ sudo rm /usr/share/xsessions/dwm.desktop
 
 - DWM: MIT/X Consortium License
 - slstatus: ISC License
+- slock: MIT/X Consortium License
 - 本配置: 遵循上游项目许可证
 
 ## 贡献
