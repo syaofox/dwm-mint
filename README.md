@@ -119,17 +119,35 @@ sudo make clean install
 
 ### 5. 创建 DWM 会话文件
 
-创建 DWM 的 X 会话入口，这样就可以在登录管理器中选择 DWM：
+使用脚本一键创建 `~/.xsession` 与 `/usr/share/xsessions/dwm.desktop`（适配 LightDM，使用 `/etc/X11/Xsession` 自动读取 `~/.xsession`）：
 
 ```bash
-sudo tee /usr/share/xsessions/dwm.desktop > /dev/null <<EOF
-[Desktop Entry]
-Name=DWM
-Comment=Dynamic Window Manager
-Exec=/usr/local/bin/dwm
-Type=Application
-EOF
+bash scripts/setup-dwm-session.sh
 ```
+
+脚本会写入以下内容：
+
+- `~/.xsession`
+
+  ```sh
+  #!/bin/sh
+  # start GNOME Keyring Daemon and export SSH agent variables
+  eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+  export SSH_AUTH_SOCK GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO
+  exec dwm
+  ```
+
+- `/usr/share/xsessions/dwm.desktop`
+
+  ```ini
+  [Desktop Entry]
+  Name=dwm
+  Comment=dynamic window manager
+  Exec=/etc/X11/Xsession
+  TryExec=/usr/bin/dwm
+  Type=XSession
+  DesktopNames=dwm
+  ```
 
 ### 6. 准备壁纸（可选）
 
@@ -278,6 +296,19 @@ slstatus &
 ```
 
 ## 故障排除
+### 问题：登录界面没有显示 dwm 会话
+
+**解决方案**：
+1. 确认 `dwm` 已安装且存在于 `/usr/bin/dwm`
+2. 确认 `/usr/share/xsessions/dwm.desktop` 权限为 0644
+3. 使用 LightDM 或确保系统走 `/etc/X11/Xsession`
+
+### 问题：`~/.xsession` 没有被执行
+
+**解决方案**：
+1. 检查 `~/.xsession` 权限为 0644，内容完整且有换行
+2. 查看 `~/.xsession-errors` 获取错误
+3. 若非 LightDM，确认显示管理器是否遵循 `/etc/X11/Xsession`
 
 ### 问题：编译时提示找不到头文件
 
