@@ -1,0 +1,84 @@
+# Alacritty 配置文件 (TOML 格式)
+
+[window]
+# 窗口透明度 (0.0 完全透明, 1.0 完全不透明)
+opacity = 0.85
+
+# 窗口内边距
+padding = { x = 10, y = 10 }
+
+# 窗口装饰
+decorations = "full"
+
+# 启动模式
+# startup_mode = "Windowed"  # 可选: "Windowed", "Maximized", "Fullscreen"
+
+[font]
+# 字体大小
+size = 10.0
+
+# 字体配置
+normal = { family = "JetBrains Mono Nerd Font", style = "Regular" }
+bold = { family = "JetBrains Mono Nerd Font", style = "Bold" }
+italic = { family = "JetBrains Mono Nerd Font", style = "Italic" }
+
+[colors]
+# Teal 风格配色方案
+
+[colors.primary]
+background = "#0d1117"
+foreground = "#d9f8f4"
+dim_foreground = "#7fdbca"
+
+[colors.cursor]
+text = "#0d1117"
+cursor = "#00bfa5"
+
+[colors.vi_mode_cursor]
+text = "#0d1117"
+cursor = "#00bfa5"
+
+[colors.selection]
+text = "CellForeground"
+background = "#1e4d49"
+
+[colors.normal]
+black = "#0d1117"
+red = "#ff5370"
+green = "#00e8c6"
+yellow = "#ffcb6b"
+blue = "#00bfa5"
+magenta = "#c792ea"
+cyan = "#26c6da"
+white = "#d9f8f4"
+
+[colors.bright]
+black = "#546e7a"
+red = "#ff6e85"
+green = "#00ffcc"
+yellow = "#ffd740"
+blue = "#00d4aa"
+magenta = "#ddb4ff"
+cyan = "#4dd0e1"
+white = "#ffffff"
+
+[cursor]
+# 光标样式
+style = { shape = "Block", blinking = "On" }
+
+[bell]
+# 响铃动画
+animation = "EaseOutExpo"
+duration = 0
+
+[selection]
+# 保存到主剪贴板
+save_to_clipboard = true
+
+[scrolling]
+# 回滚缓冲区行数
+history = 10000
+
+# 每次滚动的行数
+multiplier = 3
+

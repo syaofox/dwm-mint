@@ -1,0 +1,81 @@
+configuration {
+    /* 显示模式 */
+    show-icons: true;
+    icon-theme: "Mint-Y";
+    
+    /* 字体 */
+    font: "JetBrains Mono Nerd Font 10";
+    
+    /* 显示设置 */
+    display-drun: "Applications";
+    drun-display-format: "{name}";
+    
+    /* 其他设置 */
+    modi: "drun,run,window";
+    terminal: "alacritty";
+}
+
+/* 自定义 teal 主题 */
+* {
+    background-color: #1e1e2e;
+    foreground-color: #cdd6f4;
+    border-color: #14b8a6;
+    selected-normal-background: #14b8a6;
+    selected-normal-foreground: #1e1e2e;
+    alternate-normal-background: #1e1e2e;
+    alternate-normal-foreground: #cdd6f4;
+    normal-background: #1e1e2e;
+    normal-foreground: #cdd6f4;
+    urgent-background: #f38ba8;
+    urgent-foreground: #1e1e2e;
+    active-background: #14b8a6;
+    active-foreground: #1e1e2e;
+}
+
+window {
+    background-color: @background-color;
+    border: 2px;
+    border-color: @border-color;
+    padding: 4px;
+    width: 800px;
+}
+
+mainbox {
+    border: 0;
+    padding: 0;
+}
+
+inputbar {
+    padding: 8px;
+    background-color: #2a2a3e;
+    text-color: @foreground-color;
+    border: 0 0 2px 0;
+    border-color: @border-color;
+}
+
+listview {
+    padding: 4px 0;
+    scrollbar: false;
+    columns: 2;
+    lines: 8;
+}
+
+element {
+    padding: 4px;
+    border: 0;
+}
+
+element selected {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element-icon {
+    background-color: inherit;
+    size: 1.2em;
+}
