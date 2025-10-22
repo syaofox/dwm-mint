@@ -4,3 +4,6 @@
 [submodule "slstatus"]
 	path = slstatus
 	url = git@github.com:syaofox/slstatus.git
+[submodule "slock"]
+	path = slock
+	url = git@github.com:syaofox/slock.git
