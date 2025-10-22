@@ -201,6 +201,7 @@ mkdir -p ~/dwm-mint/wallpaper
 | `Super + K` | 焦点移到上一个窗口 |
 | `Super + H` | 减小主窗口区域 |
 | `Super + L` | 增大主窗口区域 |
+| `Super + S` | 将当前选中的窗口移到主区域 |
 | `Super + P` | 切换当前窗口的浮动状态 |
 | `Super + B` | 切换状态栏显示/隐藏 |
 | `Super + Tab` | 切换到上一个 tag |
