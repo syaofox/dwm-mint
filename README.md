@@ -24,13 +24,14 @@
 这些包是编译 DWM 和 slstatus 所必需的：
 
 ```bash
-sudo apt install build-essential libxft-dev libxinerama-dev
+sudo apt install build-essential libxft-dev libxinerama-dev libxrandr-dev
 ```
 
 **包说明：**
 - `build-essential` - 包含 gcc、make 等基本编译工具
 - `libxft-dev` - FreeType 字体渲染库（会自动安装 libx11-dev、libfontconfig1-dev 等）
 - `libxinerama-dev` - Xinerama 扩展库（多显示器支持，会自动安装相关 X11 依赖）
+- `libxrandr-dev` - XRandR 扩展开发库
 
 
 ### 2. 运行时软件
