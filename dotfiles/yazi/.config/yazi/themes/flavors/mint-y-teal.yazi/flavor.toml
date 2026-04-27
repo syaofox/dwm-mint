@@ -1,0 +1,247 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+# Mint-Y-Teal Color Palette Reference:
+# Background: #162124 (Dark teal-black)
+# Foreground: #E4E4E4 (Light gray)
+# Primary: #1A8693 (Teal)
+# Accent Yellow: #E7B448
+# Accent Green: #2ECC71
+# Accent Red: #E74C3C
+# Accent Pink: #E91E63
+# Muted: #5D6D72 (Gray)
+
+
+# : Manager {{{
+
+[mgr]
+
+cwd = { fg = "#1A8693" } # Teal - Primary accent
+
+hovered = { reversed = true }
+preview_hovered = { underline = true }
+
+find_keyword = { fg = "#E7B448", bold = true, italic = true, underline = true } # Yellow accent
+find_position = { fg = "#E91E63", bg = "reset", bold = true, italic = true }    # Pink accent
+
+marker_copied   = { fg = "#2ECC71",  bg = "#2ECC71" }  # Green
+marker_cut      = { fg = "#E74C3C",    bg = "#E74C3C" } # Red
+marker_marked   = { fg = "#1A8693",   bg = "#1A8693" } # Teal
+marker_selected = { fg = "#E7B448", bg = "#E7B448" }   # Yellow
+
+count_copied   = { fg = "#162124", bg = "#2ECC71" }   # Dark on Green
+count_cut      = { fg = "#162124", bg = "#E74C3C" }   # Dark on Red
+count_selected = { fg = "#162124", bg = "#E7B448" }   # Dark on Yellow
+
+border_symbol = "│"
+border_style = { fg = "#5D6D72" }
+
+# : }}}
+
+
+# : Tabs {{{
+
+[tabs]
+
+active   = { fg = "#162124", bg = "#1A8693", bold = true } # Dark on Teal
+inactive = { fg = "#1A8693", bg = "#5D6D72" }              # Teal on Gray
+
+# : }}}
+
+
+# : Mode {{{
+
+[mode]
+
+normal_main = { fg = "#162124", bg = "#2ECC71", bold = true } # Dark on Green
+normal_alt  = { fg = "#2ECC71", bg = "#5D6D72" }               # Green on Gray
+
+select_main = { fg = "#162124", bg = "#E74C3C", bold = true } # Dark on Red
+select_alt  = { fg = "#E74C3C", bg = "#5D6D72" }               # Red on Gray
+
+unset_main = { fg = "#162124", bg = "#E91E63", bold = true } # Dark on Pink
+unset_alt  = { fg = "#E91E63", bg = "#5D6D72" }               # Pink on Gray
+
+# : }}}
+
+
+# : Status bar {{{
+
+[status]
+
+perm_sep   = { fg = "#5D6D72" }
+perm_type  = { fg = "#2ECC71" }
+perm_read  = { fg = "#E7B448" }
+perm_write = { fg = "#E74C3C" }
+perm_exec  = { fg = "#1A8693" }
+
+progress_label  = { bold = true }
+progress_normal = { fg = "#2ECC71", bg = "#5D6D72" }
+progress_error  = { fg = "#E7B448", bg = "#E74C3C" }
+
+# : }}}
+
+
+# : Pick {{{
+
+[pick]
+
+border   = { fg = "#1A8693" }
+active   = { fg = "#E91E63", bold = true }
+inactive = { fg = "#E4E4E4" }
+
+# : }}}
+
+
+# : Input {{{
+
+[input]
+
+border   = { fg = "#1A8693" }
+title    = { fg = "#E4E4E4" }
+value    = { fg = "#E4E4E4" }
+selected = { reversed = true }
+
+# : }}}
+
+
+# : Completion {{{
+
+[cmp]
+
+border = { fg = "#1A8693" }
+
+# : }}}
+
+
+# : Tasks {{{
+
+[tasks]
+
+border  = { fg = "#1A8693" }
+title   = { fg = "#E4E4E4" }
+hovered = { fg = "#E91E63", bold = true }
+
+# : }}}
+
+
+# : Which {{{
+
+[which]
+
+cols            = 3
+mask            = { bg = "#162124" }
+cand            = { fg = "#1A8693" }
+rest            = { fg = "#5D6D72" }
+desc            = { fg = "#E91E63" }
+separator       = "  "
+separator_style = { fg = "#5D6D72" }
+
+# : }}}
+
+
+# : Help {{{
+
+[help]
+
+on      = { fg = "#1A8693" }
+run     = { fg = "#E91E63" }
+desc    = { fg = "#E4E4E4" }
+hovered = { reversed = true, bold = true }
+footer  = { fg = "#162124", bg = "#E4E4E4" }
+
+# : }}}
+
+
+# : Notify {{{
+
+[notify]
+
+title_info  = { fg = "#2ECC71" }
+title_warn  = { fg = "#E7B448" }
+title_error = { fg = "#E74C3C" }
+
+icon_info  = ""
+icon_warn  = ""
+icon_error = ""
+
+# : }}}
+
+
+# : Confirm {{{
+
+[confirm]
+
+border     = { fg = "#1A8693" }
+title      = { fg = "#1A8693" }
+body       = { fg = "#E4E4E4" }
+list       = { fg = "#E4E4E4" }
+btn_yes    = { reversed = true }
+btn_no     = { fg = "#E4E4E4" }
+btn_labels = [ "  [Y]es  ", "  (N)o  " ]
+
+# : }}}
+
+
+# : Spot {{{
+
+[spot]
+
+border = { fg = "#1A8693" }
+title  = { fg = "#1A8693" }
+
+tbl_col  = { fg = "#1A8693" }
+tbl_cell = { fg = "#E7B448", reversed = true }
+
+# : }}}
+
+
+# : Indicator {{{
+
+[indicator]
+
+parent  = { reversed = true }
+current = { reversed = true }
+preview = { underline = true }
+padding = { open = "", close = "" }
+
+# : }}}
+
+
+# : File-specific styles {{{
+
+[filetype]
+
+rules = [
+	# Image - Yellow accent
+	{ mime = "image/*", fg = "#E7B448" },
+
+	# Media - Pink accent
+	{ mime = "{audio,video}/*", fg = "#E91E63" },
+
+	# Archive - Red accent
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#E74C3C" },
+
+	# Document - Teal accent
+	{ mime = "application/{pdf,doc,rtf}", fg = "#1A8693" },
+
+	# Virtual file system - Muted gray
+	{ mime = "vfs/{absent,stale}", fg = "#5D6D72" },
+
+	# Special file - Red background for orphan
+	{ url = "*", is = "orphan", bg = "#E74C3C" },
+
+	# Executable - Green
+	{ url = "*", is = "exec", fg = "#2ECC71" },
+
+	# Dummy file - Red background
+	{ url = "*", is = "dummy", bg = "#E74C3C" },
+	{ url = "*/", is = "dummy", bg = "#E74C3C" },
+
+	# Fallback directory - Teal
+	{ url = "*/", fg = "#1A8693" },
+
+	# Fallback file - Default foreground
+	{ url = "*", fg = "#E4E4E4" },
+]
+
+# : }}}

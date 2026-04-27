@@ -1,0 +1,134 @@
+! TokyoNight Theme Colors for dwm
+!
+! Color Palette Reference (using #define macros)
+#define BG0               #1a1b26
+#define BG1               #404768
+#define BG2               #25293a
+#define BG0_SEL           #191a20
+#define FG                #c0caf5
+#define FG_DARK           #e5e8f7
+#define WHITE             #FFFFFF
+#define PURPLE            #8272bb
+#define GREEN             #9ece6a
+#define MAGENTA           #bb9af7
+#define RED               #f7768e
+#define GRAY              #868686
+#define GRAY_DARK         #585858
+#define TAG_UNDERLINE     #af9afc
+#define BLUE              #7aa2f7
+#define YELLOW            #e0af68
+#define CYAN              #7dcfff
+
+! dwm 窗口颜色 - 未选中，无客户端（窗口）状态
+dwm.col_norm_fg:        BG1
+dwm.col_norm_bg:        BG0
+dwm.col_norm_border:    BG2
+
+
+! dwm 窗口颜色 - 选中，无客户端（窗口）状态
+dwm.col_sel_fg:         BG1
+dwm.col_sel_bg:         BG0_SEL
+dwm.col_sel_border:     MAGENTA
+
+
+! dwm 窗口颜色 - 未选中，有客户端（窗口在窗口区显示）
+dwm.col_occ_fg:         FG_DARK
+dwm.col_occ_bg:         BG0
+dwm.col_occ_border:     BG2
+
+
+! dwm 窗口颜色 - 选中，有客户端（窗口区有窗口且当前激活）
+dwm.col_selocc_fg:      WHITE
+dwm.col_selocc_bg:      BG0_SEL
+dwm.col_selocc_border:  MAGENTA
+
+
+! dwm 状态栏颜色（dwmbar）
+dwm.col_status_fg:      FG
+dwm.col_status_bg:      BG0
+dwm.col_status_border:  BG0
+
+
+! dwm 窗口标题区颜色（标题栏）
+dwm.col_title_fg:       FG_DARK
+dwm.col_title_bg:       BG0
+dwm.col_title_border:   BG1
+
+
+! dwm 窗口标题区颜色 - 选中状态
+dwm.col_titlesel_fg:    FG_DARK
+dwm.col_titlesel_bg:    BG0
+dwm.col_titlesel_border: BG0
+
+
+! dwm Tag 标签下划线颜色
+dwm.col_tagunderline:   TAG_UNDERLINE
+dwm.tagunderline: 1
+
+
+! slstatus 状态栏颜色（系统信息显示）
+slstatus.sep:   BG1
+slstatus.net:   FG
+slstatus.cpu:   FG
+slstatus.ram:   FG
+slstatus.gpu:   FG
+slstatus.time:  FG
+
+
+! slock 锁屏颜色
+slock.init:     BG0
+slock.input:    PURPLE
+slock.fail:     RED
+slock.text:     FG
+
+
+! PS1 bash 提示符颜色
+ps1.dir:    BLUE
+ps1.prompt: MAGENTA
+ps1.branch: GRAY
+
+
+! dunst 通知颜色
+dunst.urgency_low_bg:          BG0
+dunst.urgency_low_fg:          FG_DARK
+dunst.urgency_low_frame:       MAGENTA
+dunst.urgency_normal_bg:       BG0
+dunst.urgency_normal_fg:       FG_DARK
+dunst.urgency_normal_frame:    MAGENTA
+dunst.urgency_critical_bg:     BG1
+dunst.urgency_critical_fg:     RED
+dunst.urgency_critical_frame:  RED
+
+
+! rofi 启动器颜色
+rofi.icontheme:                Mint-Y-Purple
+rofi.background:               BG0
+rofi.foreground:               FG_DARK
+rofi.selected_bg:              MAGENTA
+rofi.selected_fg:              WHITE
+rofi.active_fg:                MAGENTA
+
+
+! wezterm 终端颜色
+wezterm.bg:                    BG0
+wezterm.fg:                    FG_DARK
+wezterm.cursor_bg:             FG_DARK
+wezterm.black:                 BG1
+wezterm.red:                   RED
+wezterm.green:                 GREEN
+wezterm.yellow:                YELLOW
+wezterm.blue:                  BLUE
+wezterm.magenta:               MAGENTA
+wezterm.cyan:                  CYAN
+wezterm.white:                 FG
+
+
+! yazi 文件管理器主题
+yazi.flavor:                   tokyonight
+
+
+! GTK 主题设置
+gtk.theme:                     Mint-Y-Purple
+gtk.icon_theme:                Mint-Y-Purple
+gtk.font:                      Noto Sans 11
+gtk.gtk-application-prefer-dark-theme: 0

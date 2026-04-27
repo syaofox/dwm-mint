@@ -1,0 +1,87 @@
+#!/bin/bash
+[[ $EUID -eq 0 ]] && err "Please do not run this script as root. Use a regular user account with sudo privileges."
+
+source "$(dirname "${BASH_SOURCE[0]}")/bin/utils.sh"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Function to ask user what to do on failure
+ask_on_failure() {
+    local step_name="$1"
+    log_error "${step_name} failed"
+    echo ""
+    log_info "What would you like to do?"
+    echo "  [r] Retry this step"
+    echo "  [s] Skip this step"
+    echo "  [e] Exit installation"
+    echo ""
+    read -p "Enter your choice [r/s/e]: " choice
+
+    case $choice in
+        r|R) return 1 ;;
+        s|S) log_info "Skipping: ${step_name}"; echo ""; return 0 ;;
+        e|E) log_info "Exiting installation..."; exit 1 ;;
+        *) echo "Invalid choice. Please try again."; ask_on_failure "$step_name" ;;
+    esac
+}
+
+# Function to run a step with error handling
+run_step() {
+    local step_name="$1"
+    shift
+    local cmd="$@"
+
+    while true; do
+        log_info "Running: ${step_name}..."
+        if bash -c "$cmd"; then
+            log_info "${step_name} completed successfully!"
+            echo ""
+            return 0
+        else
+            ask_on_failure "$step_name" || continue
+            return 0
+        fi
+    done
+}
+
+
+run_step "Uninstall LibreOffice" "./bin/uninstall-libreOffice.sh"
+run_step "Optimize system services" "./bin/optimize_services.sh"
+run_step "Upgrade system dependencies" "./bin/upgrade-deps.sh"
+run_step "Install system dependencies" "./bin/install-deps.sh"
+
+
+run_step "Install GSettings and xsettings daemon" "./bin/install-gsettings.sh"
+run_step "Install fcitx5" "./bin/install-fcitx5.sh"
+run_step "Install Neovim" "./bin/install-neovim.sh"
+run_step "Install wezterm" "./bin/install-wezterm.sh"
+run_step "Install Visual Studio Code" "./bin/install-vscode.sh"
+run_step "Install Brave Browser" "./bin/install-brave.sh"
+run_step "Install Docker and Docker Compose" "./bin/install-docker.sh"
+run_step "Install uv Python package manager" "./bin/install-uv.sh"
+run_step "Install Node.js via nvm" "./bin/install-nodejs.sh"
+run_step "Install fzf" "./bin/install-fzf.sh" 
+run_step "Install fd-find" "./bin/install-fd.sh"
+run_step "Install rofi" "./bin/install-rofi.sh"
+run_step "Install yazi" "./bin/install-yazi.sh"
+
+run_step "Compile and install DWM" "./bin/install-dwm.sh"
+run_step "Compile and install slstatus" "./bin/install-slstatus.sh"
+run_step "Compile and install slock" "./bin/install-slock.sh"
+
+run_step "Install fonts" "./bin/install-fonts.sh"
+
+
+run_step "Update bashrc" "./bin/update-bashrc.sh"
+run_step "Deploy configuration files" "./bin/deploy-dotfiles.sh"
+run_step "Generate DWM desktop entry" "./bin/generate-dwm-desktop.sh"
+
+
+echo ""
+log_info "═══════════════════════════════════════"
+log_info "✓ All installation steps completed!"
+log_info "═══════════════════════════════════════"
+echo ""
+log_info "Please reboot your system to apply all changes."
+

@@ -1,0 +1,118 @@
+! Catppuccin Mocha Theme Colors for dwm
+! 颜色参考: https://catppuccin.com/palette/
+! Mocha 配色:
+! Rosewater: #f5e0dc, Flamingo: #f2cdcd, Pink: #f5c2e7, Mauve: #cba6f7
+! Red: #f38ba8, Maroon: #eba0ac, Peach: #fab387, Yellow: #f9e2af
+! Green: #a6e3a1, Teal: #94e2d5, Sky: #89dceb, Sapphire: #74c7ec
+! Blue: #89b4fa, Lavender: #b4befe
+! Text: #cdd6f4, Subtext: #bac2de, Overlay: #9399b2
+! Surface: #45475a, Base: #1e1e2e, Mantle: #181825, Crust: #11111b
+
+! dwm 窗口颜色 - 未选中，无客户端（窗口）状态
+dwm.col_norm_fg:        #6c7086
+dwm.col_norm_bg:        #1e1e2e
+dwm.col_norm_border:    #6c7086
+
+
+! dwm 窗口颜色 - 选中，无客户端（窗口）状态
+dwm.col_sel_fg:         #1e1e2e
+dwm.col_sel_bg:         #89b4fa
+dwm.col_sel_border:     #b4befe
+
+
+! dwm 窗口颜色 - 未选中，有客户端（窗口在窗口区显示）
+dwm.col_occ_fg:         #cdd6f4
+dwm.col_occ_bg:         #1e1e2e
+dwm.col_occ_border:     #6c7086
+
+
+! dwm 窗口颜色 - 选中，有客户端（窗口区有窗口且当前激活）
+dwm.col_selocc_fg:      #1e1e2e
+dwm.col_selocc_bg:      #89b4fa
+dwm.col_selocc_border:  #89b4fa
+
+
+! dwm 状态栏颜色（dwmbar）
+dwm.col_status_fg:      #bac2de
+dwm.col_status_bg:      #1e1e2e
+dwm.col_status_border:  #1e1e2e
+
+
+! dwm 窗口标题区颜色（标题栏）
+dwm.col_title_fg:       #cdd6f4
+dwm.col_title_bg:       #1e1e2e
+dwm.col_title_border:   #6c7086
+
+
+! dwm 窗口标题区颜色 - 选中状态
+dwm.col_titlesel_fg:    #1e1e2e
+dwm.col_titlesel_bg:    #89b4fa
+dwm.col_titlesel_border: #1e1e2e
+
+
+! dwm Tag 标签下划线颜色
+dwm.col_tagunderline:   #89b4fa
+dwm.tagunderline: 0
+
+
+! slstatus 状态栏颜色（系统信息显示）
+slstatus.sep:   #6c7086
+slstatus.net:   #89dceb
+slstatus.cpu:   #f9e2af
+slstatus.ram:   #f9e2af
+slstatus.gpu:   #a6e3a1
+slstatus.time:  #cdd6f4
+
+
+! slock 锁屏颜色
+slock.init:     #1e1e2e
+slock.input:    #89b4fa
+slock.fail:     #f38ba8
+slock.text:     #cdd6f4
+
+
+! PS1 bash 提示符颜色
+ps1.dir:    #a6e3a1
+ps1.prompt: #89b4fa
+ps1.branch: #868686
+
+! dunst 通知颜色
+dunst.urgency_low_bg:          #1e1e2e
+dunst.urgency_low_fg:          #cdd6f4
+dunst.urgency_low_frame:       #89b4fa
+dunst.urgency_normal_bg:       #45475a
+dunst.urgency_normal_fg:       #cdd6f4
+dunst.urgency_normal_frame:    #89b4fa
+dunst.urgency_critical_bg:     #cba6f7
+dunst.urgency_critical_fg:     #f38ba8
+dunst.urgency_critical_frame:  #eba0ac
+
+! rofi 启动器颜色
+rofi.icontheme:                Mint-Y-Pink
+rofi.background:               #1e1e2e
+rofi.foreground:               #cdd6f4
+rofi.selected_bg:              #89b4fa
+rofi.selected_fg:              #1e1e2e
+rofi.active_fg:                #89b4fa
+
+! wezterm 终端颜色
+wezterm.bg:                    #1e1e2e
+wezterm.fg:                    #cdd6f4
+wezterm.cursor_bg:             #cdd6f4
+wezterm.black:                 #45475a
+wezterm.red:                   #f38ba8
+wezterm.green:                 #a6e3a1
+wezterm.yellow:                #f9e2af
+wezterm.blue:                  #89b4fa
+wezterm.magenta:               #cba6f7
+wezterm.cyan:                  #94e2d5
+wezterm.white:                 #bac2de
+
+! yazi 文件管理器主题
+yazi.flavor:                   catppuccin-mocha
+
+! GTK 主题设置
+gtk.theme:                     Mint-Y-Pink
+gtk.icon_theme:                Mint-Y-Pink
+gtk.font:                      Noto Sans 10
+gtk.gtk-application-prefer-dark-theme: 0

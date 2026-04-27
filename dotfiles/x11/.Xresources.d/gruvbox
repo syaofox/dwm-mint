@@ -1,0 +1,120 @@
+! Gruvbox Theme Colors for dwm
+!
+! Color Palette Reference:
+!   #282828  bg0_hard   - Background dark
+!   #3c3836  bg1        - Background
+!   #ebdbb2  fg         - Foreground
+!   #d5c4a1  fg_dim     - Foreground dim
+!   #fb4934  red        - Red
+!   #b8bb26  green      - Green
+!   #fabd2f  yellow     - Yellow
+!   #83a598  aqua       - Aqua/Teal
+!   #d3869b  purple     - Purple
+
+! dwm 窗口颜色 - 未选中，无客户端
+dwm.col_norm_fg:        #ebdbb2
+dwm.col_norm_bg:        #282828
+dwm.col_norm_border:   #3c3836
+
+
+! dwm 窗口颜色 - 选中，无客户端
+dwm.col_sel_fg:      #282828
+dwm.col_sel_bg:       #fabd2f
+dwm.col_sel_border:   #fabd2f
+
+
+! dwm 窗口颜色 - 未选中，有客户端
+dwm.col_occ_fg:      #ebdbb2
+dwm.col_occ_bg:      #282828
+dwm.col_occ_border:  #3c3836
+
+
+! dwm 窗口颜色 - 选中，有客户端
+dwm.col_selocc_fg:    #282828
+dwm.col_selocc_bg:    #fabd2f
+dwm.col_selocc_border: #fabd2f
+
+
+! dwm 状态栏颜色（dwmbar）
+dwm.col_status_fg:    #ebdbb2
+dwm.col_status_bg:    #282828
+dwm.col_status_border: #282828
+
+
+! dwm 窗口标题区颜色（标题栏）
+dwm.col_title_fg:     #ebdbb2
+dwm.col_title_bg:     #282828
+dwm.col_title_border: #3c3836
+
+dwm.col_titlesel_fg:   #282828
+dwm.col_titlesel_bg:   #fabd2f
+dwm.col_titlesel_border: #282828
+
+
+! dwm Tag 标签下划线颜色
+dwm.col_tagunderline:  #fabd2f
+dwm.tagunderline: 0
+
+
+! slstatus 状态栏颜色（系统信息显示）
+slstatus.sep:   #3c3836
+slstatus.net:   #83a598
+slstatus.cpu:   #b8bb26
+slstatus.ram:   #b8bb26
+slstatus.gpu:   #83a598
+slstatus.time:  #fabd2f
+
+
+! slock 锁屏颜色
+slock.init:     #282828
+slock.input:    #fabd2f
+slock.fail:     #fb4934
+slock.text:     #83a598
+
+
+! PS1 bash 提示符颜色
+ps1.dir:    #b8bb26
+ps1.prompt: #fabd2f
+ps1.branch: #868686
+
+! dunst 通知颜色
+dunst.urgency_low_bg:          #282828
+dunst.urgency_low_fg:          #ebdbb2
+dunst.urgency_low_frame:       #fabd2f
+dunst.urgency_normal_bg:       #3c3836
+dunst.urgency_normal_fg:       #ebdbb2
+dunst.urgency_normal_frame:    #fabd2f
+dunst.urgency_critical_bg:     #cc241d
+dunst.urgency_critical_fg:     #ebdbb2
+dunst.urgency_critical_frame:  #fb4934
+
+! rofi 启动器颜色
+rofi.icontheme:                Mint-Y-Orange
+rofi.background:               #282828
+rofi.foreground:               #ebdbb2
+rofi.selected_bg:              #fabd2f
+rofi.selected_fg:              #282828
+rofi.active_fg:                #fabd2f
+
+! wezterm 终端颜色
+wezterm.bg:                    #282828
+wezterm.fg:                    #ebdbb2
+wezterm.cursor_bg:             #ebdbb2
+wezterm.black:                 #3c3836
+wezterm.red:                   #fb4934
+wezterm.green:                 #b8bb26
+wezterm.yellow:                #fabd2f
+wezterm.blue:                  #83a598
+wezterm.magenta:               #d3869b
+wezterm.cyan:                  #8ec07c
+wezterm.white:                 #ebdbb2
+
+! yazi 文件管理器主题
+yazi.flavor:                   gruvbox
+
+! GTK 主题设置
+gtk.theme:                     Mint-Y-Orange
+gtk.icon_theme:                Mint-Y-Orange
+gtk.font:                      Noto Sans 10
+gtk.gtk-application-prefer-dark-theme: 0
+
