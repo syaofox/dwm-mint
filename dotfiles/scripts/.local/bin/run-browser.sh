@@ -4,7 +4,7 @@
 
 set -e
 
-BRAVE_APT="/opt/brave-bin/brave"
+BRAVE_APT="/usr/bin/brave-browser"
 BRAVE_FLATPAK_ID="com.brave.Browser"
 CHROME_APT="/usr/bin/google-chrome-stable"
 CHROME_FLATPAK_ID="com.google.Chrome"

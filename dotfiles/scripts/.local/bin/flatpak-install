@@ -1,22 +1,20 @@
 #!/bin/bash
 
-# Show a fuzzy-finder TUI for picking new AUR packages to install.
+# Show a fuzzy-finder TUI for picking new Flatpak packages to install.
 
 fzf_args=(
   --multi
-  --preview 'yay -Siia {1}'
-  --preview-label='alt-p: toggle description, alt-b/B: toggle PKGBUILD, alt-j/k: scroll, tab: multi-select'
+  --preview 'flatpak remote-info flathub {1} 2>/dev/null || flatpak info {1} 2>/dev/null'
+  --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
   --preview-label-pos='bottom'
   --preview-window 'down:65%:wrap'
   --bind 'alt-p:toggle-preview'
   --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
   --bind 'alt-k:preview-up,alt-j:preview-down'
-  --bind 'alt-b:change-preview:yay -Gpa {1} | tail -n +5'
-  --bind 'alt-B:change-preview:yay -Siia {1}'
   --color 'pointer:green,marker:green'
 )
 
-pkg_names=$(yay -Slqa | fzf "${fzf_args[@]}")
+pkg_names=$(flatpak remote-ls --app --columns=application 2>/dev/null | fzf "${fzf_args[@]}")
 
 if [[ -n $pkg_names ]]; then
   # Display the list of packages to be installed
@@ -29,8 +27,10 @@ if [[ -n $pkg_names ]]; then
   read -p "Do you want to proceed with the installation? [y/N] " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    # Add aur/ prefix to each package name and convert to space-separated for yay
-    echo "$pkg_names" | sed 's/^/aur\//' | tr '\n' ' ' | xargs yay -S --noconfirm
+    # Convert newline-separated selections to space-separated for flatpak
+    while IFS= read -r pkg; do
+      flatpak install -y flathub "$pkg"
+    done <<< "$pkg_names"
   else
     echo "Installation cancelled."
   fi
