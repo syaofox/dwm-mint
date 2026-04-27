@@ -40,7 +40,7 @@ if [ -f "$HOME/.config/theme" ]; then
     THEME=$(cat "$HOME/.config/theme")
     log "Theme loaded from config: $THEME"
 else
-    THEME="tokyonight"
+    THEME="mint-y-teal"
     log "No theme config found, using default: $THEME"
 fi
 
