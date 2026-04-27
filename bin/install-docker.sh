@@ -39,4 +39,33 @@ sudo docker run --rm hello-world
 
 log_info "Docker and Docker Compose installation complete"
 log_info "Note: You may need to log out and back in for group changes to take effect"
+
+log_step "Checking for NVIDIA GPU to enable Docker GPU support..."
+
+if ! command -v lspci &>/dev/null; then
+    log_info "Installing pciutils for hardware detection..."
+    sudo apt install -y pciutils
+fi
+
+if lspci -d 10de:* | grep -q .; then
+    log_info "NVIDIA GPU detected, installing NVIDIA Container Toolkit..."
+
+    log_info "Setting up NVIDIA Container Toolkit repository..."
+    sudo curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /etc/apt/keyrings/nvidia-container-toolkit.gpg
+
+    . /etc/os-release
+    echo "deb [signed-by=/etc/apt/keyrings/nvidia-container-toolkit.gpg] https://nvidia.github.io/libnvidia-container/ubuntu${VERSION_ID} /" | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list > /dev/null
+
+    sudo apt update
+    sudo apt install -y nvidia-container-toolkit
+
+    log_info "Configuring Docker NVIDIA runtime..."
+    sudo nvidia-ctk runtime configure --runtime=docker
+    sudo systemctl restart docker
+
+    log_info "NVIDIA Container Toolkit installed. Note: Host NVIDIA drivers are required for GPU access."
+else
+    log_info "No NVIDIA GPU detected, skipping GPU dependencies"
+fi
+
 exit 0
