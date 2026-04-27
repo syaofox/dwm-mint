@@ -6,6 +6,7 @@ err()    { echo "[$(date +'%H:%M:%S')] ERROR: $*" >&2; }
 export XDG_CURRENT_DESKTOP=dwm
 export XDG_SESSION_DESKTOP=dwm
 
+
 LOGDIR="$HOME/.local/share/dwm"
 LOGFILE="$LOGDIR/dwm.log"
 mkdir -p "$LOGDIR"
@@ -15,6 +16,15 @@ log "=== DWM session starting (PID: $$) ==="
 
 # ---------- X 基础设置 ----------
 log "Setting X basic settings (dpms, screensaver)..."
+
+xrdb -merge ~/.Xresources
+
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+
 xset -dpms && log "dpms disabled" || err "failed to disable dpms"
 xset s off && log "screensaver disabled" || err "failed to disable screensaver"
 xset s noblank && log "blanking disabled" || err "failed to disable blanking"
