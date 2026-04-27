@@ -123,6 +123,7 @@ log "Starting slstatus..."
 slstatus &
 log "slstatus started (PID: $!)"
 
+xfce4-clipman &
 # picom -b &
 # log "picom started (PID: $!)"
 
