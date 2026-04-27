@@ -2,7 +2,7 @@
 
 # ============================================================
 # 配置文件备份/还原脚本（fzf 交互版）
-# 功能：备份/还原 git/ssh/gnupg/dconf 配置
+# 功能：备份/还原 ssh/gnupg/dconf/fcitx5 配置
 # ============================================================
 
 # set -euo pipefail
@@ -96,12 +96,11 @@ backup_item() {
 
 # ======================= fzf 选择函数 =======================
 fzf_select_backup_items() {
-    local items=("git    - Git 全局配置"
-                 "ssh    - SSH 配置 (含密钥)"
+    local items=("ssh    - SSH 配置 (含密钥)"
                  "gnupg  - GPG 配置 (含密钥)"
                  "dconf  - dconf 配置 (GNOME/GTK 设置)"
                  "fcitx5 - Fcitx5 输入法配置")
-    local keys=("git" "ssh" "gnupg" "dconf" "fcitx5")
+    local keys=("ssh" "gnupg" "dconf" "fcitx5")
     local selected=()
 
     if ! command -v fzf &>/dev/null; then
@@ -113,7 +112,6 @@ fzf_select_backup_items() {
     
     for desc in "${chosen[@]}"; do
         case "$desc" in
-            "git"*)    selected+=("git") ;;
             "ssh"*)    selected+=("ssh") ;;
             "gnupg"*)  selected+=("gnupg") ;;
             "dconf"*)  selected+=("dconf") ;;
@@ -157,10 +155,9 @@ fzf_select_restore_items() {
     local available_desc=()
     local selected=()
 
-    for item in git ssh gnupg dconf fcitx5; do
-        if [ -d "$1/$item" ] || [ -f "$1/$item/.gitconfig" ] 2>/dev/null; then
+    for item in ssh gnupg dconf fcitx5; do
+        if [ -d "$1/$item" ]; then
             case "$item" in
-                git)    desc="Git 全局配置" ;;
                 ssh)    desc="SSH 配置 (含密钥)" ;;
                 gnupg)  desc="GPG 配置 (含密钥)" ;;
                 dconf)  desc="dconf 配置 (GNOME/GTK 设置)" ;;
@@ -186,7 +183,6 @@ fzf_select_restore_items() {
 
     for desc in "${chosen[@]}"; do
         case "$desc" in
-            "git"*)    selected+=("git") ;;
             "ssh"*)    selected+=("ssh") ;;
             "gnupg"*)  selected+=("gnupg") ;;
             "dconf"*)  selected+=("dconf") ;;
@@ -224,13 +220,12 @@ do_backup() {
     else
         # 传统方式
         BACKUP_ITEMS_DESC=(
-            "git    - Git 全局配置"
             "ssh    - SSH 配置 (含密钥)"
             "gnupg  - GPG 配置 (含密钥)"
             "dconf  - dconf 配置 (GNOME/GTK 设置)"
             "fcitx5 - Fcitx5 输入法配置"
         )
-        BACKUP_ITEM_KEYS=("git" "ssh" "gnupg" "dconf" "fcitx5")
+        BACKUP_ITEM_KEYS=("ssh" "gnupg" "dconf" "fcitx5")
 
         echo "可选备份项目:"
         for i in "${!BACKUP_ITEMS_DESC[@]}"; do
@@ -271,10 +266,6 @@ do_backup() {
 
     for item in "${SELECTED[@]}"; do
         case "$item" in
-            git)
-                backup_item "$HOME/.gitconfig" "$BACKUP_DIR/git/.gitconfig" "Git 全局配置" && ((BACKUP_COUNT++)) || ((SKIP_COUNT++))
-                backup_item "$HOME/.gitignore_global" "$BACKUP_DIR/git/.gitignore_global" "Git 全局忽略文件" && ((BACKUP_COUNT++)) || ((SKIP_COUNT++))
-                ;;
             ssh)
                 backup_item "$HOME/.ssh" "$BACKUP_DIR/ssh" "SSH 配置目录" && ((BACKUP_COUNT++)) || ((SKIP_COUNT++))
                 ;;
@@ -319,7 +310,7 @@ EOF
     cd "$BACKUP_BASE_DIR" || { echo "无法进入备份目录"; return 1; }
     chmod -R 700 "backup_${TIMESTAMP}/ssh" "backup_${TIMESTAMP}/gnupg" 2>/dev/null || true
     find "backup_${TIMESTAMP}/ssh" "backup_${TIMESTAMP}/gnupg" -type f -exec chmod 600 {} \; 2>/dev/null || true
-    if tar -cpzf "$ARCHIVE_NAME" --exclude='.git' "backup_${TIMESTAMP}"; then
+    if tar -cpzf "$ARCHIVE_NAME" "backup_${TIMESTAMP}"; then
         ARCHIVE_SIZE=$(du -h "$ARCHIVE_NAME" | cut -f1)
         rm -rf "$BACKUP_DIR"
         echo ""
@@ -414,10 +405,9 @@ do_restore() {
         # 传统方式
         AVAILABLE_KEYS=()
         AVAILABLE_DESC=()
-        for item in git ssh gnupg dconf fcitx5; do
-            if [ -d "$BACKUP_CONTENT_DIR/$item" ] || [ -f "$BACKUP_CONTENT_DIR/$item/.gitconfig" ] 2>/dev/null; then
+        for item in ssh gnupg dconf fcitx5; do
+            if [ -d "$BACKUP_CONTENT_DIR/$item" ]; then
                 case "$item" in
-                    git)    desc="Git 全局配置" ;;
                     ssh)    desc="SSH 配置 (含密钥)" ;;
                     gnupg)  desc="GPG 配置 (含密钥)" ;;
                     dconf)  desc="dconf 配置 (GNOME/GTK 设置)" ;;
@@ -497,25 +487,6 @@ do_restore() {
 
     for item in "${SELECTED_RESTORE[@]}"; do
         case "$item" in
-            git)
-                if [ -f "$BACKUP_CONTENT_DIR/git/.gitconfig" ]; then
-                    if [ -f "$HOME/.gitconfig" ]; then
-                        cp "$HOME/.gitconfig" "$HOME/.gitconfig$BACKUP_SUFFIX" 2>/dev/null || true
-                    fi
-                    if cp "$BACKUP_CONTENT_DIR/git/.gitconfig" "$HOME/.gitconfig" 2>/dev/null; then
-                        echo -e "${GREEN}[OK]${NC} 还原 Git 配置"
-                        ((RESTORE_COUNT++))
-                    else
-                        echo -e "${RED}[FAIL]${NC} 还原 Git 配置失败"
-                    fi
-                fi
-                if [ -f "$BACKUP_CONTENT_DIR/git/.gitignore_global" ]; then
-                    if [ -f "$HOME/.gitignore_global" ]; then
-                        cp "$HOME/.gitignore_global" "$HOME/.gitignore_global$BACKUP_SUFFIX" 2>/dev/null || true
-                    fi
-                    cp "$BACKUP_CONTENT_DIR/git/.gitignore_global" "$HOME/.gitignore_global" 2>/dev/null && ((RESTORE_COUNT++))
-                fi
-                ;;
             ssh)
                 if [ -d "$BACKUP_CONTENT_DIR/ssh" ]; then
                     if [ -d "$HOME/.ssh" ]; then
