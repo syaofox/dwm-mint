@@ -61,6 +61,8 @@ run_step "Install Brave Browser" "./bin/install-brave.sh"
 run_step "Install Docker and Docker Compose" "./bin/install-docker.sh"
 run_step "Install uv Python package manager" "./bin/install-uv.sh"
 run_step "Install Node.js via nvm" "./bin/install-nodejs.sh"
+run_step "Install opencode" "./bin/install-opencode.sh"
+
 run_step "Install fzf" "./bin/install-fzf.sh" 
 run_step "Install fd-find" "./bin/install-fd.sh"
 run_step "Install rofi" "./bin/install-rofi.sh"
