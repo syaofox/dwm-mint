@@ -10,9 +10,6 @@ case "$mode" in
     file)
         nemo
         ;;
-    clipman)
-        xfce4-clipman-history
-        ;;
     lock)
         slock -m "Single is simple, double is double."
         ;;
