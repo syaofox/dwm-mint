@@ -13,7 +13,9 @@ case "$mode" in
     lock)
         slock -m "Single is simple, double is double."
         ;;
-
+    clipman)
+        xfce4-popup-clipman
+        ;;
     term)
         # 现在的 $@ 已经是空的（如果你只传了 term）
         # 或者包含了 term 之后的参数
