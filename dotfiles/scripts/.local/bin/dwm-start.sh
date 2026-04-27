@@ -127,8 +127,8 @@ log "slstatus started (PID: $!)"
 # log "picom started (PID: $!)"
 
 
-# 壁纸 (使用 feh)
-if command -v feh >/dev/null; then
+# 壁纸 
+if command -v xwallpaper >/dev/null; then
     log "Setting wallpaper..."
     WALLPAPER_CONF="$HOME/.config/wallpaper.conf"
     DEFAULT_WALLPAPER="$HOME/.config/walls/black-nord.png"
@@ -141,14 +141,12 @@ if command -v feh >/dev/null; then
         log "Using default wallpaper: $WALLPAPER"
     fi
 
-    if [[ -f "$WALLPAPER" ]]; then
-        feh --bg-fill "$WALLPAPER" && log "Wallpaper set successfully" || err "Failed to set wallpaper: $WALLPAPER"
-    else
-        err "Wallpaper file not found: $WALLPAPER"
-    fi
+    xwallpaper --zoom "$WALLPAPER" &
+
 else
     err "feh not found, wallpaper not set"
 fi
+
 
 
 

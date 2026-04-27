@@ -13,7 +13,7 @@ APT_packages=(
 
     build-essential python3-dev libx11-dev libxinerama-dev libxft-dev libxrandr-dev
     x11-xserver-utils 
-    dunst feh pasystray picom 
+    dunst xwallpaper pasystray picom 
     xfce4-clipman xdotool
     maim xclip rofi ffmpeg 
     lxappearance 
