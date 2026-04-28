@@ -44,5 +44,10 @@ if ! sudo test -f "$PROFILE_D" 2>/dev/null || ! sudo grep -q "$NVIM_BIN_DIR" "$P
     sudo chmod 644 "$PROFILE_D"
 fi
 
+if ! sudo test -f /usr/local/bin/nvim 2>/dev/null; then
+    log_info "Creating symlink /usr/local/bin/nvim..."
+    sudo ln -sf "${NVIM_BIN_DIR}/nvim" /usr/local/bin/nvim
+fi
+
 log_info "Neovim installation complete"
 exit 0
