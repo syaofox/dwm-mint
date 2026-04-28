@@ -19,7 +19,9 @@ log "=== DWM session starting (PID: $$) ==="
 
 # ---------- X 基础设置 ----------
 log "Setting X basic settings (dpms, screensaver)..."
-xrdb -merge ~/.xsessionrc
+
+xrdb -merge ~/.Xresources
+
 xset -dpms && log "dpms disabled" || err "failed to disable dpms"
 xset s off && log "screensaver disabled" || err "failed to disable screensaver"
 xset s noblank && log "blanking disabled" || err "failed to disable blanking"
