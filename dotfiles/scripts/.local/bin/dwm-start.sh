@@ -17,7 +17,7 @@ log "=== DWM session starting (PID: $$) ==="
 # ---------- X 基础设置 ----------
 log "Setting X basic settings (dpms, screensaver)..."
 
-xrdb -merge ~/.Xresources
+xrdb -merge ~/.xsessionrc
 
 Xft.dpi: 96
 Xft.antialias: 1
