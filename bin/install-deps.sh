@@ -34,6 +34,9 @@ APT_packages=(
     # 音频工具
     alsa-utils pavucontrol pasystray
 
+    # 其他
+    papirus-icon-theme adwaita-icon-theme-full gnome-icon-theme
+
 )
 
 log_info "Installing official packages..."
