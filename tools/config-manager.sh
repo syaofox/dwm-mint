@@ -108,7 +108,7 @@ fzf_select_backup_items() {
         return 1
     fi
 
-    mapfile -t chosen < <(printf '%s\n' "${items[@]}" | fzf --multi --prompt="选择备份项目 > " --header="TAB: 多选 / ENTER: 确认 / ESC: 取消")
+    mapfile -t chosen < <(printf '%s\n' "${items[@]}" | fzf --multi --prompt="选择备份项目 > " --header="TAB/ctrl-a: 多选/全选 / ENTER: 确认 / ESC: 取消" --bind "ctrl-a:toggle-all")
     
     for desc in "${chosen[@]}"; do
         case "$desc" in
@@ -179,7 +179,7 @@ fzf_select_restore_items() {
         return 1
     fi
 
-    mapfile -t chosen < <(printf '%s\n' "${available_desc[@]}" | fzf --multi --prompt="选择还原项目 > " --header="TAB: 多选 / ENTER: 确认 / ESC: 取消")
+    mapfile -t chosen < <(printf '%s\n' "${available_desc[@]}" | fzf --multi --prompt="选择还原项目 > " --header="TAB/ctrl-a: 多选/全选 / ENTER: 确认 / ESC: 取消" --bind "ctrl-a:toggle-all")
 
     for desc in "${chosen[@]}"; do
         case "$desc" in

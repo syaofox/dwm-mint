@@ -16,7 +16,7 @@ APT_packages=(
     dunst xwallpaper pasystray picom 
     xfce4-clipman xdotool
     maim xclip rofi ffmpeg 
-    lxappearance 
+    lxappearance  xdg-desktop-portal
 
     # 归档工具
     unzip 7zip

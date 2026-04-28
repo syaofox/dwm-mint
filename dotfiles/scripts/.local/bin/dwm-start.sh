@@ -110,7 +110,8 @@ else
 fi
 
 log "Starting pasystray (PulseAudio)..."
-pasystray &
+pasystray >/dev/null 2>&1 &
+
 log "pasystray started (PID: $!)"
 
 log "Starting slstatus..."
@@ -143,7 +144,7 @@ else
     err "feh not found, wallpaper not set"
 fi
 
-
+xdg-desktop-portal-gtk &
 
 
 log "=== Starting DWM (PID: $$) ==="
