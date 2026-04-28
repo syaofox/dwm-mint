@@ -12,9 +12,9 @@ alias la='ls -A'
 
 
 alias trash='trash-put -v'
-alias rm='trash-put -v'
+# alias rm='trash-put -v'
 alias vim='nvim'
-alias svim='sudo -E nvim'
+# alias svim='sudo -E nvim'
 
 # 系统更新快捷命令
 alias update='sudo pacman -Syyu'
