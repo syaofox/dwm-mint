@@ -1,11 +1,7 @@
-# 设置输入法框架为 fcitx5
 export IM_MODULE=fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-
-# 针对某些现代 Wayland/X11 混合环境的补充（可选）
 export SDL_IM_MODULE=fcitx
 export GLFW_IM_MODULE=ibus
-
 export QT_QPA_PLATFORMTHEME=qt5ct
