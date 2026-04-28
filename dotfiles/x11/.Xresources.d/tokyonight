@@ -124,7 +124,8 @@ wezterm.white:                 FG
 
 
 ! yazi 文件管理器主题
-yazi.flavor:                   tokyonight
+yazi.dark:                   tokyonight
+yazi.light:                   tokyonight
 
 
 ! GTK 主题设置

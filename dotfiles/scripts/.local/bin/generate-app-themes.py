@@ -404,11 +404,14 @@ def generate_yazi_config(colors, output_file):
     if os.path.islink(output_file):
         os.unlink(output_file)
     
-    flavor = colors.get('yazi.flavor', 'nord')
+    dark = colors.get('yazi.dark', 'nord')
+    light = colors.get('yazi.light', 'nord')
     
     with open(output_file, 'w') as f:
         f.write('[flavor]\n')
-        f.write('use = "{}"\n\n'.format(flavor))
+        f.write('dark = "{}"\n'.format(dark))
+        f.write('light = "{}"\n'.format(light))
+        f.write('\n')
         f.write('"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"\n\n')
 
 def generate_ps1_config(colors, output_file):
