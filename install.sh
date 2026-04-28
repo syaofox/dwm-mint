@@ -78,6 +78,7 @@ run_step "Install fonts" "./bin/install-fonts.sh"
 run_step "Update bashrc" "./bin/update-bashrc.sh"
 run_step "Deploy configuration files" "./bin/deploy-dotfiles.sh"
 run_step "Generate DWM desktop entry" "./bin/generate-dwm-desktop.sh"
+run_step "Update user groups" "./bin/update-usergroup.sh"
 
 
 echo ""

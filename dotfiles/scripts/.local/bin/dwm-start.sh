@@ -7,6 +7,8 @@ export XDG_CURRENT_DESKTOP=dwm
 export XDG_SESSION_DESKTOP=dwm
 
 
+
+
 LOGDIR="$HOME/.local/share/dwm"
 LOGFILE="$LOGDIR/dwm.log"
 mkdir -p "$LOGDIR"
@@ -14,25 +16,15 @@ mkdir -p "$LOGDIR"
 exec > >(tee -a "$LOGFILE") 2>&1
 log "=== DWM session starting (PID: $$) ==="
 
+
 # ---------- X 基础设置 ----------
 log "Setting X basic settings (dpms, screensaver)..."
-
 xrdb -merge ~/.xsessionrc
-
-Xft.dpi: 96
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.hintstyle: hintslight
-Xft.rgba: rgb
-
 xset -dpms && log "dpms disabled" || err "failed to disable dpms"
 xset s off && log "screensaver disabled" || err "failed to disable screensaver"
 xset s noblank && log "blanking disabled" || err "failed to disable blanking"
 
 # xrandr --output HDMI-0 --mode 2560x1080 --rate 60 --primary &
-
-
-
 
 # ---------- Xresources 主题 ----------
 log "Loading theme configuration..."
