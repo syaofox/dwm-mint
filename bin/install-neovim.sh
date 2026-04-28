@@ -37,5 +37,12 @@ if ! grep -q "$NVIM_BIN_DIR" "$BASHRC" 2>/dev/null; then
     echo "export PATH=\"\$PATH:${NVIM_BIN_DIR}\"" >> "$BASHRC"
 fi
 
+PROFILE_D="/etc/profile.d/neovim.sh"
+if ! sudo test -f "$PROFILE_D" 2>/dev/null || ! sudo grep -q "$NVIM_BIN_DIR" "$PROFILE_D" 2>/dev/null; then
+    log_info "Adding Neovim to PATH system-wide in ${PROFILE_D}..."
+    echo "export PATH=\"\$PATH:${NVIM_BIN_DIR}\"" | sudo tee "$PROFILE_D" > /dev/null
+    sudo chmod 644 "$PROFILE_D"
+fi
+
 log_info "Neovim installation complete"
 exit 0
