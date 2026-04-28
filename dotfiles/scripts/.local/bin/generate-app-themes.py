@@ -426,7 +426,7 @@ def generate_ps1_config(colors, output_file):
     
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w') as f:
-        f.write("PS1='\\033[38;2;{};{};{}m\\w\\033[0m\\033[38;2;{};{};{}m$(__git_branch)\\033[0m\\n\\033[1;38;2;{};{};{}m> \\033[0m'\n".format(
+        f.write("PS1='\\[\\033[38;2;{};{};{}m\\]\\w\\[\\033[0m\\]\\[\\033[38;2;{};{};{}m\\]$(__git_branch)\\[\\033[0m\\]\\n\\[\\033[1;38;2;{};{};{}m\\]> \\[\\033[0m\\]'\n".format(
             dir_r, dir_g, dir_b, branch_r, branch_g, branch_b, prompt_r, prompt_g, prompt_b))
 
 def update_gtk2_config(filepath, updates):
