@@ -14,21 +14,6 @@ fi
 
 log_step "Configure Bash environment..."
 
-BASHRC_DIR="$DOTFILES_DIR/bashrc"
-if [ ! -d "$BASHRC_DIR" ]; then
-    log_error "bashrc directory not found: $BASHRC_DIR"
-else
-    while IFS= read -r rel_path; do
-        rel_path="${rel_path#./}"
-        [ -z "$rel_path" ] && continue
-
-        src="$BASHRC_DIR/$rel_path"
-        target="$HOME/$rel_path"
-
-        create_symlink "$src" "$target"
-    done < <(cd "$BASHRC_DIR" && find . \( -type f -o -type l \) 2>/dev/null | grep -v '^\./\.git' | grep -v '^\./\.svn')
-fi
-
 BASHRC="$HOME/.bashrc"
 need_bashrc_entry=false
 if [[ ! -f "$BASHRC" ]]; then
