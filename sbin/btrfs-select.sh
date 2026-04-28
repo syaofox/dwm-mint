@@ -124,6 +124,20 @@ UUID=$EFI_UUID  /boot/efi       vfat    umask=0077,noatime      0       1
 
 # Swap 分区
 $SWAP_LINE
+
+# ============================================
+# Manual Mount Reference (uncomment as needed)
+# ============================================
+
+# ssd
+#UUID=cb6285a3-5e94-4376-a9fc-38b10c28d40e /mnt/github btrfs rw,noatime,ssd,compress=zstd:3,discard=async,space_cache=v2,subvol=/@github 0 0
+#UUID=cb6285a3-5e94-4376-a9fc-38b10c28d40e /mnt/data btrfs rw,noatime,ssd,compress=zstd:3,discard=async,space_cache=v2,subvol=/@data 0 0
+
+# dnas
+#10.10.10.2:/fs/1000/nfs /mnt/dnas nfs noauto,x-systemd.automount,_netdev,addr=10.10.10.2 0 0
+
+# xiaoxin
+#10.10.10.6:/fs/1000/nfs /mnt/xiaoxin nfs noauto,x-systemd.automount,_netdev,addr=10.10.10.6 0 0
 EOF
 
 echo "--- 脚本执行完毕！ ---"
