@@ -113,7 +113,8 @@ wezterm.cyan:                  #00b7ff
 wezterm.white:                 #bbbbbb
 
 ! yazi 文件管理器主题
-yazi.flavor:                   dwm
+yazi.dark:                     nord
+yazi.light:                    nord
 
 ! GTK 主题设置
 

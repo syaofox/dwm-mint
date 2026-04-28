@@ -110,7 +110,9 @@ wezterm.cyan:                  #8ec07c
 wezterm.white:                 #ebdbb2
 
 ! yazi 文件管理器主题
-yazi.flavor:                   gruvbox
+yazi.dark:                    gruvbox
+yazi.light:                   gruvbox
+
 
 ! GTK 主题设置
 gtk.theme:                     Mint-Y-Orange

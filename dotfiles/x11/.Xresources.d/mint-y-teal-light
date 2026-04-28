@@ -101,7 +101,8 @@ wezterm.cyan:                  #1A8693
 wezterm.white:                 #FFFFFF
 
 ! yazi 文件管理器主题
-yazi.flavor:                   mint-y-teal-light
+yazi.dark:                     nord
+yazi.light:                    nord
 
 ! GTK 主题设置
 gtk.theme:                     Mint-Y-Teal

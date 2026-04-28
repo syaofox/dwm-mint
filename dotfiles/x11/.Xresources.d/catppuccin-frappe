@@ -121,7 +121,8 @@ wezterm.cyan:                  #81c8be
 wezterm.white:                 #b5bfe2
 
 ! yazi 文件管理器主题
-yazi.flavor:                   catppuccin-frappe
+yazi.dark:                   catppuccin-frappe
+yazi.light:                   catppuccin-frappe
 
 ! GTK 主题设置
 gtk.theme:                     Mint-Y-Pink
