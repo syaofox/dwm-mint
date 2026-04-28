@@ -20,7 +20,9 @@ log "=== DWM session starting (PID: $$) ==="
 # ---------- X 基础设置 ----------
 log "Setting X basic settings (dpms, screensaver)..."
 
-xrdb -merge ~/.Xresources
+
+xrdb -merge ~/.Xresources && log "Xresources loaded" || err "Xresources failed"
+
 
 xset -dpms && log "dpms disabled" || err "failed to disable dpms"
 xset s off && log "screensaver disabled" || err "failed to disable screensaver"
