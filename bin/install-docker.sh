@@ -50,10 +50,13 @@ fi
 if lspci -d 10de:* | grep -q .; then
     log_info "NVIDIA GPU detected, installing NVIDIA Container Toolkit..."
 
+    log_info "Installing prerequisites for NVIDIA Container Toolkit..."
+    sudo apt update && sudo apt install -y --no-install-recommends ca-certificates curl gnupg2
+
     log_info "Setting up NVIDIA Container Toolkit repository..."
     curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
     curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+        sed 's#deb https://#deb \[signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg\] https://#g' | \
         sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list > /dev/null
 
     sudo apt update
