@@ -51,13 +51,13 @@ if lspci -d 10de:* | grep -q .; then
     log_info "NVIDIA GPU detected, installing NVIDIA Container Toolkit..."
 
     log_info "Setting up NVIDIA Container Toolkit repository..."
-    sudo curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /etc/apt/keyrings/nvidia-container-toolkit.gpg
-
-    . /etc/os-release
-    echo "deb [signed-by=/etc/apt/keyrings/nvidia-container-toolkit.gpg] https://nvidia.github.io/libnvidia-container/ubuntu${VERSION_ID} /" | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list > /dev/null
+    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+    curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+        sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list > /dev/null
 
     sudo apt update
-    sudo apt install -y nvidia-container-toolkit
+    sudo apt install -y nvidia-container-toolkit nvidia-container-toolkit-base libnvidia-container-tools libnvidia-container1
 
     log_info "Configuring Docker NVIDIA runtime..."
     sudo nvidia-ctk runtime configure --runtime=docker
