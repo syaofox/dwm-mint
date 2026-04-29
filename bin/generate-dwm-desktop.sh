@@ -8,9 +8,9 @@ sudo bash -c "cat > $DESKTOP_FILE" <<EOF
 Encoding=UTF-8
 Name=Dwm
 Comment=Dynamic window manager
-Exec=dwm-start.sh
+Exec=dbus-run-session dwm
 Icon=dwm
-Type=XSession
+Type=Application
 EOF
 
 echo "Created $DESKTOP_FILE"

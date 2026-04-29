@@ -8,7 +8,7 @@ case "$mode" in
         rofi -show drun -show-icons
         ;;
     file)
-        nemo
+        nemo --no-desktop
         ;;
     lock)
         slock -m "Single is simple, double is double."

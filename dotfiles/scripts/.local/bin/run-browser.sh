@@ -18,7 +18,7 @@ export LC_ALL=zh_CN.UTF-8
 EXTRA_ARGS=(--unsafely-treat-insecure-origin-as-secure=http://10.10.10.6:8080/)
 
 if [ -x "$BRAVE_APT" ]; then
-    exec "$BRAVE_APT" "${EXTRA_ARGS[@]}" "$@"
+    exec "$BRAVE_APT" "--password-store=basic" "${EXTRA_ARGS[@]}" "$@"
 fi
 
 if command -v flatpak >/dev/null 2>&1 && flatpak info "${BRAVE_FLATPAK_ID}" >/dev/null 2>&1; then
