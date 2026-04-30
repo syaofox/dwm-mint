@@ -36,7 +36,7 @@ for svc in slstatus xfce4-clipman; do
 done
 
 log "Starting picom..."
-picom -b &
+picom --config "$HOME/.config/picom/picom.conf" -b &
 
 if command -v xwallpaper >/dev/null; then
     WALLPAPER_CONF="$HOME/.config/wallpaper.conf"
