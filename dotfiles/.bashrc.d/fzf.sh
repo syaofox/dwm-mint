@@ -14,6 +14,7 @@
 # kill -9 **Tab	                            Look for process name to kill to get pid
 # any command (like nvim or code) + **Tab	Look for files & directories to complete command
 
+[ -d "$HOME/.fzf/bin" ] && PATH="$HOME/.fzf/bin:$PATH"
 eval "$(fzf --bash)"
 
 # -- Use fd instead of fzf --
