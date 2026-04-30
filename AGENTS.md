@@ -44,9 +44,37 @@ The `compile_and_install()` helper in `setup/utils.sh` clones into `/tmp/<name>`
 
 ## Theme system
 
-Themes are Xresources files in `~/.Xresources.d/`. The active theme name is stored in `~/.config/theme`.
+Themes are Xresources files in `~/.Xresources.d/`. Each file uses `#define` macros at the top to define a standard palette (~40 variables covering all colors). Below the macros are the `dwm.*`, `slstatus.*`, and `slock.*` entries that reference those macros — these are read directly by `xrdb`.
 
-`dotfiles/.local/bin/switch-theme.sh` handles switching. It runs `generate-app-themes.py` (which must exist in `~/.local/bin/`) to generate configs for rofi, wezterm, dunst, and xsettingsd from the Xresources theme file.
+The active theme name is stored in `~/.config/theme`.
+
+`dotfiles/.local/bin/switch-theme.sh` handles switching. It runs `generate-app-themes.py` (in `~/.local/bin/`) which:
+1. Parses the `#define` macros from the Xresources theme file → palette dict
+2. Renders Jinja2-style templates from `~/.local/bin/templates/*.j2` using a built-in template engine (no Jinja2 dependency)
+3. Writes the rendered configs to the correct paths
+
+### Templates (dotfiles/.local/bin/templates/)
+
+| Template | Output |
+|----------|--------|
+| `dunstrc.j2` | `~/.config/dunst/dunstrc` |
+| `rofi.rasi.j2` | `~/.config/rofi/theme.rasi` |
+| `wezterm.lua.j2` | `~/.config/wezterm/theme.lua` |
+| `yazi.toml.j2` | `~/.config/yazi/theme.toml` |
+| `ps1.j2` | `~/.bashrc.d/ps1/current` |
+| `gtk2.j2` | `~/.gtkrc-2.0` |
+| `gtk3.ini.j2` | `~/.config/gtk-3.0/settings.ini` and `~/.config/gtk-4.0/settings.ini` |
+| `xsettingsd.conf.j2` | `~/.config/xsettingsd/xsettingsd.conf` |
+
+**Adding a new app**: create a new `.j2` template and add a `(template_name, output_path)` entry in `TEMPLATE_OUTPUTS` inside `generate-app-themes.py` — no new Python function needed.
+
+**Adding a new theme**: create an Xresources file in `dotfiles/.Xresources.d/` with the standard `#define` palette section + dwm/slstatus/slock entries referencing macros. See existing themes for format.
+
+### Available filters in templates
+
+- `{{ VAR }}` — direct substitution
+- `{{ VAR | hex_to_rgb }}` → `"R, G, B"` (for rofi rgba())
+- `{{ VAR | hex_to_rgb_s }}` → `"R;G;B"` (for ANSI escape sequences)
 
 ## DWM session startup flow
 

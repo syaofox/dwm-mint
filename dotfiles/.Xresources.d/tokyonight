@@ -1,135 +1,100 @@
 ! TokyoNight Theme Colors for dwm
-!
-! Color Palette Reference (using #define macros)
-#define BG0               #1a1b26
-#define BG1               #404768
-#define BG2               #25293a
-#define BG0_SEL           #191a20
-#define FG                #c0caf5
-#define FG_DARK           #e5e8f7
-#define WHITE             #FFFFFF
-#define PURPLE            #8272bb
-#define GREEN             #9ece6a
-#define MAGENTA           #bb9af7
-#define RED               #f7768e
-#define GRAY              #868686
-#define GRAY_DARK         #585858
-#define TAG_UNDERLINE     #af9afc
-#define BLUE              #7aa2f7
-#define YELLOW            #e0af68
-#define CYAN              #7dcfff
 
-! dwm 窗口颜色 - 未选中，无客户端（窗口）状态
-dwm.col_norm_fg:        BG1
-dwm.col_norm_bg:        BG0
-dwm.col_norm_border:    BG2
+#define BG              #1a1b26
+#define BG_ALT          #404768
+#define FG              #e5e8f7
+#define FG_DIM          #404768
+#define STATUS_FG       #c0caf5
+#define ACCENT          #bb9af7
+#define BORDER          #25293a
+#define SEL_BG          #191a20
+#define SEL_FG          #404768
+#define TITLE_FG        #e5e8f7
+#define SEL_BORDER      #bb9af7
+#define TAG_UL          #af9afc
+#define BLACK           #404768
+#define RED             #f7768e
+#define GREEN           #9ece6a
+#define YELLOW          #e0af68
+#define BLUE            #7aa2f7
+#define MAGENTA         #bb9af7
+#define CYAN            #7dcfff
+#define WHITE           #c0caf5
+#define CRIT_BG         #404768
+#define CRIT_FG         #f7768e
+#define CRIT_FRAME      #f7768e
+#define CURSOR_BG       #e5e8f7
+#define SLSEP           #404768
+#define SLNET           #c0caf5
+#define SLCPU           #c0caf5
+#define SLRAM           #c0caf5
+#define SLGPU           #c0caf5
+#define SLTIME          #c0caf5
+#define LOCK_BG         #1a1b26
+#define LOCK_INPUT      #8272bb
+#define LOCK_FAIL       #f7768e
+#define LOCK_TEXT       #c0caf5
+#define PS1_DIR         #7aa2f7
+#define PS1_PROMPT      #bb9af7
+#define PS1_BRANCH      #868686
+#define GTK_THEME       Mint-Y-Purple
+#define GTK_ICON        Mint-Y-Purple
+#define GTK_FONT        Noto Sans 11
+#define DARK_THEME      0
+#define YAZI_DARK       tokyo-night
+#define YAZI_LIGHT      tokyo-night
+#define ROFI_ICON       Mint-Y-Purple
+#define ROFI_SEL_FG     #FFFFFF
 
+! dwm 窗口颜色 - 未选中，无客户端
+dwm.col_norm_fg:        FG_DIM
+dwm.col_norm_bg:        BG
+dwm.col_norm_border:    BORDER
 
-! dwm 窗口颜色 - 选中，无客户端（窗口）状态
-dwm.col_sel_fg:         BG1
-dwm.col_sel_bg:         BG0_SEL
-dwm.col_sel_border:     MAGENTA
+! dwm 窗口颜色 - 选中，无客户端
+dwm.col_sel_fg:         SEL_FG
+dwm.col_sel_bg:         SEL_BG
+dwm.col_sel_border:     ACCENT
 
+! dwm 窗口颜色 - 未选中，有客户端
+dwm.col_occ_fg:         TITLE_FG
+dwm.col_occ_bg:         BG
+dwm.col_occ_border:     BORDER
 
-! dwm 窗口颜色 - 未选中，有客户端（窗口在窗口区显示）
-dwm.col_occ_fg:         FG_DARK
-dwm.col_occ_bg:         BG0
-dwm.col_occ_border:     BG2
-
-
-! dwm 窗口颜色 - 选中，有客户端（窗口区有窗口且当前激活）
-dwm.col_selocc_fg:      WHITE
-dwm.col_selocc_bg:      BG0_SEL
-dwm.col_selocc_border:  MAGENTA
-
+! dwm 窗口颜色 - 选中，有客户端
+dwm.col_selocc_fg:      TITLE_FG
+dwm.col_selocc_bg:      SEL_BG
+dwm.col_selocc_border:  ACCENT
 
 ! dwm 状态栏颜色（dwmbar）
-dwm.col_status_fg:      FG
-dwm.col_status_bg:      BG0
-dwm.col_status_border:  BG0
-
+dwm.col_status_fg:      STATUS_FG
+dwm.col_status_bg:      BG
+dwm.col_status_border:  BG
 
 ! dwm 窗口标题区颜色（标题栏）
-dwm.col_title_fg:       FG_DARK
-dwm.col_title_bg:       BG0
-dwm.col_title_border:   BG1
-
+dwm.col_title_fg:       TITLE_FG
+dwm.col_title_bg:       BG
+dwm.col_title_border:   FG_DIM
 
 ! dwm 窗口标题区颜色 - 选中状态
-dwm.col_titlesel_fg:    FG_DARK
-dwm.col_titlesel_bg:    BG0
-dwm.col_titlesel_border: BG0
-
+dwm.col_titlesel_fg:    TITLE_FG
+dwm.col_titlesel_bg:    BG
+dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   TAG_UNDERLINE
+dwm.col_tagunderline:   TAG_UL
 dwm.tagunderline: 1
 
-
-! slstatus 状态栏颜色（系统信息显示）
-slstatus.sep:   BG1
-slstatus.net:   FG
-slstatus.cpu:   FG
-slstatus.ram:   FG
-slstatus.gpu:   FG
-slstatus.time:  FG
-
+! slstatus 状态栏颜色
+slstatus.sep:   SLSEP
+slstatus.net:   SLNET
+slstatus.cpu:   SLCPU
+slstatus.ram:   SLRAM
+slstatus.gpu:   SLGPU
+slstatus.time:  SLTIME
 
 ! slock 锁屏颜色
-slock.init:     BG0
-slock.input:    PURPLE
-slock.fail:     RED
-slock.text:     FG
-
-
-! PS1 bash 提示符颜色
-ps1.dir:    BLUE
-ps1.prompt: MAGENTA
-ps1.branch: GRAY
-
-
-! dunst 通知颜色
-dunst.urgency_low_bg:          BG0
-dunst.urgency_low_fg:          FG_DARK
-dunst.urgency_low_frame:       MAGENTA
-dunst.urgency_normal_bg:       BG0
-dunst.urgency_normal_fg:       FG_DARK
-dunst.urgency_normal_frame:    MAGENTA
-dunst.urgency_critical_bg:     BG1
-dunst.urgency_critical_fg:     RED
-dunst.urgency_critical_frame:  RED
-
-
-! rofi 启动器颜色
-rofi.icontheme:                Mint-Y-Purple
-rofi.background:               BG0
-rofi.foreground:               FG_DARK
-rofi.selected_bg:              MAGENTA
-rofi.selected_fg:              WHITE
-rofi.active_fg:                MAGENTA
-
-
-! wezterm 终端颜色
-wezterm.bg:                    BG0
-wezterm.fg:                    FG_DARK
-wezterm.cursor_bg:             FG_DARK
-wezterm.black:                 BG1
-wezterm.red:                   RED
-wezterm.green:                 GREEN
-wezterm.yellow:                YELLOW
-wezterm.blue:                  BLUE
-wezterm.magenta:               MAGENTA
-wezterm.cyan:                  CYAN
-wezterm.white:                 FG
-
-
-! yazi 文件管理器主题
-yazi.dark:                    tokyo-night
-yazi.light:                   tokyo-night
-
-
-! GTK 主题设置
-gtk.theme:                     Mint-Y-Purple
-gtk.icon_theme:                Mint-Y-Purple
-gtk.font:                      Noto Sans 11
-gtk.gtk-application-prefer-dark-theme: 0
+slock.init:     LOCK_BG
+slock.input:    LOCK_INPUT
+slock.fail:     LOCK_FAIL
+slock.text:     LOCK_TEXT

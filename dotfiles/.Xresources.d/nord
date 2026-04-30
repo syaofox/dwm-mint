@@ -1,128 +1,100 @@
 ! Nord Theme Colors for dwm
-!
-! Color Palette Reference:
-!   #2E3440  polar_night_0 - Background dark
-!   #3B4252  polar_night_1 - Background light
-!   #434C5E  polar_night_2 - Background lighter
-!   #4C566A  polar_night_3 - Background lightest
-!   #8FBCBB  frost_0       - Frost green
-!   #88C0D0  frost_1       - Frost cyan
-!   #81A1C1  frost_2       - Frost blue
-!   #5E81AC  frost_3       - Frost dark blue
-!   #ECEFF4  snow_storm_0  - Foreground light
-!   #D8DEE9  snow_storm_1  - Foreground
-!   #E5E9F0  snow_storm_2  - Foreground dark
-!   #A3BE8C  aurora_green  - Green
-!   #EBCB8B  aurora_yellow - Yellow
-!   #BF616A  aurora_red    - Red
-!   #B48EAD  aurora_purple - Purple
+
+#define BG              #2E3440
+#define BG_ALT          #3B4252
+#define FG              #ECEFF4
+#define FG_DIM          #4C566A
+#define STATUS_FG       #D8DEE9
+#define ACCENT          #88C0D0
+#define BORDER          #4C566A
+#define SEL_BG          #2E3440
+#define SEL_FG          #E5E9F0
+#define TITLE_FG        #FAFCFF
+#define SEL_BORDER      #a8ecff
+#define TAG_UL          #a8ecff
+#define BLACK           #4C566A
+#define RED             #BF616A
+#define GREEN           #A3BE8C
+#define YELLOW          #EBCB8B
+#define BLUE            #81A1C1
+#define MAGENTA         #B48EAD
+#define CYAN            #8FBCBB
+#define WHITE           #ECEFF4
+#define CRIT_BG         #2a1515
+#define CRIT_FG         #ff9f90
+#define CRIT_FRAME      #ff7f70
+#define CURSOR_BG       #ECEFF4
+#define SLSEP           #4C566A
+#define SLNET           #88C0D0
+#define SLCPU           #EBCB8B
+#define SLRAM           #EBCB8B
+#define SLGPU           #A3BE8C
+#define SLTIME          #ECEFF4
+#define LOCK_BG         #2E3440
+#define LOCK_INPUT      #88C0D0
+#define LOCK_FAIL       #BF616A
+#define LOCK_TEXT       #ECEFF4
+#define PS1_DIR         #81A1C1
+#define PS1_PROMPT      #a8ecff
+#define PS1_BRANCH      #a5aab6
+#define GTK_THEME       Mint-Y-Teal
+#define GTK_ICON        Mint-Y-Teal
+#define GTK_FONT        Noto Sans 10
+#define DARK_THEME      0
+#define YAZI_DARK       nord
+#define YAZI_LIGHT      nord
+#define ROFI_ICON       Mint-Y-Teal
+#define ROFI_SEL_FG     #2E3440
 
 ! dwm 窗口颜色 - 未选中，无客户端（窗口）状态
-dwm.col_norm_fg:        #4C566A
-dwm.col_norm_bg:        #2E3440
-dwm.col_norm_border:    #4C566A
-
+dwm.col_norm_fg:        FG_DIM
+dwm.col_norm_bg:        BG
+dwm.col_norm_border:    FG_DIM
 
 ! dwm 窗口颜色 - 选中，无客户端（窗口）状态
-dwm.col_sel_fg:         #E5E9F0
-dwm.col_sel_bg:         #2E3440
-dwm.col_sel_border:     #a8ecff
-
+dwm.col_sel_fg:         SEL_FG
+dwm.col_sel_bg:         SEL_BG
+dwm.col_sel_border:     SEL_BORDER
 
 ! dwm 窗口颜色 - 未选中，有客户端（窗口在窗口区显示）
-dwm.col_occ_fg:         #E5E9F0
-dwm.col_occ_bg:         #2E3440
-dwm.col_occ_border:     #4C566A
-
+dwm.col_occ_fg:         SEL_FG
+dwm.col_occ_bg:         BG
+dwm.col_occ_border:     BORDER
 
 ! dwm 窗口颜色 - 选中，有客户端（窗口区有窗口且当前激活）
-dwm.col_selocc_fg:      #FAFCFF
-dwm.col_selocc_bg:      #2E3440
-dwm.col_selocc_border:  #4C566A
-
+dwm.col_selocc_fg:      TITLE_FG
+dwm.col_selocc_bg:      BG
+dwm.col_selocc_border:  SEL_BORDER
 
 ! dwm 状态栏颜色（dwmbar）
-dwm.col_status_fg:      #D8DEE9
-dwm.col_status_bg:      #2E3440
-dwm.col_status_border:  #2E3440
-
+dwm.col_status_fg:      STATUS_FG
+dwm.col_status_bg:      BG
+dwm.col_status_border:  BG
 
 ! dwm 窗口标题区颜色（标题栏）
-dwm.col_title_fg:       #FAFCFF
-dwm.col_title_bg:       #2E3440
-dwm.col_title_border:   #4C566A
-
+dwm.col_title_fg:       TITLE_FG
+dwm.col_title_bg:       BG
+dwm.col_title_border:   BORDER
 
 ! dwm 窗口标题区颜色 - 选中状态
-dwm.col_titlesel_fg:    #FAFCFF
-dwm.col_titlesel_bg:    #2E3440
-dwm.col_titlesel_border: #2E3440
-
+dwm.col_titlesel_fg:    TITLE_FG
+dwm.col_titlesel_bg:    BG
+dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   #a8ecff
+dwm.col_tagunderline:   TAG_UL
 dwm.tagunderline: 1
 
-
-! slstatus 状态栏颜色（系统信息显示）
-slstatus.sep:   #4C566A
-slstatus.net:   #88C0D0
-slstatus.cpu:   #EBCB8B
-slstatus.ram:   #EBCB8B
-slstatus.gpu:   #A3BE8C
-slstatus.time:  #ECEFF4
-
+! slstatus 状态栏颜色
+slstatus.sep:   SLSEP
+slstatus.net:   SLNET
+slstatus.cpu:   SLCPU
+slstatus.ram:   SLRAM
+slstatus.gpu:   SLGPU
+slstatus.time:  SLTIME
 
 ! slock 锁屏颜色
-slock.init:     #2E3440
-slock.input:    #88C0D0
-slock.fail:     #BF616A
-slock.text:     #ECEFF4
-
-
-! PS1 bash 提示符颜色
-ps1.dir:    #81A1C1
-ps1.prompt: #a8ecff
-ps1.branch: #a5aab6
-
-! dunst 通知颜色
-dunst.urgency_low_bg:          #2E3440
-dunst.urgency_low_fg:          #ECEFF4
-dunst.urgency_low_frame:       #88C0D0
-dunst.urgency_normal_bg:       #3B4252
-dunst.urgency_normal_fg:       #ECEFF4
-dunst.urgency_normal_frame:    #88C0D0
-dunst.urgency_critical_bg:     #2a1515
-dunst.urgency_critical_fg:     #ff9f90
-dunst.urgency_critical_frame:  #ff7f70
-
-! rofi 启动器颜色
-rofi.icontheme:                Mint-Y-Teal
-rofi.background:               #2E3440
-rofi.foreground:               #ECEFF4
-rofi.selected_bg:              #88C0D0
-rofi.selected_fg:              #2E3440
-rofi.active_fg:                #88C0D0
-
-! wezterm 终端颜色
-wezterm.bg:                    #2E3440
-wezterm.fg:                    #ECEFF4
-wezterm.cursor_bg:             #ECEFF4
-wezterm.black:                 #4C566A
-wezterm.red:                   #BF616A
-wezterm.green:                 #A3BE8C
-wezterm.yellow:                #EBCB8B
-wezterm.blue:                  #81A1C1
-wezterm.magenta:               #B48EAD
-wezterm.cyan:                  #8FBCBB
-wezterm.white:                 #ECEFF4
-
-! yazi 文件管理器主题
-yazi.dark:                     nord
-yazi.light:                    nord
-
-! GTK 主题设置
-gtk.theme:                     Mint-Y-Teal
-gtk.icon_theme:                Mint-Y-Teal
-gtk.font:                      Noto Sans 10
-gtk.gtk-application-prefer-dark-theme: 0
+slock.init:     LOCK_BG
+slock.input:    LOCK_INPUT
+slock.fail:     LOCK_FAIL
+slock.text:     LOCK_TEXT

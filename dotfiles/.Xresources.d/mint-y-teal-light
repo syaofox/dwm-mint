@@ -1,112 +1,100 @@
 ! Mint-Y-Teal Light Theme Colors for dwm
 
-! dwm 窗口颜色 - 未选中，无客户端（窗口）状态
-dwm.col_norm_fg:        #808080
-dwm.col_norm_bg:        #EAF2F1
-dwm.col_norm_border:    #3D5A5E
+#define BG              #EAF2F1
+#define BG_ALT          #3D5A5E
+#define FG              #2D3436
+#define FG_DIM          #808080
+#define STATUS_FG       #2D3436
+#define ACCENT          #1A8693
+#define BORDER          #3D5A5E
+#define SEL_BG          #1A8693
+#define SEL_FG          #FFFFFF
+#define TITLE_FG        #FFFFFF
+#define SEL_BORDER      #2bdff3
+#define TAG_UL          #1A8693
+#define BLACK           #808080
+#define RED             #E74C3C
+#define GREEN           #27AE60
+#define YELLOW          #D4A017
+#define BLUE            #1A8693
+#define MAGENTA         #2bdff3
+#define CYAN            #1A8693
+#define WHITE           #FFFFFF
+#define CRIT_BG         #E74C3C
+#define CRIT_FG         #FFFFFF
+#define CRIT_FRAME      #E74C3C
+#define CURSOR_BG       #2D3436
+#define SLSEP           #3D5A5E
+#define SLNET           #1A8693
+#define SLCPU           #D4A017
+#define SLRAM           #D4A017
+#define SLGPU           #27AE60
+#define SLTIME          #2D3436
+#define LOCK_BG         #EAF2F1
+#define LOCK_INPUT      #1A8693
+#define LOCK_FAIL       #E74C3C
+#define LOCK_TEXT       #27c6d8
+#define PS1_DIR         #D4A017
+#define PS1_PROMPT      #1A8693
+#define PS1_BRANCH      #868686
+#define GTK_THEME       Mint-Y-Teal
+#define GTK_ICON        Mint-Y-Teal
+#define GTK_FONT        Noto Sans 10
+#define DARK_THEME      0
+#define YAZI_DARK       flexoki-light
+#define YAZI_LIGHT      flexoki-light
+#define ROFI_ICON       Mint-Y-Teal
+#define ROFI_SEL_FG     #FFFFFF
 
+! dwm 窗口颜色 - 未选中，无客户端
+dwm.col_norm_fg:        FG_DIM
+dwm.col_norm_bg:        BG
+dwm.col_norm_border:    BORDER
 
-! dwm 窗口颜色 - 选中，无客户端（窗口）状态
-dwm.col_sel_fg:         #FFFFFF
-dwm.col_sel_bg:        #1A8693
-dwm.col_sel_border:    #2bdff3
+! dwm 窗口颜色 - 选中，无客户端
+dwm.col_sel_fg:         SEL_FG
+dwm.col_sel_bg:         ACCENT
+dwm.col_sel_border:     SEL_BORDER
 
+! dwm 窗口颜色 - 未选中，有客户端
+dwm.col_occ_fg:         FG
+dwm.col_occ_bg:         BG
+dwm.col_occ_border:     BORDER
 
-! dwm 窗口颜色 - 未选中，有客户端（窗口在窗口区显示）
-dwm.col_occ_fg:         #2D3436
-dwm.col_occ_bg:        #EAF2F1
-dwm.col_occ_border:    #3D5A5E
-
-
-! dwm 窗口颜色 - 选中，有客户端（窗口区有窗口且当前激活）
-dwm.col_selocc_fg:      #FFFFFF
-dwm.col_selocc_bg:     #1A8693
-dwm.col_selocc_border: #2bdff3
-
+! dwm 窗口颜色 - 选中，有客户端
+dwm.col_selocc_fg:      TITLE_FG
+dwm.col_selocc_bg:      ACCENT
+dwm.col_selocc_border:  SEL_BORDER
 
 ! dwm 状态栏颜色（dwmbar）
-dwm.col_status_fg:      #2D3436
-dwm.col_status_bg:      #EAF2F1
-dwm.col_status_border:  #EAF2F1
-
+dwm.col_status_fg:      STATUS_FG
+dwm.col_status_bg:      BG
+dwm.col_status_border:  BG
 
 ! dwm 窗口标题区颜色（标题栏）
-dwm.col_title_fg:       #2D3436
-dwm.col_title_bg:       #EAF2F1
-dwm.col_title_border:   #3D5A5E
-
+dwm.col_title_fg:       FG
+dwm.col_title_bg:       BG
+dwm.col_title_border:   BORDER
 
 ! dwm 窗口标题区颜色 - 选中状态
-dwm.col_titlesel_fg:    #FFFFFF
-dwm.col_titlesel_bg:    #1A8693
-dwm.col_titlesel_border: #EAF2F1
-
+dwm.col_titlesel_fg:    TITLE_FG
+dwm.col_titlesel_bg:    ACCENT
+dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   #1A8693
+dwm.col_tagunderline:   TAG_UL
 dwm.tagunderline: 0
 
-
-! slstatus 状态栏颜色（系统信息显示）
-slstatus.sep:   #3D5A5E
-slstatus.net:   #1A8693
-slstatus.cpu:   #D4A017
-slstatus.ram:   #D4A017
-slstatus.gpu:   #27AE60
-slstatus.time:  #2D3436
-
+! slstatus 状态栏颜色
+slstatus.sep:   SLSEP
+slstatus.net:   SLNET
+slstatus.cpu:   SLCPU
+slstatus.ram:   SLRAM
+slstatus.gpu:   SLGPU
+slstatus.time:  SLTIME
 
 ! slock 锁屏颜色
-slock.init:     #EAF2F1
-slock.input:    #1A8693
-slock.fail:     #E74C3C
-slock.text:     #27c6d8
-
-
-! PS1 bash 提示符颜色
-ps1.dir:    #D4A017
-ps1.prompt: #1A8693
-ps1.branch: #868686
-
-! dunst 通知颜色
-dunst.urgency_low_bg:          #EAF2F1
-dunst.urgency_low_fg:          #2D3436
-dunst.urgency_low_frame:       #1A8693
-dunst.urgency_normal_bg:       #3D5A5E
-dunst.urgency_normal_fg:       #2D3436
-dunst.urgency_normal_frame:    #1A8693
-dunst.urgency_critical_bg:     #E74C3C
-dunst.urgency_critical_fg:     #FFFFFF
-dunst.urgency_critical_frame:  #E74C3C
-
-! rofi 启动器颜色
-rofi.icontheme:                Mint-Y-Teal
-rofi.background:               #EAF2F1
-rofi.foreground:               #2D3436
-rofi.selected_bg:              #1A8693
-rofi.selected_fg:              #FFFFFF
-rofi.active_fg:                #1A8693
-
-! wezterm 终端颜色
-wezterm.bg:                    #EAF2F1
-wezterm.fg:                    #2D3436
-wezterm.cursor_bg:             #2D3436
-wezterm.black:                 #808080
-wezterm.red:                   #E74C3C
-wezterm.green:                 #27AE60
-wezterm.yellow:                #D4A017
-wezterm.blue:                  #1A8693
-wezterm.magenta:               #2bdff3
-wezterm.cyan:                  #1A8693
-wezterm.white:                 #FFFFFF
-
-! yazi 文件管理器主题
-yazi.dark:                     flexoki-light
-yazi.light:                    flexoki-light
-
-! GTK 主题设置
-gtk.theme:                     Mint-Y-Teal
-gtk.icon_theme:                Mint-Y-Teal
-gtk.font:                      Noto Sans 10
-gtk.gtk-application-prefer-dark-theme: 0
-
+slock.init:     LOCK_BG
+slock.input:    LOCK_INPUT
+slock.fail:     LOCK_FAIL
+slock.text:     LOCK_TEXT

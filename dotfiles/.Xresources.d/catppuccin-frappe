@@ -1,135 +1,100 @@
 ! Catppuccin Frappe Theme Colors for dwm
-!
-! Color Palette Reference:
-!   #f2d5cf  rosewater  - Rosewater
-!   #eebebe  flamingo   - Flamingo
-!   #f4b8e4  pink       - Pink
-!   #ca9ee6  mauve      - Mauve
-!   #e78284  red        - Red
-!   #ef9f76  peach      - Peach
-!   #e5c890  yellow     - Yellow
-!   #a6d189  green      - Green
-!   #81c8be  teal       - Teal
-!   #99d1db  sky        - Sky
-!   #8caaee  blue       - Blue
-!   #babbf1  lavender   - Lavender
-!   #c6d0f5  text       - Text
-!   #b5bfe2  subtext   - Subtext
-!   #303446  base       - Base
-!   #51576d  surface    - Surface
 
-! dwm 窗口颜色 - 未选中，无客户端（窗口）状态
-dwm.col_norm_fg:        #525668
-dwm.col_norm_bg:        #303446
-dwm.col_norm_border:    #737994
+#define BG              #303446
+#define BG_ALT          #51576d
+#define FG              #c6d0f5
+#define FG_DIM          #737994
+#define STATUS_FG       #b5bfe2
+#define ACCENT          #8caaee
+#define BORDER          #737994
+#define SEL_BG          #303446
+#define SEL_FG          #eaeefd
+#define TITLE_FG        #c6d0f5
+#define SEL_BORDER      #f4b8e4
+#define TAG_UL          #f4b8e4
+#define BLACK           #51576d
+#define RED             #e78284
+#define GREEN           #a6d189
+#define YELLOW          #e5c890
+#define BLUE            #8caaee
+#define MAGENTA         #ca9ee6
+#define CYAN            #81c8be
+#define WHITE           #b5bfe2
+#define CRIT_BG         #ca9ee6
+#define CRIT_FG         #e78284
+#define CRIT_FRAME      #eebebe
+#define CURSOR_BG       #c6d0f5
+#define SLSEP           #737994
+#define SLNET           #99d1db
+#define SLCPU           #e5c890
+#define SLRAM           #e5c890
+#define SLGPU           #a6d189
+#define SLTIME          #c6d0f5
+#define LOCK_BG         #303446
+#define LOCK_INPUT      #8caaee
+#define LOCK_FAIL       #e78284
+#define LOCK_TEXT       #c6d0f5
+#define PS1_DIR         #a6d189
+#define PS1_PROMPT      #8caaee
+#define PS1_BRANCH      #868686
+#define GTK_THEME       Mint-Y-Pink
+#define GTK_ICON        Mint-Y-Pink
+#define GTK_FONT        Noto Sans 10
+#define DARK_THEME      0
+#define YAZI_DARK       catppuccin-frappe
+#define YAZI_LIGHT      catppuccin-frappe
+#define ROFI_ICON       Mint-Y-Pink
+#define ROFI_SEL_FG     #303446
 
+! dwm 窗口颜色 - 未选中，无客户端
+dwm.col_norm_fg:        FG_DIM
+dwm.col_norm_bg:        BG
+dwm.col_norm_border:    BORDER
 
-! dwm 窗口颜色 - 选中，无客户端（窗口）状态
-dwm.col_sel_fg:         #eaeefd
-dwm.col_sel_bg:         #303446
-dwm.col_sel_border:     #f4b8e4
+! dwm 窗口颜色 - 选中，无客户端
+dwm.col_sel_fg:         SEL_FG
+dwm.col_sel_bg:         SEL_BG
+dwm.col_sel_border:     SEL_BORDER
 
+! dwm 窗口颜色 - 未选中，有客户端
+dwm.col_occ_fg:         FG
+dwm.col_occ_bg:         BG
+dwm.col_occ_border:     BORDER
 
-! dwm 窗口颜色 - 未选中，有客户端（窗口在窗口区显示）
-dwm.col_occ_fg:         #c6d0f5
-dwm.col_occ_bg:         #303446
-dwm.col_occ_border:     #737994
-
-
-! dwm 窗口颜色 - 选中，有客户端（窗口区有窗口且当前激活）
-dwm.col_selocc_fg:      #eaeefd
-dwm.col_selocc_bg:      #303446
-dwm.col_selocc_border:  #f4b8e4
-
+! dwm 窗口颜色 - 选中，有客户端
+dwm.col_selocc_fg:      TITLE_FG
+dwm.col_selocc_bg:      SEL_BG
+dwm.col_selocc_border:  SEL_BORDER
 
 ! dwm 状态栏颜色（dwmbar）
-dwm.col_status_fg:      #b5bfe2
-dwm.col_status_bg:      #303446
-dwm.col_status_border:  #303446
-
+dwm.col_status_fg:      STATUS_FG
+dwm.col_status_bg:      BG
+dwm.col_status_border:  BG
 
 ! dwm 窗口标题区颜色（标题栏）
-dwm.col_title_fg:       #c6d0f5
-dwm.col_title_bg:       #303446
-dwm.col_title_border:   #737994
-
+dwm.col_title_fg:       FG
+dwm.col_title_bg:       BG
+dwm.col_title_border:   BORDER
 
 ! dwm 窗口标题区颜色 - 选中状态
-dwm.col_titlesel_fg:    #c6d0f5
-dwm.col_titlesel_bg:    #303446
-dwm.col_titlesel_border: #303446
-
+dwm.col_titlesel_fg:    FG
+dwm.col_titlesel_bg:    BG
+dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   #f4b8e4
+dwm.col_tagunderline:   TAG_UL
 dwm.tagunderline: 1
 
-
-! slstatus 状态栏颜色（系统信息显示）
-slstatus.sep:   #737994
-slstatus.net:   #99d1db
-slstatus.cpu:   #e5c890
-slstatus.ram:   #e5c890
-slstatus.gpu:   #a6d189
-slstatus.time:  #c6d0f5
-
+! slstatus 状态栏颜色
+slstatus.sep:   SLSEP
+slstatus.net:   SLNET
+slstatus.cpu:   SLCPU
+slstatus.ram:   SLRAM
+slstatus.gpu:   SLGPU
+slstatus.time:  SLTIME
 
 ! slock 锁屏颜色
-slock.init:     #303446
-slock.input:    #8caaee
-slock.fail:     #e78284
-slock.text:     #c6d0f5
-
-
-
-
-! PS1 bash 提示符颜色
-ps1.dir:    #a6d189
-ps1.prompt: #8caaee
-ps1.branch: #868686
-
-! dunst 通知颜色
-dunst.urgency_low_bg:          #303446
-dunst.urgency_low_fg:          #c6d0f5
-dunst.urgency_low_frame:       #8caaee
-dunst.urgency_normal_bg:       #51576d
-dunst.urgency_normal_fg:       #c6d0f5
-dunst.urgency_normal_frame:    #8caaee
-dunst.urgency_critical_bg:     #ca9ee6
-dunst.urgency_critical_fg:     #e78284
-dunst.urgency_critical_frame:  #eebebe
-
-! rofi 启动器颜色
-rofi.icontheme:                Mint-Y-Pink
-rofi.background:               #303446
-rofi.foreground:               #c6d0f5
-rofi.selected_bg:              #8caaee
-rofi.selected_fg:              #303446
-rofi.active_fg:                #8caaee
-
-! wezterm 终端颜色
-wezterm.bg:                    #303446
-wezterm.fg:                    #c6d0f5
-wezterm.cursor_bg:             #c6d0f5
-wezterm.black:                 #51576d
-wezterm.red:                   #e78284
-wezterm.green:                 #a6d189
-wezterm.yellow:                #e5c890
-wezterm.blue:                  #8caaee
-wezterm.magenta:               #ca9ee6
-wezterm.cyan:                  #81c8be
-wezterm.white:                 #b5bfe2
-
-! yazi 文件管理器主题
-yazi.dark:                   catppuccin-frappe
-yazi.light:                   catppuccin-frappe
-
-! GTK 主题设置
-gtk.theme:                     Mint-Y-Pink
-gtk.icon_theme:                Mint-Y-Pink
-gtk.font:                      Noto Sans 10
-gtk.gtk-application-prefer-dark-theme: 0
-
-
-
-
+slock.init:     LOCK_BG
+slock.input:    LOCK_INPUT
+slock.fail:     LOCK_FAIL
+slock.text:     LOCK_TEXT
