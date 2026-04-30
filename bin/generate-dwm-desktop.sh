@@ -8,7 +8,7 @@ sudo bash -c "cat > $DESKTOP_FILE" <<EOF
 Encoding=UTF-8
 Name=Dwm
 Comment=Dynamic window manager
-Exec=dbus-run-session dwm
+Exec=dwm
 Icon=dwm
 Type=Application
 EOF

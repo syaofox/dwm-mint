@@ -11,30 +11,15 @@ exec > >(tee -a "$LOGFILE") 2>&1
 log "=== DWM session starting (PID: $$) ==="
 
 
-# 设置输入法环境变量，确保在 DWM 中也能正确使用输入法
-# log "Setting input method environment variables..."
-# export XDG_CURRENT_DESKTOP=dwm
-# export XDG_SESSION_DESKTOP=dwm
-# export GTK_IM_MODULE=fcitx
-# export QT_IM_MODULE=fcitx
-# export XMODIFIERS=@im=fcitx
-# export SDL_IM_MODULE=fcitx
-# export GLFW_IM_MODULE=fcitx  # 之前日志显示为 ibus，这里强制改回
-# export __GLX_VENDOR_LIBRARY_NAME=nvidia
-
-
-# 注意：必须在所有 export 之后运行
+# 1. 虽然已经在 .xprofile 导出了，但在脚本里再次同步给 systemd/dbus 是最稳妥的
+# 这样通过 systemctl --user 启动的应用也能拿到正确变量
 if command -v dbus-update-activation-environment >/dev/null; then
     log "Updating DBus activation environment..."
-    # 显式指定我们要强制同步的变量，防止被系统残留脚本覆盖为错误的值
-    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY \
-        XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP \
-        GTK_IM_MODULE QT_IM_MODULE XMODIFIERS
+    dbus-update-activation-environment --systemd --all
 fi
 
-# 3. 启动 Keyring 和 Polkit[cite: 2]
-eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-export SSH_AUTH_SOCK
+# 2. 启动 Polkit (Cinnamon 必带组件)[cite: 1]
+# 注意：不需要再次 eval keyring 了，因为 dwm 已经从 .xprofile 继承了变量
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 
