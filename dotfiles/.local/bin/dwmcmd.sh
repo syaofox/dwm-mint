@@ -32,5 +32,8 @@ case "$mode" in
         maim -s "$filepath" && \
         dunstify -r 9988 -t 2000 "截图已保存: $filepath" || \
         dunstify -r 9988 -t 2000 '截图失败'
-        ;;    
+        ;;
+    picom)
+        switch-picom.sh
+        ;;
 esac
