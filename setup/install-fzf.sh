@@ -16,7 +16,7 @@ if ! git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; then
 fi
 
 log_info "Running fzf install script..."
-if ! ~/.fzf/install; then
+if ! ~/.fzf/install --all --no-update-rc; then
     log_error "Failed to run fzf install script"
     exit 1
 fi
