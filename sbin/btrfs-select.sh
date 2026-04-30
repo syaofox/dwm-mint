@@ -3,25 +3,16 @@
 # 分区完之后，弹出选择时区的时候执行
 
 # ==========================================
-# Configuration - edit here only
+# Configuration
 # ==========================================
 
-# Device paths (leave empty for interactive prompt)
 DEV_BTRFS=""
 DEV_EFI=""
 
-# Mount base directories
 TARGET="/target"
 MOUNT_TMP="/mnt"
 EFI_MOUNT="/boot/efi"
 
-# Root subvolume rename.
-# Set RENAME_SRC if the installer created a different name (e.g. "rootfs" for @rootfs).
-# The script will rename @<RENAME_SRC> to @.
-RENAME_SRC=""
-
-# Subvolume definitions: "name|mount_point|nodatacow(yes/no)"
-# Change this array to add/remove/modify subvolumes — everything else derives from it.
 SUBVOLUMES=(
     "@home|/home|no"
     "@cache|/var/cache|no"
@@ -46,7 +37,6 @@ echo "=========================================="
 lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINTS,LABEL
 echo "------------------------------------------"
 
-# Device selection
 read -p "请输入 Btrfs 根分区设备路径 (默认 /dev/vda3): " input
 DEV_BTRFS=${input:-${DEV_BTRFS:-/dev/vda3}}
 
@@ -56,24 +46,79 @@ DEV_EFI=${input:-${DEV_EFI:-/dev/vda1}}
 echo "确认配置: Btrfs=$DEV_BTRFS, EFI=$DEV_EFI"
 read -p "按回车键开始执行，或按 Ctrl+C 退出..."
 
-echo "--- 开始 Btrfs 多子卷重构及性能优化 ---"
-
-# 1. Unmount existing mounts
-echo "正在卸载现有挂载..."
+# ==========================================
+# Phase 1: Mount btrfs root
+# ==========================================
+echo ""
+echo "--- 阶段 1/4: 挂载 Btrfs 根分区 ---"
 umount -R "$TARGET" 2>/dev/null
-
-# 2. Mount and create subvolumes
-echo "正在挂载根分区并创建子卷..."
 mount "$DEV_BTRFS" "$MOUNT_TMP"
 cd "$MOUNT_TMP" || exit
 
-# Rename root subvolume if needed
-if [ -n "$RENAME_SRC" ] && [ -d "@${RENAME_SRC}" ]; then
-    mv "@${RENAME_SRC}" @
-    echo "已重命名 @${RENAME_SRC} 为 @"
+# ==========================================
+# Phase 2: Pre-flight validation
+# ==========================================
+echo "--- 阶段 2/4: 前置检查 ---"
+errors=()
+
+# 2a. Root subvolume must exist
+if [ -d "@" ]; then
+    echo "  [OK] 找到根子卷 @"
+elif [ -d "@rootfs" ]; then
+    echo "  [OK] 找到根子卷 @rootfs (将被重命名为 @)"
+else
+    errors+=("未找到 @ 或 @rootfs 子卷")
 fi
 
-# Create subvolumes from SUBVOLUMES array
+# 2b. Mount @ temporarily to inspect mount points
+mount -o subvol=@ "$DEV_BTRFS" "$TARGET"
+
+for entry in "${SUBVOLUMES[@]}"; do
+    IFS='|' read -r name target cow <<< "$entry"
+
+    if [ -d "${TARGET}${target}" ] && [ "$(ls -A "${TARGET}${target}")" ]; then
+        echo "  [迁移] ${target} 根子卷中已有内容，将迁至子卷 $name"
+    fi
+
+    if [ "$cow" = "yes" ]; then
+        if [ -d "${TARGET}${target}" ] && [ "$(ls -A "${TARGET}${target}")" ]; then
+            errors+=("${target} 非空，无法对其禁用 CoW (chattr +C 要求目录为空)")
+        else
+            echo "  [OK] ${target} 为空，可禁用 CoW"
+        fi
+    fi
+done
+
+umount "$TARGET"
+cd /
+
+# 2c. Report
+if [ ${#errors[@]} -gt 0 ]; then
+    echo ""
+    echo "=========================================="
+    echo "  前置检查失败，需先处理以下问题："
+    for err in "${errors[@]}"; do
+        echo "    - $err"
+    done
+    echo "=========================================="
+    umount "$MOUNT_TMP"
+    exit 1
+fi
+
+echo "所有前置检查通过，继续执行..."
+
+# ==========================================
+# Phase 3: Create subvolumes
+# ==========================================
+echo ""
+echo "--- 阶段 3/4: 创建子卷 ---"
+cd "$MOUNT_TMP" || exit
+
+if [ -d "@rootfs" ]; then
+    mv @rootfs @
+    echo "已重命名 @rootfs 为 @"
+fi
+
 for entry in "${SUBVOLUMES[@]}"; do
     name="${entry%%|*}"
     if [ ! -d "$name" ]; then
@@ -87,22 +132,37 @@ done
 cd /
 umount "$MOUNT_TMP"
 
-# 3. Mount hierarchy
-echo "正在执行多子卷挂载..."
+# ==========================================
+# Phase 4: Mount hierarchy and configure
+# ==========================================
+echo ""
+echo "--- 阶段 4/4: 挂载与配置 ---"
+
 mount -o noatime,compress=zstd,subvol=@ "$DEV_BTRFS" "$TARGET"
 
 for entry in "${SUBVOLUMES[@]}"; do
     IFS='|' read -r name target _ <<< "$entry"
-    mkdir -p "${TARGET}${target}"
-    mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
+
+    if [ -d "${TARGET}${target}" ] && [ "$(ls -A "${TARGET}${target}")" ]; then
+        echo "  迁移 ${target} 至子卷 $name..."
+        migrate_mnt="${MOUNT_TMP}/.migrate-${name#@}"
+        mkdir -p "$migrate_mnt"
+        mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "$migrate_mnt"
+        cp -a --reflink=auto "${TARGET}${target}/." "$migrate_mnt/"
+        umount "$migrate_mnt"
+        rmdir "$migrate_mnt"
+        mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
+        echo "  已迁移 ${target} 至子卷 $name"
+    else
+        mkdir -p "${TARGET}${target}"
+        mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
+    fi
 done
 
-# Mount EFI
 mkdir -p "${TARGET}${EFI_MOUNT}"
 mount "$DEV_EFI" "${TARGET}${EFI_MOUNT}"
 
-# 4. Disable CoW for designated subvolumes
-echo "正在对特定目录禁用写时复制 (chattr +C)..."
+echo "禁用写时复制 (chattr +C)..."
 cow_paths=()
 for entry in "${SUBVOLUMES[@]}"; do
     IFS='|' read -r name target cow <<< "$entry"
@@ -114,11 +174,10 @@ for entry in "${SUBVOLUMES[@]}"; do
 done
 
 if [ ${#cow_paths[@]} -gt 0 ]; then
-    echo "当前属性验证："
+    echo "属性验证："
     lsattr -d "${cow_paths[@]}"
 fi
 
-# 5. Generate fstab from SUBVOLUMES array
 echo "正在生成 $TARGET/etc/fstab..."
 BTRFS_UUID=$(blkid -s UUID -o value "$DEV_BTRFS")
 EFI_UUID=$(blkid -s UUID -o value "$DEV_EFI")
@@ -134,7 +193,6 @@ UUID=$BTRFS_UUID /               btrfs   noatime,compress=zstd,subvol=@       0 
 
 FSTAB_HEADER
 
-    # Data subvolumes — loop generates one entry per SUBVOLUMES item
     for entry in "${SUBVOLUMES[@]}"; do
         IFS='|' read -r name target cow <<< "$entry"
         if [ "$cow" = "yes" ]; then
@@ -150,7 +208,6 @@ FSTAB_HEADER
     echo "UUID=$EFI_UUID  $EFI_MOUNT       vfat    umask=0077,noatime      0       1"
     echo ""
 
-    # Swap
     if [ -n "$SWAP_LINE" ]; then
         echo "# Swap"
         echo "$SWAP_LINE"
@@ -175,4 +232,5 @@ FSTAB_FOOTER
 
 } > "$TARGET/etc/fstab"
 
+echo ""
 echo "--- 脚本执行完毕！ ---"
