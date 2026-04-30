@@ -1,7 +1,7 @@
 #!/bin/bash
 [[ $EUID -eq 0 ]] && err "Please do not run this script as root. Use a regular user account with sudo privileges."
 
-source "$(dirname "${BASH_SOURCE[0]}")/bin/utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/setup/utils.sh"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
@@ -46,40 +46,40 @@ run_step() {
 }
 
 
-run_step "Uninstall LibreOffice" "./bin/uninstall-libreOffice.sh"
-run_step "Optimize system services" "./bin/optimize_services.sh"
-run_step "Upgrade system dependencies" "./bin/upgrade-deps.sh"
-run_step "Install system dependencies" "./bin/install-deps.sh"
+run_step "Uninstall LibreOffice" "./setup/uninstall-libreOffice.sh"
+run_step "Optimize system services" "./setup/optimize_services.sh"
+run_step "Upgrade system dependencies" "./setup/upgrade-deps.sh"
+run_step "Install system dependencies" "./setup/install-deps.sh"
 
 
-run_step "Install GSettings and xsettings daemon" "./bin/install-gsettings.sh"
-run_step "Install fcitx5" "./bin/install-fcitx5.sh"
-run_step "Install Neovim" "./bin/install-neovim.sh"
-run_step "Install wezterm" "./bin/install-wezterm.sh"
-run_step "Install Visual Studio Code" "./bin/install-vscode.sh"
-run_step "Install Brave Browser" "./bin/install-brave.sh"
-run_step "Install Docker and Docker Compose" "./bin/install-docker.sh"
-run_step "Install lazydocker" "./bin/install-lazydocker.sh"
-run_step "Install uv Python package manager" "./bin/install-uv.sh"
-run_step "Install Node.js via nvm" "./bin/install-nodejs.sh"
-run_step "Install opencode" "./bin/install-opencode.sh"
+run_step "Install GSettings and xsettings daemon" "./setup/install-gsettings.sh"
+run_step "Install fcitx5" "./setup/install-fcitx5.sh"
+run_step "Install Neovim" "./setup/install-neovim.sh"
+run_step "Install wezterm" "./setup/install-wezterm.sh"
+run_step "Install Visual Studio Code" "./setup/install-vscode.sh"
+run_step "Install Brave Browser" "./setup/install-brave.sh"
+run_step "Install Docker and Docker Compose" "./setup/install-docker.sh"
+run_step "Install lazydocker" "./setup/install-lazydocker.sh"
+run_step "Install uv Python package manager" "./setup/install-uv.sh"
+run_step "Install Node.js via nvm" "./setup/install-nodejs.sh"
+run_step "Install opencode" "./setup/install-opencode.sh"
 
-run_step "Install fzf" "./bin/install-fzf.sh" 
-run_step "Install fd-find" "./bin/install-fd.sh"
-run_step "Install rofi" "./bin/install-rofi.sh"
-run_step "Install yazi" "./bin/install-yazi.sh"
+run_step "Install fzf" "./setup/install-fzf.sh" 
+run_step "Install fd-find" "./setup/install-fd.sh"
+run_step "Install rofi" "./setup/install-rofi.sh"
+run_step "Install yazi" "./setup/install-yazi.sh"
 
-run_step "Compile and install DWM" "./bin/install-dwm.sh"
-run_step "Compile and install slstatus" "./bin/install-slstatus.sh"
-run_step "Compile and install slock" "./bin/install-slock.sh"
+run_step "Compile and install DWM" "./setup/install-dwm.sh"
+run_step "Compile and install slstatus" "./setup/install-slstatus.sh"
+run_step "Compile and install slock" "./setup/install-slock.sh"
 
-run_step "Install fonts" "./bin/install-fonts.sh"
+run_step "Install fonts" "./setup/install-fonts.sh"
 
 
-run_step "Update bashrc" "./bin/update-bashrc.sh"
-run_step "Deploy configuration files" "./bin/deploy-dotfiles.sh"
-run_step "Generate DWM desktop entry" "./bin/generate-dwm-desktop.sh"
-run_step "Update user groups" "./bin/update-usergroup.sh"
+run_step "Update bashrc" "./setup/update-bashrc.sh"
+run_step "Deploy configuration files" "./setup/deploy-dotfiles.sh"
+run_step "Generate DWM desktop entry" "./setup/generate-dwm-desktop.sh"
+run_step "Update user groups" "./setup/update-usergroup.sh"
 
 
 echo ""
