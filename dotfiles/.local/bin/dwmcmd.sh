@@ -19,7 +19,7 @@ case "$mode" in
     term)
         # 现在的 $@ 已经是空的（如果你只传了 term）
         # 或者包含了 term 之后的参数
-        exec wezterm "$@"
+        exec xfce4-terminal "$@"
         ;;
     clip)
         maim -s | xclip -selection clipboard -t image/png && \

@@ -65,6 +65,7 @@ The active theme name is stored in `~/.config/theme`.
 | `gtk2.j2` | `~/.gtkrc-2.0` |
 | `gtk3.ini.j2` | `~/.config/gtk-3.0/settings.ini` and `~/.config/gtk-4.0/settings.ini` |
 | `xsettingsd.conf.j2` | `~/.config/xsettingsd/xsettingsd.conf` |
+| `xfce4-terminal.sh.j2` | `~/.cache/xfce4-terminal-theme.sh` (executed as shell script) |
 
 **Adding a new app**: create a new `.j2` template and add a `(template_name, output_path)` entry in `TEMPLATE_OUTPUTS` inside `generate-app-themes.py` — no new Python function needed.
 

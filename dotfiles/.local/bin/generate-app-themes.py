@@ -15,6 +15,7 @@ TEMPLATE_OUTPUTS = [
     ('gtk3.ini.j2',           '~/.config/gtk-3.0/settings.ini'),
     ('gtk3.ini.j2',           '~/.config/gtk-4.0/settings.ini'),
     ('xsettingsd.conf.j2',    '~/.config/xsettingsd/xsettingsd.conf'),
+    ('xfce4-terminal.sh.j2',  '~/.cache/xfce4-terminal-theme.sh'),
 ]
 
 
