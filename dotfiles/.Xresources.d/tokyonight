@@ -38,7 +38,7 @@
 #define PS1_PROMPT      #bb9af7
 #define PS1_BRANCH      #868686
 #define GTK_THEME       Mint-Y-Dark-Purple
-#define GTK_ICON        Mint-Y-Dark-Purple
+#define GTK_ICON        Mint-Y-Purple
 #define GTK_FONT        Noto Sans 11
 #define DARK_THEME      1
 #define YAZI_DARK       tokyo-night
