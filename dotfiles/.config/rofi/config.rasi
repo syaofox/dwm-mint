@@ -3,7 +3,7 @@
 configuration{
     modi: ["drun", "window", "run"];
     show-icons: true;
-    terminal: "xfce4-terminal";
+    terminal: "wezterm";
     drun-display-format: "{icon} {name}";
     icon-color: "@foreground";
     location: 0;

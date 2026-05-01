@@ -18,5 +18,9 @@ if ! sudo apt install wezterm -y; then
     exit 1
 fi
 
+log_info "Setting wezterm as Nemo's default terminal..."
+gsettings set org.cinnamon.desktop.default-applications.terminal exec "wezterm"
+
+
 log_info "wezterm installation complete"
 exit 0
