@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../setup/utils.sh"
 
 log_step "Installing KVM + QEMU virtualization tools..."
 
