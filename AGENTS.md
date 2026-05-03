@@ -6,7 +6,8 @@ Deploy a DWM desktop environment on Linux Mint 22.3 (Ubuntu 24.04 LTS). The repo
 
 ## Entry points
 
-- **`install.sh`** — main orchestrator. Runs all `setup/install-*.sh` in sequence, prompting retry/skip/exit on each failure. Supports `-u`/`--upgrade` flag to force reinstallation/upgrade of already-installed components.
+- **`install.sh`** — main orchestrator. Runs all `setup/install-*.sh` in sequence, prompting retry/skip/exit on each failure.
+- **`upgrade.sh`** — standalone upgrade script for non-apt components (dwm, slstatus, slock, rofi, neovim, fd, uv, nodejs, lazydocker, opencode, fish, yazi, fzf, fonts). Advises user to run `sudo apt upgrade` separately.
 - **`tools/config-manager.sh`** — interactive backup/restore for SSH, GPG, dconf, fcitx5 configs. Accepts `backup` or `restore` subcommand.
 - **`sbin/*.sh`** — standalone admin scripts (zram, btrfs subvolumes). Run separately, not part of `install.sh`.
 
