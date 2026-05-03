@@ -4,25 +4,16 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 log_step "Installing fish shell..."
 
-FISH_VERSION="4.6.0-1~noble"
-FISH_DEB_URL="https://launchpad.net/~fish-shell/+archive/ubuntu/release-4/+files/fish_${FISH_VERSION}_amd64.deb"
+log_info "Adding fish-shell PPA..."
+if ! sudo add-apt-repository -y ppa:fish-shell/release-4; then
+    log_error "Failed to add fish-shell PPA"
+    exit 1
+fi
 
-if command -v fish >/dev/null 2>&1; then
-    INSTALLED_VERSION=$(fish --version 2>/dev/null | awk '{print $NF}')
-    DESIRED_VERSION="${FISH_VERSION%%-*}"
-    if [ "$INSTALLED_VERSION" = "$DESIRED_VERSION" ] && [ "$FORCE_UPGRADE" != true ]; then
-        log_info "fish ${INSTALLED_VERSION} is already installed, skipping deb install"
-    else
-        log_info "Downloading fish deb package..."
-        curl -fsSL "$FISH_DEB_URL" -o /tmp/fish.deb
-        log_info "Installing fish..."
-        sudo dpkg -i /tmp/fish.deb || sudo apt install -y -f
-    fi
-else
-    log_info "Downloading fish deb package..."
-    curl -fsSL "$FISH_DEB_URL" -o /tmp/fish.deb
-    log_info "Installing fish..."
-    sudo dpkg -i /tmp/fish.deb || sudo apt install -y -f
+log_info "Installing fish via apt..."
+if ! sudo apt install -y fish; then
+    log_error "Failed to install fish"
+    exit 1
 fi
 
 log_info "Installing fisher..."
