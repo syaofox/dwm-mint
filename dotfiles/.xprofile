@@ -12,9 +12,14 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 
 # X基础设置
-xset -dpms
-xset s off
-xset s noblank
+# xset -dpms
+# xset s off
+# xset s noblank
+
+# 设置屏幕保护和电源管理
+xset dpms 0 0 900
+xset s 600 s noblank
+xss-lock -- slock &
 
 # 主题逻辑加载 (移动到这里)
 if [ -f "$HOME/.config/theme" ]; then

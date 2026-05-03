@@ -9,7 +9,7 @@ case "$mode" in
         ;;
     file)
         # nemo --no-desktop
-        exec wezterm start -- yazi
+        exec wezterm start --class yazi-float -- yazi
         ;;
     lock)
         slock -m "Single is simple, double is double."
