@@ -4,13 +4,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 log_step "Installing fish shell..."
 
-log_info "Adding fish-shell PPA..."
-if ! sudo add-apt-repository -y ppa:fish-shell/release-4; then
-    log_error "Failed to add fish-shell PPA"
-    exit 1
-fi
-
-log_info "Installing fish via apt..."
+log_info "Installing fish from official repo..."
 if ! sudo apt install -y fish; then
     log_error "Failed to install fish"
     exit 1
