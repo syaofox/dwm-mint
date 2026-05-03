@@ -4,7 +4,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 log_step "Installing lazydocker..."
 
-if command -v lazydocker >/dev/null 2>&1; then
+if command -v lazydocker >/dev/null 2>&1 && [ "$FORCE_UPGRADE" != true ]; then
     log_info "lazydocker is already installed"
     exit 0
 fi

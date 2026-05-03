@@ -8,8 +8,12 @@ INSTALL_DIR="/opt/nvim"
 NVIM_BIN_DIR="${INSTALL_DIR}-linux-x86_64/bin"
 
 if command -v "$NVIM_BIN_DIR/nvim" >/dev/null 2>&1 || grep -q "$NVIM_BIN_DIR" "$HOME/.bashrc" 2>/dev/null; then
-    log_info "Neovim is already installed at ${NVIM_BIN_DIR}"
-    exit 0
+    if [ "$FORCE_UPGRADE" = true ]; then
+        log_info "Upgrading Neovim..."
+    else
+        log_info "Neovim is already installed at ${NVIM_BIN_DIR}"
+        exit 0
+    fi
 fi
 
 ARCHIVE="nvim-linux-x86_64.tar.gz"

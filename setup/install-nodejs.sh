@@ -24,11 +24,6 @@ node_installed() {
     [ -d "$NVM_DIR" ] && [ -f "$NVM_DIR/nvm.sh" ] && bash -c "source \"$NVM_DIR/nvm.sh\" && nvm list 25" 2>/dev/null | grep -q "v25"
 }
 
-if nvm_installed && node_installed; then
-    log_info "Node.js 25 is already installed via nvm"
-    exit 0
-fi
-
 if ! nvm_installed; then
     log_info "Installing nvm..."
     export NVM_DIR="$HOME/.config/nvm"
@@ -37,9 +32,18 @@ if ! nvm_installed; then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 fi
 
-log_info "Installing Node.js 25..."
-bash -c "source \"$NVM_DIR/nvm.sh\" && nvm install 25 && nvm alias default 25"
+if node_installed && [ "$FORCE_UPGRADE" != true ]; then
+    log_info "Node.js 25 is already installed via nvm"
+    exit 0
+fi
+
+if [ "$FORCE_UPGRADE" = true ] && node_installed; then
+    log_info "Upgrading Node.js 25..."
+    bash -c "source \"$NVM_DIR/nvm.sh\" && nvm install 25 --reinstall-packages-from=25 && nvm alias default 25"
+else
+    log_info "Installing Node.js 25..."
+    bash -c "source \"$NVM_DIR/nvm.sh\" && nvm install 25 && nvm alias default 25"
+fi
 
 log_info "Node.js has been successfully installed!"
-log_info "You can now use 'node' and 'npm'"
 exit 0

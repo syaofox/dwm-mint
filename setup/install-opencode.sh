@@ -5,7 +5,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 log_step "Installing Opencode..."
 
 
-if command -v "opencode" >/dev/null 2>&1 ; then
+if command -v "opencode" >/dev/null 2>&1 && [ "$FORCE_UPGRADE" != true ]; then
     log_info "opencode is already installed"
     exit 0
 fi

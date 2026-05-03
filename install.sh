@@ -6,6 +6,27 @@ source "$(dirname "${BASH_SOURCE[0]}")/setup/utils.sh"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -u|--upgrade)
+            FORCE_UPGRADE=true
+            export FORCE_UPGRADE
+            log_info "Running in UPGRADE mode — will update existing installations"
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: $0 [--upgrade|-u]"
+            echo "  --upgrade, -u    Upgrade existing components instead of skipping them"
+            exit 0
+            ;;
+        *)
+            log_error "Unknown option: $1"
+            echo "Usage: $0 [--upgrade|-u]"
+            exit 1
+            ;;
+    esac
+done
+
 # Function to ask user what to do on failure
 ask_on_failure() {
     local step_name="$1"
