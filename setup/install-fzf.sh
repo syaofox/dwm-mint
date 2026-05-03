@@ -4,21 +4,15 @@ source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 log_step "Installing fzf..."
 
-if [ -d "$HOME/.fzf" ]; then
-    log_info "fzf is already installed at ~/.fzf"
-    exit 0
-fi
-
-log_info "Cloning fzf repository..."
-if ! git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; then
-    log_error "Failed to clone fzf repository"
+log_info "Installing fzf via apt..."
+if ! sudo apt install -y fzf; then
+    log_error "Failed to install fzf"
     exit 1
 fi
 
-log_info "Running fzf install script..."
-if ! ~/.fzf/install; then
-    log_error "Failed to run fzf install script"
-    exit 1
+log_info "Cloning fzf repository for shell integration files..."
+if [ ! -d "$HOME/.fzf" ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 fi
 
 log_info "fzf installation complete"
