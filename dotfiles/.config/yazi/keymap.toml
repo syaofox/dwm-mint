@@ -1,8 +1,13 @@
 # rsync-paste.yazi
 [[mgr.prepend_keymap]]
-on   = [ "c", "r", "r" ]
+on   = [ "c", "r" ]
 run  = "plugin rsync-paste"
-desc = "Rsync paste (incremental, skip newer dest)"
+desc = "Rsync paste (auto: y=incremental / x=move)"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "r", "r" ]
+run  = "plugin rsync-paste -i"
+desc = "Rsync paste (incremental, explicit)"
 
 [[mgr.prepend_keymap]]
 on   = [ "c", "r", "a" ]
