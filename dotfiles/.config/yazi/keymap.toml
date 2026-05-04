@@ -23,7 +23,7 @@ desc = "Rsync paste (move, remove source)"
 [[mgr.prepend_keymap]]
 on   = [ "g", "m" ]
 run  = "cd /mnt"
-desc = "Go to trash"
+desc = "Go to mnt"
 
 
 # Trash
