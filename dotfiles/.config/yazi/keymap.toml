@@ -19,6 +19,12 @@ on   = [ "c", "r", "x" ]
 run  = "plugin rsync-paste -m"
 desc = "Rsync paste (move, remove source)"
 
+# Trash
+[[mgr.prepend_keymap]]
+on   = [ "g", "t" ]
+run  = "cd ~/.local/share/Trash/files"
+desc = "Go to trash"
+
 # compress.yazi - Archive selected files
 [[mgr.prepend_keymap]]
 on   = [ "c", "a", "a" ]
