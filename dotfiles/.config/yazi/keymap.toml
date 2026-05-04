@@ -19,6 +19,13 @@ on   = [ "c", "r", "x" ]
 run  = "plugin rsync-paste -m"
 desc = "Rsync paste (move, remove source)"
 
+# /mnt
+[[mgr.prepend_keymap]]
+on   = [ "g", "m" ]
+run  = "cd /mnt"
+desc = "Go to trash"
+
+
 # Trash
 [[mgr.prepend_keymap]]
 on   = [ "g", "t" ]
