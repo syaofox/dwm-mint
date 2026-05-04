@@ -31,8 +31,14 @@ local function notify(title, content, level, timeout)
 	}
 end
 
+local function mode_label(overwrite, move)
+	if move then return "Move" end
+	if overwrite then return "Overwrite" end
+	return "Incremental"
+end
+
 return {
-	entry = function()
+	entry = function(self, job)
 		local data = get_data()
 		if #data.urls == 0 then
 			notify("Rsync Paste", "No files to sync", "warn", 3)
@@ -41,8 +47,24 @@ return {
 
 		ya.emit("escape", { visual = true })
 
+		local overwrite, move = false, false
+		if job.args then
+			for _, arg in ipairs(job.args) do
+				if arg == "-o" then overwrite = true end
+				if arg == "-m" then move = true end
+			end
+		end
+
+		local mode = mode_label(overwrite, move)
+
 		local cmd = Command("rsync")
-		cmd = cmd:arg("-a"):arg("--update"):arg("-hh")
+		cmd = cmd:arg("-a"):arg("-hh")
+		if not overwrite then
+			cmd = cmd:arg("--update")
+		end
+		if move then
+			cmd = cmd:arg("--remove-source-files")
+		end
 		for _, url in ipairs(data.urls) do
 			cmd = cmd:arg(url)
 		end
@@ -50,12 +72,12 @@ return {
 
 		local result, err = cmd:output()
 		if not result then
-			notify("Rsync Paste", "Failed to run rsync: " .. (err or "is rsync installed?"), "error", 5)
+			notify("Rsync Paste (" .. mode .. ")", "Failed to run rsync: " .. (err or "is rsync installed?"), "error", 5)
 			return
 		end
 		if not result.status.success then
 			local msg = (result.stderr or ""):gmatch("[^\r\n]+")()
-			notify("Rsync Paste", "rsync error: " .. (msg or "unknown"), "warn", 5)
+			notify("Rsync Paste (" .. mode .. ")", "rsync error: " .. (msg or "unknown"), "warn", 5)
 			return
 		end
 
@@ -66,7 +88,7 @@ return {
 			end
 		end
 
-		notify("Rsync Paste", ("Synced %d file(s)"):format(count > 0 and count or #data.urls), "info", 3)
+		notify("Rsync Paste (" .. mode .. ")", ("Synced %d file(s)"):format(count > 0 and count or #data.urls), "info", 3)
 		ya.emit("cd", {})
 	end,
 }
