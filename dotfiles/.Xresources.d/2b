@@ -1,17 +1,6 @@
 ! 2B Theme Colors for dwm
 
-#define BG              #23201e
-#define BG_ALT          #796e63
-#define FG              #ECEFF4
-#define FG_DIM          #796e63
-#define STATUS_FG       #bbbbbb
-#define ACCENT          #B6A59B
-#define BORDER          #23201e
-#define SEL_BG          #23201e
-#define SEL_FG          #eeeeee
-#define TITLE_FG        #FFFFFF
-#define SEL_BORDER      #f7ddcd
-#define TAG_UL          #B6A59B
+
 #define BLACK           #796e63
 #define RED             #FF7777
 #define GREEN           #d0fdae
@@ -20,82 +9,72 @@
 #define MAGENTA         #B6A59B
 #define CYAN            #7fecfa
 #define WHITE           #bbbbbb
-#define CRIT_BG         #FF7777
-#define CRIT_FG         #FFFFFF
-#define CRIT_FRAME      #FF7777
-#define CURSOR_BG       #ECEFF4
+
+#define BG              #23201e
+#define FG              #ECEFF4
+#define SEL_BG          #23201e
+#define SEL_FG          #eeeeee
 #define SLSEP           #303030
 #define SLNET           #f0efef
-#define SLCPU           #f0efef
-#define SLRAM           #f0efef
-#define SLGPU           #f0efef
-#define SLTIME          #FFFFFF
-#define LOCK_BG         #23201e
-#define LOCK_INPUT      #B6A59B
 #define LOCK_FAIL       #fdb0b0
-#define LOCK_TEXT       #f7ddcd
-#define PS1_DIR         #94defc
 #define PS1_PROMPT      #ffd9c2
 #define PS1_BRANCH      #81766d
 #define GTK_THEME       Mint-Y-Sand
-#define GTK_ICON        Mint-Y-Sand
 #define GTK_FONT        Noto Sans 10
 #define DARK_THEME      0
 #define YAZI_DARK       2b
-#define YAZI_LIGHT      2b
-#define ROFI_ICON       Mint-Y-Sand
 #define ROFI_SEL_FG     #FFFFFF
 
 ! dwm 窗口颜色 - 未选中，无客户端
-dwm.col_norm_fg:        FG_DIM
+dwm.col_norm_fg:        BLACK
 dwm.col_norm_bg:        BG
-dwm.col_norm_border:    BORDER
+dwm.col_norm_border:    BG
 
 ! dwm 窗口颜色 - 选中，无客户端
 dwm.col_sel_fg:         SEL_FG
 dwm.col_sel_bg:         SEL_BG
-dwm.col_sel_border:     SEL_BORDER
+dwm.col_sel_border:     YELLOW
 
 ! dwm 窗口颜色 - 未选中，有客户端
 dwm.col_occ_fg:         FG
 dwm.col_occ_bg:         BG
-dwm.col_occ_border:     BORDER
+dwm.col_occ_border:     BG
 
 ! dwm 窗口颜色 - 选中，有客户端
-dwm.col_selocc_fg:      TITLE_FG
+dwm.col_selocc_fg:      ROFI_SEL_FG
 dwm.col_selocc_bg:      SEL_BG
-dwm.col_selocc_border:  SEL_BORDER
+dwm.col_selocc_border:  YELLOW
 
 ! dwm 状态栏颜色（dwmbar）
-dwm.col_status_fg:      STATUS_FG
+dwm.col_status_fg:      WHITE
 dwm.col_status_bg:      BG
 dwm.col_status_border:  BG
 
 ! dwm 窗口标题区颜色（标题栏）
 dwm.col_title_fg:       FG
 dwm.col_title_bg:       BG
-dwm.col_title_border:   BORDER
+dwm.col_title_border:   BG
 
 ! dwm 窗口标题区颜色 - 选中状态
-dwm.col_titlesel_fg:    TITLE_FG
+dwm.col_titlesel_fg:    ROFI_SEL_FG
 dwm.col_titlesel_bg:    BG
 dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   TAG_UL
+dwm.col_tagunderline:   MAGENTA
 dwm.tagunderline: 0
 
 ! slstatus 状态栏颜色
 slstatus.sep:   SLSEP
 slstatus.net:   SLNET
-slstatus.cpu:   SLCPU
-slstatus.ram:   SLRAM
-slstatus.gpu:   SLGPU
+slstatus.cpu:   SLNET
+slstatus.ram:   SLNET
+slstatus.gpu:   SLNET
 slstatus.kbd:   RED
-slstatus.time:  SLTIME
+slstatus.time:  ROFI_SEL_FG
 
 ! slock 锁屏颜色
-slock.init:     LOCK_BG
-slock.input:    LOCK_INPUT
+slock.init:     BG
+slock.input:    MAGENTA
 slock.fail:     LOCK_FAIL
-slock.text:     LOCK_TEXT
+slock.text:     YELLOW

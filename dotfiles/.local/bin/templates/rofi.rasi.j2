@@ -1,5 +1,5 @@
 configuration {
-    icon-theme: "{{ ROFI_ICON }}";
+    icon-theme: "{{ GTK_THEME }}";
 }
 
 * {
@@ -8,14 +8,14 @@ configuration {
     normal-foreground:           @foreground;
     normal-background:           rgba ({{ BG | hex_to_rgb }}, 63%);
     selected-normal-foreground:  {{ ROFI_SEL_FG }};
-    selected-normal-background:  {{ ACCENT }};
-    selected-active-foreground:  {{ ACCENT }};
-    selected-active-background:  rgba ({{ ACCENT | hex_to_rgb }}, 100%);
+    selected-normal-background:  {{ MAGENTA }};
+    selected-active-foreground:  {{ MAGENTA }};
+    selected-active-background:  rgba ({{ MAGENTA | hex_to_rgb }}, 100%);
     selected-urgent-foreground:  @selected-normal-foreground;
-    selected-urgent-background:  rgba ({{ ACCENT | hex_to_rgb }}, 100%);
+    selected-urgent-background:  rgba ({{ MAGENTA | hex_to_rgb }}, 100%);
     urgent-foreground:           @foreground;
     urgent-background:           rgba ({{ BG | hex_to_rgb }}, 15%);
-    active-foreground:          {{ ACCENT }};
+    active-foreground:          {{ MAGENTA }};
     active-background:           rgba ({{ BG | hex_to_rgb }}, 15%);
     bordercolor:                rgba ({{ BG | hex_to_rgb }}, 21%);
     separatorcolor:              rgba ({{ BG | hex_to_rgb }}, 18%);
@@ -124,13 +124,13 @@ element.alternate.normal {
 }
 
 element.alternate.urgent {
-    background-color: @alternate-urgent-background;
-    text-color:       @alternate-urgent-foreground;
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
 }
 
 element.alternate.active {
-    background-color: @alternate-active-background;
-    text-color:       @alternate-active-foreground;
+    background-color: @active-background;
+    text-color:       @active-foreground;
 }
 
 scrollbar {

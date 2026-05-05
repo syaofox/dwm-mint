@@ -1,17 +1,6 @@
 ! Catppuccin Latte Theme Colors for dwm
 
-#define BG              #eff1f5
-#define BG_ALT          #bcc0cc
-#define FG              #4c4f69
-#define FG_DIM          #6c6f85
-#define STATUS_FG       #5c5f77
-#define ACCENT          #1e66f5
-#define BORDER          #6c6f85
-#define SEL_BG          #1e66f5
-#define SEL_FG          #eff1f5
-#define TITLE_FG        #eff1f5
-#define SEL_BORDER      #7287fd
-#define TAG_UL          #1e66f5
+
 #define BLACK           #bcc0cc
 #define RED             #d20f39
 #define GREEN           #40a02b
@@ -20,46 +9,37 @@
 #define MAGENTA         #8839ef
 #define CYAN            #179299
 #define WHITE           #5c5f77
-#define CRIT_BG         #d20f39
-#define CRIT_FG         #eff1f5
+
+#define BG              #eff1f5
+#define FG              #4c4f69
+#define FG_DIM          #6c6f85
+#define SEL_BG          #1e66f5
+#define SEL_FG          #eff1f5
+#define TAG_UL          #1e66f5
+
 #define CRIT_FRAME      #e64553
-#define CURSOR_BG       #4c4f69
-#define SLSEP           #6c6f85
 #define SLNET           #04a5e5
-#define SLCPU           #df8e1d
-#define SLRAM           #df8e1d
-#define SLGPU           #40a02b
-#define SLTIME          #4c4f69
-#define LOCK_BG         #eff1f5
-#define LOCK_INPUT      #1e66f5
-#define LOCK_FAIL       #d20f39
-#define LOCK_TEXT       #4c4f69
-#define PS1_DIR         #40a02b
-#define PS1_PROMPT      #1e66f5
 #define PS1_BRANCH      #868686
 #define GTK_THEME       Mint-Y-Aqua
-#define GTK_ICON        Mint-Y-Aqua
 #define GTK_FONT        Noto Sans 10
 #define DARK_THEME      0
 #define YAZI_DARK       catppuccin-latte
-#define YAZI_LIGHT      catppuccin-latte
-#define ROFI_ICON       Mint-Y-Aqua
 #define ROFI_SEL_FG     #eff1f5
 
 ! dwm 窗口颜色 - 未选中，无客户端
 dwm.col_norm_fg:        FG_DIM
 dwm.col_norm_bg:        BG
-dwm.col_norm_border:    BORDER
+dwm.col_norm_border:    FG_DIM
 
 ! dwm 窗口颜色 - 选中，无客户端
 dwm.col_sel_fg:         SEL_FG
 dwm.col_sel_bg:         SEL_BG
-dwm.col_sel_border:     SEL_BORDER
+dwm.col_sel_border:     SEL_FG
 
 ! dwm 窗口颜色 - 未选中，有客户端
 dwm.col_occ_fg:         FG
 dwm.col_occ_bg:         BG
-dwm.col_occ_border:     BORDER
+dwm.col_occ_border:     FG_DIM
 
 ! dwm 窗口颜色 - 选中，有客户端
 dwm.col_selocc_fg:      SEL_FG
@@ -67,14 +47,14 @@ dwm.col_selocc_bg:      SEL_BG
 dwm.col_selocc_border:  SEL_BG
 
 ! dwm 状态栏颜色（dwmbar）
-dwm.col_status_fg:      STATUS_FG
+dwm.col_status_fg:      WHITE
 dwm.col_status_bg:      BG
 dwm.col_status_border:  BG
 
 ! dwm 窗口标题区颜色（标题栏）
 dwm.col_title_fg:       FG
 dwm.col_title_bg:       BG
-dwm.col_title_border:   BORDER
+dwm.col_title_border:   FG_DIM
 
 ! dwm 窗口标题区颜色 - 选中状态
 dwm.col_titlesel_fg:    SEL_FG
@@ -86,17 +66,19 @@ dwm.col_tagunderline:   TAG_UL
 dwm.tagunderline: 0
 
 ! slstatus 状态栏颜色
-slstatus.sep:   SLSEP
+slstatus.sep:   FG_DIM
 slstatus.net:   SLNET
-slstatus.cpu:   SLCPU
-slstatus.ram:   SLRAM
-slstatus.gpu:   SLGPU
+slstatus.cpu:   YELLOW
+slstatus.ram:   YELLOW
+slstatus.gpu:   GREEN
 slstatus.temp:  WHITE
 slstatus.kbd:   RED
 slstatus.swap:  WHITE
 
+slstatus.time:  FG
+
 ! slock 锁屏颜色
-slock.init:     LOCK_BG
-slock.input:    LOCK_INPUT
-slock.fail:     LOCK_FAIL
-slock.text:     LOCK_TEXT
+slock.init:     BG
+slock.input:    BLUE
+slock.fail:     RED
+slock.text:     FG
