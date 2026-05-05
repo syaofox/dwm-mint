@@ -8,7 +8,7 @@ case "$mode" in
         rofi -show drun -show-icons
         ;;
     file)
-        exec kitty --class yazi-float -o initial_window_width=120 -o initial_window_height=36 yazi
+        exec kitty --class yazi-float -o initial_window_width=120 -o initial_window_height=36 -e bash -l -i -c 'exec yazi'
         ;;
     lock)
         slock -m "Single is simple, double is double."
