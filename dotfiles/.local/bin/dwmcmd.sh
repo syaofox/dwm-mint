@@ -8,8 +8,7 @@ case "$mode" in
         rofi -show drun -show-icons
         ;;
     file)
-        # nemo --no-desktop
-        exec wezterm start --class yazi-float -- yazi
+        exec kitty --class yazi-float yazi
         ;;
     lock)
         slock -m "Single is simple, double is double."
@@ -20,7 +19,7 @@ case "$mode" in
     term)
         # 现在的 $@ 已经是空的（如果你只传了 term）
         # 或者包含了 term 之后的参数
-        exec wezterm "$@"
+        exec kitty "$@"
         ;;
     clip)
         maim -s | xclip -selection clipboard -t image/png && \

@@ -3,7 +3,7 @@
 configuration{
     modi: ["drun", "window", "run"];
     show-icons: true;
-    terminal: "wezterm";
+    terminal: "kitty";
     drun-display-format: "{icon} {name}";
     icon-color: "@foreground";
     location: 0;

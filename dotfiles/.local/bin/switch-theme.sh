@@ -5,11 +5,6 @@
 # 主题目录 - 软连接到 dotfiles 目录下的 .Xresources.d
 THEME_DIR="$HOME/.Xresources.d"
 
-ROFI_DIR="$HOME/.config/rofi/themes"
-WEZTERM_DIR="$HOME/.config/wezterm/themes"
-DUNST_DIR="$HOME/.config/dunst/themes"
-YAZI_DIR="$HOME/.config/yazi/themes"
-
 # Robust theme enumeration (handles spaces in names)
 AVAILABLE_THEMES=()
 if [ -d "$THEME_DIR" ]; then
@@ -108,6 +103,11 @@ switch_theme() {
 
     killall dunst 2>/dev/null || true
     dunst &
+
+    # 刷新 kitty 配色
+    if command -v kitty &>/dev/null && kitty @ set-colors --all --configured "$HOME/.config/kitty/kitty.conf" &>/dev/null; then
+        :
+    fi
 
     # PS1 配置已通过 PROMPT_COMMAND 自动检测更新（见 env.sh）
     # 下次显示提示符时会自动应用新主题
