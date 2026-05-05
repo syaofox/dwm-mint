@@ -50,7 +50,7 @@ run_step "Uninstall LibreOffice" "./setup/uninstall-libreOffice.sh"
 run_step "Optimize system services" "./setup/optimize_services.sh"
 run_step "Upgrade system dependencies" "./setup/upgrade-deps.sh"
 run_step "Install system dependencies" "./setup/install-deps.sh"
-
+run_step "Create common directories" "./setup/install-directories.sh"
 
 run_step "Install GSettings and xsettings daemon" "./setup/install-gsettings.sh"
 run_step "Install fcitx5" "./setup/install-fcitx5.sh"
@@ -85,6 +85,7 @@ run_step "Deploy configuration files" "./setup/deploy-dotfiles.sh"
 run_step "Generate DWM desktop entry" "./setup/generate-dwm-desktop.sh"
 run_step "Update user groups" "./setup/update-usergroup.sh"
 run_step "Install fish shell" "./setup/install-fish.sh"
+
 
 
 

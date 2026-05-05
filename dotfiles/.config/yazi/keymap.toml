@@ -19,16 +19,24 @@ on   = [ "c", "r", "x" ]
 run  = "plugin rsync-paste -m"
 desc = "Rsync paste (move, remove source)"
 
-# /mnt
+# 常用目录
+[[mgr.prepend_keymap]]
+on   = [ "g", "t" ]
+run  = "cd ~/tmp"
+desc = "Go to ~/tmp"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "p" ]
+run  = "cd ~/project"
+desc = "Go to ~/project"
+
 [[mgr.prepend_keymap]]
 on   = [ "g", "m" ]
 run  = "cd /mnt"
 desc = "Go to mnt"
 
-
-# Trash
 [[mgr.prepend_keymap]]
-on   = [ "g", "t" ]
+on   = [ "g", "r" ]
 run  = "cd ~/.local/share/Trash/files"
 desc = "Go to trash"
 
