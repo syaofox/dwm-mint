@@ -51,10 +51,10 @@ The active theme name is stored in `~/.config/theme`.
 
 `dotfiles/.local/bin/switch-theme.sh` handles switching. It runs `generate-app-themes.py` (in `~/.local/bin/`) which:
 1. Parses the `#define` macros from the Xresources theme file → palette dict
-2. Renders Jinja2-style templates from `~/.local/bin/templates/*.j2` using a built-in template engine (no Jinja2 dependency)
+2. Renders Jinja2-style templates from `~/.config/theme-templates/*.j2` using a built-in template engine (no Jinja2 dependency)
 3. Writes the rendered configs to the correct paths
 
-### Templates (dotfiles/.local/bin/templates/)
+### Templates (dotfiles/.config/theme-templates/)
 
 | Template | Output |
 |----------|--------|

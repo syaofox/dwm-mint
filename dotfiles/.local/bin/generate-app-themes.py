@@ -3,7 +3,7 @@ import sys
 import os
 import re
 
-TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+TEMPLATES_DIR = os.path.expanduser('~/.config/theme-templates')
 
 TEMPLATE_OUTPUTS = [
     ('dunstrc.j2',            '~/.config/dunst/dunstrc'),
