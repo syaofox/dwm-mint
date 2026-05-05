@@ -3,38 +3,36 @@
 WALLPAPER_DIR="$HOME/.config/walls"
 WALLPAPER_CONF="$HOME/.config/wallpaper.conf"
 
-if [[ ! -d "$WALLPAPER_DIR" ]]; then
-    notify-send "change-wallpaper" "Wallpaper directory not found: $WALLPAPER_DIR"
-    exit 1
+notify() { notify-send "switch-wallpaper" "$1"; }
+
+set_wallpaper() {
+    local wallpaper="$1"
+    [[ ! -f "$wallpaper" ]] && { notify "File not found: $wallpaper"; return 1; }
+    if xwallpaper --zoom "$wallpaper"; then
+        echo "$wallpaper" > "$WALLPAPER_CONF"
+    else
+        notify "Failed to set wallpaper"
+        return 1
+    fi
+}
+
+[[ -d "$WALLPAPER_DIR" ]] || { notify "Directory not found: $WALLPAPER_DIR"; exit 1; }
+
+mapfile -t wallpapers < <(
+    find -L "$WALLPAPER_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.webp" \) | sort
+)
+
+(( ${#wallpapers[@]} )) || { notify "No wallpapers found"; exit 1; }
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PICKER="$SCRIPT_DIR/wallpaper-picker.py"
+
+if [[ -x "$PICKER" ]]; then
+    exec "$PICKER"
 fi
 
-mapfile -t wallpapers < <(find -L "$WALLPAPER_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.webp" \) | sort)
 
-if [[ ${#wallpapers[@]} -eq 0 ]]; then
-    notify-send "change-wallpaper" "No wallpapers found"
-    exit 1
-fi
 
-current=""
-if [[ -f "$WALLPAPER_CONF" ]]; then
-    current="$(cat "$WALLPAPER_CONF")"
-fi
+[[ -z "$selected" ]] && exit 1
 
-next_index=0
-if [[ -n "$current" ]]; then
-    for i in "${!wallpapers[@]}"; do
-        if [[ "$(realpath "${wallpapers[$i]}")" == "$(realpath "$current")" ]]; then
-            next_index=$(( (i + 1) % ${#wallpapers[@]} ))
-            break
-        fi
-    done
-fi
-
-next_wallpaper="${wallpapers[$next_index]}"
-
-if xwallpaper --zoom "$next_wallpaper"; then
-    echo "$next_wallpaper" > "$WALLPAPER_CONF"
-    # notify-send "change-wallpaper" "$(basename "$next_wallpaper")"
-else
-    notify-send "change-wallpaper" "Failed: xwallpaper error"
-fi
+set_wallpaper "$selected"
