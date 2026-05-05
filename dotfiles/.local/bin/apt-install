@@ -30,10 +30,10 @@ if [[ -n $pkg_names ]]; then
   echo "-----------------------------------"
   
   # 确认提示
-  read -p "是否继续安装？ [y/N] " -n 1 -r
+  read -p "是否继续安装？ [Y/n] " -n 1 -r
   echo
   
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
+  if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     echo -e "\n\033[1;33m正在安装软件包，请稍候...\033[0m\n"
     
     sudo apt install -y "${pkgs_array[@]}"
