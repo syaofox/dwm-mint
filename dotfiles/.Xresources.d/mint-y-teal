@@ -80,3 +80,7 @@ slock.init:     BG
 slock.input:    LOCK_INPUT
 slock.fail:     RED
 slock.text:     WHITE
+
+! wallpick 配色
+wallpick.background: BG
+wallpick.borderSelected: MAGENTA
