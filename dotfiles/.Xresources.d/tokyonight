@@ -1,6 +1,5 @@
 ! TokyoNight Theme Colors for dwm
 
-
 #define BLACK           #404768
 #define RED             #f7768e
 #define GREEN           #9ece6a
@@ -19,9 +18,11 @@
 #define LOCK_INPUT      #8272bb
 #define PS1_BRANCH      #868686
 #define GTK_THEME       Mint-Y-Purple
+#define GTK_ICON        Mint-Y-Purple
 #define GTK_FONT        Noto Sans 11
 #define DARK_THEME      0
 #define YAZI_DARK       tokyo-night
+#define YAZI_LIGHT      tokyo-night
 #define ROFI_SEL_FG     #FFFFFF
 
 ! dwm 窗口颜色 - 未选中，无客户端
@@ -72,7 +73,6 @@ slstatus.gpu:   WHITE
 slstatus.temp:  WHITE
 slstatus.kbd:   RED
 slstatus.swap:  WHITE
-
 slstatus.time:  WHITE
 
 ! slock 锁屏颜色
