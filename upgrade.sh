@@ -60,6 +60,7 @@ run_step "Upgrade Node.js"               "./setup/install-nodejs.sh"
 run_step "Upgrade lazydocker"            "./setup/install-lazydocker.sh"
 run_step "Upgrade opencode"              "./setup/install-opencode.sh"
 run_step "Upgrade yazi"                  "./setup/install-yazi.sh"
+run_step "Upgrade kitty"                "./setup/install-kitty.sh"
 run_step "Upgrade fzf shell integration" "./setup/install-fzf.sh"
 # run_step "Upgrade fonts"                 "./setup/install-fonts.sh"
 
