@@ -13,7 +13,7 @@
 #define FG              #cdd6f4
 #define BORDER          #313244
 #define SEL_BG          #181825
-#define TAG_UL          #b4befe
+#define TAG_UL          #cba6f7
 
 #define LOCK_INPUT      #f5c2e7
 #define PS1_BRANCH      #585b70

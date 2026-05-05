@@ -1,12 +1,12 @@
 ! dwm Original Classic Colors
 
-#define BLACK           #222222
+#define BLACK           #696969
 #define RED             #444444
 #define GREEN           #bbbbbb
 #define YELLOW          #eeeeee
 #define BLUE            #005577
-#define MAGENTA         #005577
-#define CYAN            #005577
+#define MAGENTA         #007eaf
+#define CYAN            #006e99
 #define WHITE           #eeeeee
 
 #define BG              #222222
