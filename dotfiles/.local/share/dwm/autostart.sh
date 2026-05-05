@@ -12,7 +12,7 @@ log "=== DWM session starting (PID: $$) ==="
 command -v dbus-update-activation-environment >/dev/null &&
     dbus-update-activation-environment --systemd --all
 
-/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 >/dev/null 2>&1 &
 
 numlockx on &
 
