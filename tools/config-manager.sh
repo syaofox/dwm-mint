@@ -124,7 +124,7 @@ fzf_select_backup_items() {
 
 fzf_select_restore_file() {
     local files=()
-    mapfile -t files < <(find "$BACKUP_BASE_DIR" -maxdepth 1 -name "backup_*.tar.gz" -type f 2>/dev/null | sort -r)
+    mapfile -t files < <(find "$BACKUP_BASE_DIR" -maxdepth 1 \( -name "backup_*.tar.gz" -o -name "backup_*.tar.gz.enc" \) -type f 2>/dev/null | sort -r)
 
     if [ ${#files[@]} -eq 0 ]; then
         echo -e "${YELLOW}未找到任何备份文件${NC}" >&2
@@ -311,8 +311,36 @@ EOF
     chmod -R 700 "backup_${TIMESTAMP}/ssh" "backup_${TIMESTAMP}/gnupg" 2>/dev/null || true
     find "backup_${TIMESTAMP}/ssh" "backup_${TIMESTAMP}/gnupg" -type f -exec chmod 600 {} \; 2>/dev/null || true
     if tar -cpzf "$ARCHIVE_NAME" "backup_${TIMESTAMP}"; then
-        ARCHIVE_SIZE=$(du -h "$ARCHIVE_NAME" | cut -f1)
         rm -rf "$BACKUP_DIR"
+
+        # 可选加密
+        echo ""
+        if yes_no "是否用密码加密备份文件？（方便安全地 push 到 git 仓库）" "n"; then
+            while true; do
+                read -s -p "输入加密密码: " PASS1
+                echo
+                read -s -p "确认密码: " PASS2
+                echo
+                if [ "$PASS1" != "$PASS2" ]; then
+                    echo -e "${RED}两次密码不一致，请重试${NC}"
+                elif [ -z "$PASS1" ]; then
+                    echo -e "${RED}密码不能为空${NC}"
+                else
+                    break
+                fi
+            done
+            ENC_ARCHIVE="${ARCHIVE_NAME}.enc"
+            if openssl enc -aes-256-cbc -salt -pbkdf2 -pass pass:"$PASS1" -in "$ARCHIVE_NAME" -out "$ENC_ARCHIVE" 2>/dev/null; then
+                rm -f "$ARCHIVE_NAME"
+                ARCHIVE_NAME="$ENC_ARCHIVE"
+                echo -e "${GREEN}[OK]${NC} 加密成功"
+            else
+                echo -e "${RED}[FAIL]${NC} 加密失败，保留未加密文件"
+            fi
+            unset PASS1 PASS2
+        fi
+
+        ARCHIVE_SIZE=$(du -h "$ARCHIVE_NAME" | cut -f1)
         echo ""
         echo "========================================"
         echo "          备份完成！"
@@ -333,7 +361,7 @@ EOF
 
 # ======================= 还原功能 =======================
 do_restore() {
-    mapfile -t BACKUP_FILES < <(find "$BACKUP_BASE_DIR" -maxdepth 1 -name "backup_*.tar.gz" -type f 2>/dev/null | sort -r)
+    mapfile -t BACKUP_FILES < <(find "$BACKUP_BASE_DIR" -maxdepth 1 \( -name "backup_*.tar.gz" -o -name "backup_*.tar.gz.enc" \) -type f 2>/dev/null | sort -r)
     if [ ${#BACKUP_FILES[@]} -eq 0 ]; then
         echo -e "${YELLOW}未找到任何备份文件 (${BACKUP_BASE_DIR}/backup_*.tar.gz)${NC}"
         press_enter
@@ -377,13 +405,35 @@ do_restore() {
 
     echo "选择: $(basename "$FULL_PATH")"
 
+    # 检测并解密加密的备份文件
+    ARCHIVE_TO_EXTRACT="$FULL_PATH"
+    CLEANUP_DECRYPTED=0
+    if [[ "$FULL_PATH" == *.enc ]]; then
+        echo -e "${YELLOW}检测到加密备份文件${NC}"
+        read -s -p "输入解密密码: " DEC_PASS
+        echo
+        DEC_ARCHIVE="${FULL_PATH%.enc}"
+        if ! openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$DEC_PASS" -in "$FULL_PATH" -out "$DEC_ARCHIVE" 2>/dev/null; then
+            echo -e "${RED}解密失败（密码错误或文件损坏）${NC}"
+            rm -f "$DEC_ARCHIVE" 2>/dev/null
+            press_enter
+            return 1
+        fi
+        ARCHIVE_TO_EXTRACT="$DEC_ARCHIVE"
+        CLEANUP_DECRYPTED=1
+        unset DEC_PASS
+        echo -e "${GREEN}[OK]${NC} 解密成功"
+    fi
+
     TEMP_RESTORE_DIR=$(mktemp -d -t config_restore_XXXXXX)
-    if ! tar -xzf "$FULL_PATH" -C "$TEMP_RESTORE_DIR" 2>/dev/null; then
+    if ! tar -xzf "$ARCHIVE_TO_EXTRACT" -C "$TEMP_RESTORE_DIR" 2>/dev/null; then
         echo -e "${RED}解压备份文件失败${NC}"
         rm -rf "$TEMP_RESTORE_DIR"
+        [ "$CLEANUP_DECRYPTED" = 1 ] && rm -f "$ARCHIVE_TO_EXTRACT"
         press_enter
         return 1
     fi
+    [ "$CLEANUP_DECRYPTED" = 1 ] && rm -f "$ARCHIVE_TO_EXTRACT"
 
     BACKUP_CONTENT_DIR=$(find "$TEMP_RESTORE_DIR" -maxdepth 1 -type d -name "backup_*" | head -1)
     if [ -z "$BACKUP_CONTENT_DIR" ]; then
