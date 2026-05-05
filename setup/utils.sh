@@ -21,9 +21,16 @@ compile_and_install() {
     log_info "Compiling and installing ${name}..."
 
     if [[ -d "$build_dir" ]]; then
-        log_info "Directory exists, updating repository..."
-        cd "$build_dir" || return 1
-        git pull || return 1
+        if [[ -d "$build_dir/.git" ]]; then
+            log_info "Directory exists, updating repository..."
+            cd "$build_dir" || return 1
+            git pull || return 1
+        else
+            log_info "Directory exists but not a git repository, re-cloning..."
+            rm -rf "$build_dir"
+            git clone "$repo_url" "$build_dir" || return 1
+            cd "$build_dir" || return 1
+        fi
     else
         git clone "$repo_url" "$build_dir" || return 1
         cd "$build_dir" || return 1

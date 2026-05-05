@@ -65,8 +65,8 @@ log_info "Verifying installation..."
 $LOCAL_BIN/yazi --version
 
 log_info "Installing plugins..."
-ya pkg add KKV9/compress
-ya pkg add yazi-rs/plugins:chmod
+ya pkg add KKV9/compress || true
+ya pkg add yazi-rs/plugins:chmod || true
 
 
 log_info "yazi installation complete"

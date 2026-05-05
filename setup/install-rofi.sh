@@ -43,11 +43,18 @@ REPO_URL="https://github.com/davatorium/rofi.git"
 BUILD_DIR="/tmp/rofi"
 
 if [[ -d "$BUILD_DIR" ]]; then
-    log_info "Updating repository..."
-    cd "$BUILD_DIR"
-    git checkout next 2>/dev/null || true
-    git pull
-    git submodule update --init
+    if [[ -d "$BUILD_DIR/.git" ]]; then
+        log_info "Updating repository..."
+        cd "$BUILD_DIR"
+        git checkout next 2>/dev/null || true
+        git pull
+        git submodule update --init
+    else
+        log_info "Directory exists but not a git repository, re-cloning..."
+        rm -rf "$BUILD_DIR"
+        git clone --recursive -b next "$REPO_URL" "$BUILD_DIR"
+        cd "$BUILD_DIR"
+    fi
 else
     git clone --recursive -b next "$REPO_URL" "$BUILD_DIR"
     cd "$BUILD_DIR"
