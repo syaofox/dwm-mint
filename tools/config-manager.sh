@@ -96,11 +96,12 @@ backup_item() {
 
 # ======================= fzf 选择函数 =======================
 fzf_select_backup_items() {
-    local items=("ssh    - SSH 配置 (含密钥)"
-                 "gnupg  - GPG 配置 (含密钥)"
-                 "dconf  - dconf 配置 (GNOME/GTK 设置)"
-                 "fcitx5 - Fcitx5 输入法配置")
-    local keys=("ssh" "gnupg" "dconf" "fcitx5")
+    local items=("ssh      - SSH 配置 (含密钥)"
+                 "gnupg    - GPG 配置 (含密钥)"
+                 "dconf    - dconf 配置 (GNOME/GTK 设置)"
+                 "fcitx5   - Fcitx5 输入法配置"
+                 "keyrings - GNOME Keyring 配置")
+    local keys=("ssh" "gnupg" "dconf" "fcitx5" "keyrings")
     local selected=()
 
     if ! command -v fzf &>/dev/null; then
@@ -112,10 +113,11 @@ fzf_select_backup_items() {
     
     for desc in "${chosen[@]}"; do
         case "$desc" in
-            "ssh"*)    selected+=("ssh") ;;
-            "gnupg"*)  selected+=("gnupg") ;;
-            "dconf"*)  selected+=("dconf") ;;
-            "fcitx5"*) selected+=("fcitx5") ;;
+            "ssh"*)      selected+=("ssh") ;;
+            "gnupg"*)    selected+=("gnupg") ;;
+            "dconf"*)    selected+=("dconf") ;;
+            "fcitx5"*)   selected+=("fcitx5") ;;
+            "keyrings"*) selected+=("keyrings") ;;
         esac
     done
 
@@ -155,14 +157,15 @@ fzf_select_restore_items() {
     local available_desc=()
     local selected=()
 
-    for item in ssh gnupg dconf fcitx5; do
+    for item in ssh gnupg dconf fcitx5 keyrings; do
         if [ -d "$1/$item" ]; then
             case "$item" in
-                ssh)    desc="SSH 配置 (含密钥)" ;;
-                gnupg)  desc="GPG 配置 (含密钥)" ;;
-                dconf)  desc="dconf 配置 (GNOME/GTK 设置)" ;;
-                fcitx5) desc="Fcitx5 输入法配置" ;;
-                *)      desc="$item" ;;
+                ssh)      desc="SSH 配置 (含密钥)" ;;
+                gnupg)    desc="GPG 配置 (含密钥)" ;;
+                dconf)    desc="dconf 配置 (GNOME/GTK 设置)" ;;
+                fcitx5)   desc="Fcitx5 输入法配置" ;;
+                keyrings) desc="GNOME Keyring 配置" ;;
+                *)        desc="$item" ;;
             esac
             available_keys+=("$item")
             available_desc+=("$item - $desc")
@@ -183,10 +186,11 @@ fzf_select_restore_items() {
 
     for desc in "${chosen[@]}"; do
         case "$desc" in
-            "ssh"*)    selected+=("ssh") ;;
-            "gnupg"*)  selected+=("gnupg") ;;
-            "dconf"*)  selected+=("dconf") ;;
-            "fcitx5"*) selected+=("fcitx5") ;;
+            "ssh"*)      selected+=("ssh") ;;
+            "gnupg"*)    selected+=("gnupg") ;;
+            "dconf"*)    selected+=("dconf") ;;
+            "fcitx5"*)   selected+=("fcitx5") ;;
+            "keyrings"*) selected+=("keyrings") ;;
         esac
     done
 
@@ -220,12 +224,13 @@ do_backup() {
     else
         # 传统方式
         BACKUP_ITEMS_DESC=(
-            "ssh    - SSH 配置 (含密钥)"
-            "gnupg  - GPG 配置 (含密钥)"
-            "dconf  - dconf 配置 (GNOME/GTK 设置)"
-            "fcitx5 - Fcitx5 输入法配置"
+            "ssh      - SSH 配置 (含密钥)"
+            "gnupg    - GPG 配置 (含密钥)"
+            "dconf    - dconf 配置 (GNOME/GTK 设置)"
+            "fcitx5   - Fcitx5 输入法配置"
+            "keyrings - GNOME Keyring 配置"
         )
-        BACKUP_ITEM_KEYS=("ssh" "gnupg" "dconf" "fcitx5")
+        BACKUP_ITEM_KEYS=("ssh" "gnupg" "dconf" "fcitx5" "keyrings")
 
         echo "可选备份项目:"
         for i in "${!BACKUP_ITEMS_DESC[@]}"; do
@@ -289,6 +294,9 @@ do_backup() {
                 ;;
             fcitx5)
                 backup_item "$HOME/.config/fcitx5" "$BACKUP_DIR/fcitx5" "Fcitx5 配置" && ((BACKUP_COUNT++)) || ((SKIP_COUNT++))
+                ;;
+            keyrings)
+                backup_item "$HOME/.local/share/keyrings" "$BACKUP_DIR/keyrings" "GNOME Keyring 配置" && ((BACKUP_COUNT++)) || ((SKIP_COUNT++))
                 ;;
         esac
     done
@@ -455,14 +463,15 @@ do_restore() {
         # 传统方式
         AVAILABLE_KEYS=()
         AVAILABLE_DESC=()
-        for item in ssh gnupg dconf fcitx5; do
+        for item in ssh gnupg dconf fcitx5 keyrings; do
             if [ -d "$BACKUP_CONTENT_DIR/$item" ]; then
                 case "$item" in
-                    ssh)    desc="SSH 配置 (含密钥)" ;;
-                    gnupg)  desc="GPG 配置 (含密钥)" ;;
-                    dconf)  desc="dconf 配置 (GNOME/GTK 设置)" ;;
-                    fcitx5)  desc="Fcitx5 输入法配置" ;;
-                    *)      desc="$item" ;;
+                    ssh)      desc="SSH 配置 (含密钥)" ;;
+                    gnupg)    desc="GPG 配置 (含密钥)" ;;
+                    dconf)    desc="dconf 配置 (GNOME/GTK 设置)" ;;
+                    fcitx5)   desc="Fcitx5 输入法配置" ;;
+                    keyrings) desc="GNOME Keyring 配置" ;;
+                    *)        desc="$item" ;;
                 esac
                 AVAILABLE_KEYS+=("$item")
                 AVAILABLE_DESC+=("$item - $desc")
@@ -611,6 +620,22 @@ do_restore() {
                         fi
                     else
                         echo -e "${RED}[FAIL]${NC} 还原 Fcitx5 配置失败"
+                    fi
+                fi
+                ;;
+            keyrings)
+                if [ -d "$BACKUP_CONTENT_DIR/keyrings" ]; then
+                    if [ -d "$HOME/.local/share/keyrings" ]; then
+                        cp -r "$HOME/.local/share/keyrings" "$HOME/.local/share/keyrings$BACKUP_SUFFIX" 2>/dev/null || true
+                    fi
+                    rm -rf "$HOME/.local/share/keyrings" 2>/dev/null || true
+                    if rsync -a --no-perms --no-owner --no-group "$BACKUP_CONTENT_DIR/keyrings/" "$HOME/.local/share/keyrings/" 2>/dev/null; then
+                        chmod -R 700 "$HOME/.local/share/keyrings" 2>/dev/null || true
+                        find "$HOME/.local/share/keyrings" -type f -exec chmod 600 {} \; 2>/dev/null || true
+                        echo -e "${GREEN}[OK]${NC} 还原 GNOME Keyring 配置"
+                        ((RESTORE_COUNT++))
+                    else
+                        echo -e "${RED}[FAIL]${NC} 还原 GNOME Keyring 配置失败"
                     fi
                 fi
                 ;;
