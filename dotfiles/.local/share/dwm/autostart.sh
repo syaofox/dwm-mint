@@ -2,7 +2,7 @@
 log() { echo "[$(date +'%H:%M:%S')] $*"; }
 err() { echo "[$(date +'%H:%M:%S')] ERROR: $*" >&2; }
 
-LOGDIR="$HOME/.local/share/dwm"
+LOGDIR="/tmp/dwm"
 LOGFILE="$LOGDIR/dwm.log"
 mkdir -p "$LOGDIR"
 [ -f "$LOGFILE" ] && [ "$(stat -c%s "$LOGFILE")" -gt 1048576 ] && mv "$LOGFILE" "$LOGFILE.old"
