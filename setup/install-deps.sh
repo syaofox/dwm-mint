@@ -35,7 +35,7 @@ APT_packages=(
     alsa-utils pavucontrol pasystray
 
     # 其他
-    papirus-icon-theme adwaita-icon-theme-full gnome-icon-theme
+    papirus-icon-theme adwaita-icon-theme-full gnome-icon-theme numlockx
 
 )
 

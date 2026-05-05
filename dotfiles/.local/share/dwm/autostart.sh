@@ -14,6 +14,8 @@ command -v dbus-update-activation-environment >/dev/null &&
 
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
+numlockx on &
+
 for svc in xsettingsd dunst nm-applet; do
     log "Starting $svc..."
     $svc &
