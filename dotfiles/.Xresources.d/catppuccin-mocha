@@ -91,6 +91,7 @@ slstatus.net:   SLNET
 slstatus.cpu:   SLCPU
 slstatus.ram:   SLRAM
 slstatus.gpu:   SLGPU
+slstatus.kbd:   RED
 slstatus.time:  SLTIME
 
 ! slock 锁屏颜色
