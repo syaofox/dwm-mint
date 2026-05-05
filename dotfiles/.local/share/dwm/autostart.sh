@@ -42,7 +42,7 @@ picom --config "$HOME/.config/picom/picom.conf" -b &
 
 if command -v xwallpaper >/dev/null; then
     WALLPAPER_CONF="$HOME/.config/wallpaper.conf"
-    WALLPAPER=$([[ -f "$WALLPAPER_CONF" ]] && [[ -s "$WALLPAPER_CONF" ]] && cat "$WALLPAPER_CONF" || echo "$HOME/.config/walls/black-nord.png")
+    WALLPAPER=$([[ -f "$WALLPAPER_CONF" ]] && [[ -s "$WALLPAPER_CONF" ]] && cat "$WALLPAPER_CONF" || echo "$HOME/.config/walls/nord.png")
     log "Setting wallpaper: $WALLPAPER"
     xwallpaper --zoom "$WALLPAPER" &
 else
