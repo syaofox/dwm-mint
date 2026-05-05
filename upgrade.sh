@@ -51,6 +51,7 @@ echo ""
 run_step "Compile and upgrade DWM"       "./setup/install-dwm.sh"
 run_step "Compile and upgrade slstatus"  "./setup/install-slstatus.sh"
 run_step "Compile and upgrade slock"     "./setup/install-slock.sh"
+run_step "Compile and upgrade wallpick"     "./setup/install-wallpick.sh"
 
 run_step "Upgrade rofi"                  "./setup/install-rofi.sh"
 run_step "Upgrade Neovim"                "./setup/install-neovim.sh"
