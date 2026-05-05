@@ -7,8 +7,11 @@ case "$mode" in
     menu)
         rofi -show drun -show-icons
         ;;
-    file)
+    yazi)
         exec kitty --class yazi-float -e bash -l -i -c 'exec yazi'
+        ;;
+    file)
+        nemo --no-desktop
         ;;
     lock)
         slock -m "Single is simple, double is double."
@@ -26,7 +29,7 @@ case "$mode" in
         dunstify -r 9988 -t 2000 '截图已保存到剪贴板' || \
         dunstify -r 9988 -t 2000 '截图失败'
         ;;
-    save)
+    clipsave)
         mkdir -p "$HOME/Pictures/Screenshots"
         filepath="$HOME/Pictures/Screenshots/screenshot_$(date +%Y%m%d_%H%M%S).png"
         maim -s "$filepath" && \
