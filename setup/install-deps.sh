@@ -37,6 +37,7 @@ APT_packages=(
     # 其他
     papirus-icon-theme adwaita-icon-theme-full gnome-icon-theme numlockx
     cava 
+    btrfs-compsize
 
 )
 
