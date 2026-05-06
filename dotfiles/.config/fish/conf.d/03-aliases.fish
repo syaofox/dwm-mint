@@ -1,6 +1,6 @@
 if status is-interactive
     alias ls='ls --color=auto'
-    alias ll='ls -alF --time-style="+%m-%d %H:%M:%S"'
+    alias ll='ls -alhF --time-style="+%m-%d %H:%M:%S"'
     alias la='ls -A'
     alias trash='trash-put -v'
     alias comfyup='cd /mnt/github/comfyui-docker; touch ./custom_nodes/.update; docker compose restart; cd -'
