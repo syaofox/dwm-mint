@@ -8,7 +8,8 @@ if status is-interactive
     alias dcp='docker compose'
     alias myip='curl -s ifconfig.me'
     alias port='sudo ss -tulnp | grep'
-
+    alias vram='watch -n 1 nvidia-smi'
+    alias ram='watch -n 1 free -h'
 
     abbr -a v  nvim
     abbr -a vi nvim
