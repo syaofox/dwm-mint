@@ -13,7 +13,7 @@ TARGET="/target"
 MOUNT_TMP="/mnt"
 EFI_MOUNT="/boot/efi"
 
-MOUNT_OPTS="noatime,compress=zstd:3"
+MOUNT_OPTS="noatime,compress=zstd:3,ssd"
 
 SUBVOLUMES=(
     "@home|/home|no"
