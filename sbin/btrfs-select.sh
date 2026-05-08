@@ -228,6 +228,14 @@ FSTAB_HEADER
 
 # xiaoxin
 #10.10.10.6:/fs/1000/nfs /mnt/xiaoxin nfs defaults,_netdev,rw,nofail,hard,intr,timeo=600,retrans=2,x-systemd.automount 0 0
+
+
+# //10.10.10.6/data /mnt/xiaoxin/data cifs  credentials=/home/syaofox/.smbcredentials,uid=1000,gid=1000,iocharset=utf8,vers=3.0,rw,_netdev,nofail,x-systemd.automount,x-systemd.idle-timeout=60  0  0
+# //10.10.10.2/wd12t /mnt/dnas/wd12t cifs  credentials=/home/syaofox/.smbcredentials,uid=1000,gid=1000,iocharset=utf8,vers=3.0,rw,_netdev,nofail,x-systemd.automount,x-systemd.idle-timeout=60  0  0
+# //10.10.10.2/data /mnt/dnas/data cifs  credentials=/home/syaofox/.smbcredentials,uid=1000,gid=1000,iocharset=utf8,vers=3.0,rw,_netdev,nofail,x-systemd.automount,x-systemd.idle-timeout=60  0  0
+# //10.10.10.2/download /mnt/dnas/download cifs  credentials=/home/syaofox/.smbcredentials,uid=1000,gid=1000,iocharset=utf8,vers=3.0,rw,_netdev,nofail,x-systemd.automount,x-systemd.idle-timeout=60  0  0
+# //10.10.10.2/backup /mnt/dnas/backup cifs  credentials=/home/syaofox/.smbcredentials,uid=1000,gid=1000,iocharset=utf8,vers=3.0,rw,_netdev,nofail,x-systemd.automount,x-systemd.idle-timeout=60  0  0
+
 FSTAB_FOOTER
 
 } > "$TARGET/etc/fstab"

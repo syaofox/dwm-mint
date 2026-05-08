@@ -7,6 +7,11 @@ log_step "Creating common directories..."
 dirs=(
     "$HOME/tmp"
     "$HOME/project"
+    "/mnt/dnas/backup"
+    "/mnt/dnas/data"
+    "/mnt/dnas/download"
+    "/mnt/dnas/wd12t"
+    "/mnt/xiaoxin/data"
 )
 
 for dir in "${dirs[@]}"; do
