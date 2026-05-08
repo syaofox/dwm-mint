@@ -13,6 +13,8 @@ TARGET="/target"
 MOUNT_TMP="/mnt"
 EFI_MOUNT="/boot/efi"
 
+MOUNT_OPTS="noatime,compress=zstd:3"
+
 SUBVOLUMES=(
     "@home|/home|no"
     "@cache|/var/cache|no"
@@ -138,7 +140,7 @@ umount "$MOUNT_TMP"
 echo ""
 echo "--- 阶段 4/4: 挂载与配置 ---"
 
-mount -o noatime,compress=zstd,subvol=@ "$DEV_BTRFS" "$TARGET"
+mount -o "$MOUNT_OPTS",subvol=@ "$DEV_BTRFS" "$TARGET"
 
 for entry in "${SUBVOLUMES[@]}"; do
     IFS='|' read -r name target _ <<< "$entry"
@@ -147,15 +149,15 @@ for entry in "${SUBVOLUMES[@]}"; do
         echo "  迁移 ${target} 至子卷 $name..."
         migrate_mnt="${MOUNT_TMP}/.migrate-${name#@}"
         mkdir -p "$migrate_mnt"
-        mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "$migrate_mnt"
+        mount -o "$MOUNT_OPTS",subvol="$name" "$DEV_BTRFS" "$migrate_mnt"
         cp -a --reflink=auto "${TARGET}${target}/." "$migrate_mnt/"
         umount "$migrate_mnt"
         rmdir "$migrate_mnt"
-        mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
+        mount -o "$MOUNT_OPTS",subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
         echo "  已迁移 ${target} 至子卷 $name"
     else
         mkdir -p "${TARGET}${target}"
-        mount -o noatime,compress=zstd,subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
+        mount -o "$MOUNT_OPTS",subvol="$name" "$DEV_BTRFS" "${TARGET}${target}"
     fi
 done
 
@@ -189,18 +191,13 @@ SWAP_LINE=$(grep "swap" "$TARGET/etc/fstab" 2>/dev/null | grep -v "#")
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
 
 # Btrfs root subvolume
-UUID=$BTRFS_UUID /               btrfs   noatime,compress=zstd,subvol=@       0       1
+UUID=$BTRFS_UUID /               btrfs   $MOUNT_OPTS,subvol=@       0       1
 
 FSTAB_HEADER
 
     for entry in "${SUBVOLUMES[@]}"; do
-        IFS='|' read -r name target cow <<< "$entry"
-        if [ "$cow" = "yes" ]; then
-            opts="noatime,nodatacow"
-        else
-            opts="noatime,compress=zstd"
-        fi
-        echo "UUID=$BTRFS_UUID $target      btrfs   $opts,subvol=$name       0       2"
+        IFS='|' read -r name target _ <<< "$entry"
+        echo "UUID=$BTRFS_UUID $target      btrfs   $MOUNT_OPTS,subvol=$name       0       2"
     done
     echo ""
 
