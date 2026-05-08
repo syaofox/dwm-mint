@@ -224,10 +224,10 @@ FSTAB_HEADER
 #UUID=cb6285a3-5e94-4376-a9fc-38b10c28d40e /mnt/data btrfs rw,noatime,ssd,compress=zstd:3,discard=async,space_cache=v2,subvol=/@data 0 0
 
 # dnas
-#10.10.10.2:/fs/1000/nfs /mnt/dnas nfs defaults,_netdev,rw,nofail,soft,timeo=600,retrans=2,x-systemd.automount 0 0
+#10.10.10.2:/fs/1000/nfs /mnt/dnas nfs defaults,_netdev,rw,nofail,hard,intr,timeo=600,retrans=2,x-systemd.automount 0 0
 
 # xiaoxin
-#10.10.10.6:/fs/1000/nfs /mnt/xiaoxin nfs defaults,_netdev,rw,nofail,soft,timeo=600,retrans=2,x-systemd.automount 0 0
+#10.10.10.6:/fs/1000/nfs /mnt/xiaoxin nfs defaults,_netdev,rw,nofail,hard,intr,timeo=600,retrans=2,x-systemd.automount 0 0
 FSTAB_FOOTER
 
 } > "$TARGET/etc/fstab"
