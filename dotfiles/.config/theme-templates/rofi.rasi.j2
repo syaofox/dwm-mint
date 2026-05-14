@@ -7,7 +7,7 @@ configuration {
     foreground:                  {{ FG }};
     normal-foreground:           @foreground;
     normal-background:           rgba ({{ BG | hex_to_rgb }}, 63%);
-    selected-normal-foreground:  {{ ROFI_SEL_FG }};
+    selected-normal-foreground:  {{ WHITER }};
     selected-normal-background:  {{ MAGENTA }};
     selected-active-foreground:  {{ MAGENTA }};
     selected-active-background:  rgba ({{ MAGENTA | hex_to_rgb }}, 100%);
@@ -27,12 +27,12 @@ configuration {
     alternate-active-foreground: @active-foreground;
     spacing:                     1;
     background-color:            rgba (0, 0, 0, 0%);
-    border-color:                @foreground;
+    border-color:                @active-foreground;
 }
 
 window {
     background-color: @background;
-    border:           0;
+    border:           2;
     padding:          2;
     width:            30%;
 }

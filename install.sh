@@ -82,6 +82,7 @@ run_step "Install fonts" "./setup/install-fonts.sh"
 
 run_step "Update bashrc" "./setup/update-bashrc.sh"
 run_step "Deploy configuration files" "./setup/deploy-dotfiles.sh"
+run_step "Deploy system configuration files" "./setup/deploy-sdotfiles.sh"
 run_step "Generate DWM desktop entry" "./setup/generate-dwm-desktop.sh"
 run_step "Update user groups" "./setup/update-usergroup.sh"
 run_step "Install fish shell" "./setup/install-fish.sh"

@@ -74,9 +74,30 @@ switch_theme() {
 
     echo "$theme" > "$HOME/.config/theme"
 
+    # 先停 fcitx5（关闭时会覆写配置文件，必须在写入新配置前停止）
+    if pgrep -x fcitx5 > /dev/null; then
+        fcitx5-remote -e 2>/dev/null || true
+        sleep 0.3
+        pkill -f fcitx5 2>/dev/null || true
+    fi
+    systemctl stop --user fcitx5-daemon 2>/dev/null || true
+
     # 生成所有应用的配置文件
     if [ -f "$HOME/.local/bin/generate-app-themes.py" ]; then
         python3 "$HOME/.local/bin/generate-app-themes.py" "$theme_file"
+    fi
+
+    # 根据 DARK_THEME 设置 fcitx5 亮色/暗色主题
+    dark_val=$(grep -m1 '^#define\s\+DARK_THEME\s\+[0-9]' "$theme_file" | awk '{print $3}')
+    fcitx5_conf="$HOME/.config/fcitx5/conf/classicui.conf"
+    if [ "$dark_val" = "1" ]; then
+        # 深色 Xresources 主题 → 暗色
+        sed -i 's/^Theme=.*/Theme=dwm-dark/' "$fcitx5_conf"
+        sed -i 's/^DarkTheme=.*/DarkTheme=dwm-dark/' "$fcitx5_conf"
+    else
+        # 浅色 Xresources 主题 → 亮色
+        sed -i 's/^Theme=.*/Theme=dwm/' "$fcitx5_conf"
+        sed -i 's/^DarkTheme=.*/DarkTheme=dwm/' "$fcitx5_conf"
     fi
 
     # 应用 xfce4-terminal 配色
@@ -108,6 +129,9 @@ switch_theme() {
     if command -v kitty &>/dev/null && kitty @ set-colors --all --configured "$HOME/.config/kitty/kitty.conf" &>/dev/null; then
         :
     fi
+
+    # 启动 fcitx5 应用新主题
+    fcitx5 -d &
 
     # PS1 配置已通过 PROMPT_COMMAND 自动检测更新（见 env.sh）
     # 下次显示提示符时会自动应用新主题
