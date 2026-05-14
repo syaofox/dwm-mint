@@ -11,6 +11,11 @@ return {
     "nvim-telescope/telescope.nvim",
     { "ThePrimeagen/harpoon", branch = "harpoon2" },
     "folke/tokyonight.nvim",
+    "shaunsingh/nord.nvim",
+    "nyoom-engineering/oxocarbon.nvim",
+    "catppuccin/nvim",
+    "navarasu/onedark.nvim",
+    "sainnhe/everforest",
     "nvim-lualine/lualine.nvim",
     "brenoprata10/nvim-highlight-colors",
     "nvim-orgmode/orgmode",
@@ -19,4 +24,5 @@ return {
     "ojroques/vim-oscyank",
     "kkoomen/vim-doge",
     "captbaritone/better-indent-support-for-php-with-html",
+    "kdheepak/lazygit.nvim",
 }

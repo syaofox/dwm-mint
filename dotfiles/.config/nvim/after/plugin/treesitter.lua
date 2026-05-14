@@ -1,29 +1,17 @@
-vim.filetype.add({ extension = { goon = "goon" } })
-
--- Register custom goon parser with treesitter (old API)
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.goon = {
-    install_info = {
-        url = "/home/tony/repos/tree-sitter-goon",
-        files = { "src/parser.c" },
-    },
-    filetype = "goon",
-}
-
--- Configure nvim-treesitter with ensure_installed
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
     ensure_installed = {
         "json", "python", "ron", "javascript", "haskell", "d", "query",
         "typescript", "tsx", "rust", "zig", "php", "yaml", "html", "css",
         "markdown", "markdown_inline", "bash", "lua", "vim", "vimdoc", "c",
         "dockerfile", "gitignore", "astro", "go", "templ"
     },
-    highlight = {
-        enable = true,
-    },
-    indent = {
-        enable = true,
-    },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
 })
 
 require("nvim-treesitter-textobjects").setup({
