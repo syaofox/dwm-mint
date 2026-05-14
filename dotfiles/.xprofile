@@ -26,7 +26,7 @@ xss-lock -- slock -m "Single is simple, double is double." &
 if [ -f "$HOME/.config/theme" ]; then
     THEME=$(cat "$HOME/.config/theme")
 else
-    THEME="mint-y-teal"
+    THEME="tokyonight"
 fi
 
 # 加载 Xresources
