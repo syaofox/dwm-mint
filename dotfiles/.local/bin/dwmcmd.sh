@@ -17,7 +17,7 @@ case "$mode" in
         slock -m "Single is simple, double is double."
         ;;
     clipman)
-        xfce4-popup-clipman
+        xfce4-clipman-history
         ;;
     term)
         # 现在的 $@ 已经是空的（如果你只传了 term）
@@ -35,8 +35,5 @@ case "$mode" in
         maim -s "$filepath" && \
         dunstify -r 9988 -t 2000 "截图已保存: $filepath" || \
         dunstify -r 9988 -t 2000 '截图失败'
-        ;;
-    picom)
-        switch-picom.sh
         ;;
 esac

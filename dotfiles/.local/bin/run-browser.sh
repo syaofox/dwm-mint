@@ -1,49 +1,60 @@
 #!/usr/bin/env bash
 
-# 优先顺序: Brave Nightly > Brave APT > Brave Flatpak > Chrome > Firefox
+# 使用默认浏览器，没有则回退到 Firefox
 
 set -e
-
-BRAVE_NIGHTLY="/opt/brave.com/brave-origin-nightly/brave"
-BRAVE_APT="/opt/brave-bin/brave"
-BRAVE_FLATPAK_ID="com.brave.Browser"
-CHROME_APT="/usr/bin/google-chrome-stable"
-CHROME_FLATPAK_ID="com.google.Chrome"
-FIREFOX_APT="/usr/bin/firefox"
-FIREFOX_FLATPAK_ID="org.mozilla.firefox"
 
 export LANGUAGE=zh_CN
 export LANG=zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
 
-EXTRA_ARGS=(--unsafely-treat-insecure-origin-as-secure=http://10.10.10.6:8080/)
-
-if [ -x "$BRAVE_NIGHTLY" ]; then
-    exec "$BRAVE_NIGHTLY" "--password-store=basic" "${EXTRA_ARGS[@]}" "$@"
+# 无参数，启动浏览器首页
+if [ $# -eq 0 ]; then
+    if [ -n "$BROWSER" ]; then
+        exec $BROWSER
+    fi
+    if command -v gtk-launch >/dev/null 2>&1; then
+        default=$(xdg-settings get default-web-browser 2>/dev/null || true)
+        if [ -n "$default" ]; then
+            gtk-launch "${default%.desktop}"
+            exit 0
+        fi
+    fi
+    FIREFOX_APT="/usr/bin/firefox"
+    if [ -x "$FIREFOX_APT" ]; then
+        exec "$FIREFOX_APT"
+    fi
+    if command -v flatpak >/dev/null 2>&1 && flatpak info "org.mozilla.firefox" >/dev/null 2>&1; then
+        exec flatpak run "org.mozilla.firefox"
+    fi
+    notify-send "未找到浏览器" "未找到浏览器" || true
+    exit 1
 fi
 
-if [ -x "$BRAVE_APT" ]; then
-    exec "$BRAVE_APT" "--password-store=basic" "${EXTRA_ARGS[@]}" "$@"
+# $BROWSER 环境变量（最优先）
+if [ -n "$BROWSER" ]; then
+    # shellcheck disable=SC2086
+    exec $BROWSER "$@"
 fi
 
-if command -v flatpak >/dev/null 2>&1 && flatpak info "${BRAVE_FLATPAK_ID}" >/dev/null 2>&1; then
-    exec flatpak run "${BRAVE_FLATPAK_ID}" "${EXTRA_ARGS[@]}" "$@"
+# xdg-open（系统默认浏览器）
+if command -v xdg-open >/dev/null 2>&1; then
+    for url in "$@"; do
+        xdg-open "$url" || true
+    done
+    exit 0
 fi
 
-if [ -x "$CHROME_APT" ]; then
-    exec "$CHROME_APT" "${EXTRA_ARGS[@]}" "$@"
-fi
-
-if command -v flatpak >/dev/null 2>&1 && flatpak info "${CHROME_FLATPAK_ID}" >/dev/null 2>&1; then
-    exec flatpak run "${CHROME_FLATPAK_ID}" "${EXTRA_ARGS[@]}" "$@"
-fi
+# fallback: Firefox
+FIREFOX_APT="/usr/bin/firefox"
+FIREFOX_FLATPAK_ID="org.mozilla.firefox"
 
 if [ -x "$FIREFOX_APT" ]; then
-    exec "$FIREFOX_APT" "${EXTRA_ARGS[@]}" "$@"
+    exec "$FIREFOX_APT" "$@"
 fi
 
 if command -v flatpak >/dev/null 2>&1 && flatpak info "${FIREFOX_FLATPAK_ID}" >/dev/null 2>&1; then
-    exec flatpak run "${FIREFOX_FLATPAK_ID}" "${EXTRA_ARGS[@]}" "$@"
+    exec flatpak run "${FIREFOX_FLATPAK_ID}" "$@"
 fi
 
 notify-send "未找到浏览器" "未找到浏览器" || true
