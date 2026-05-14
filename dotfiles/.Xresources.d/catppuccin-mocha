@@ -13,17 +13,36 @@
 #define FG              #cdd6f4
 #define BORDER          #313244
 #define SEL_BG          #181825
-#define TAG_UL          #cba6f7
 
-#define LOCK_INPUT      #f5c2e7
-#define PS1_BRANCH      #585b70
+#define WHITER          #dbdbe6
+#define MAGENTA_LIGHT   #cba6f7
+#define MAGENTA_DARK    #af669c
+
+#define GTK_WIN_BG       #1e1e2e
+#define GTK_WIN_FG       #cdd6f4
+#define GTK_SURFACE_BG   #313244
+#define GTK_SURFACE_FG   #cdd6f4
+#define GTK_ACCENT_BG    #cba6f7
+#define GTK_ACCENT_FG    #1e1e2e
+#define GTK_ERROR_BG     #f2b8b5
+#define GTK_ERROR_FG     #601410
+
+#define GTK_WIN_BG_LIGHT       #cdd6f4
+#define GTK_WIN_FG_LIGHT       #1e1e2e
+#define GTK_SURFACE_BG_LIGHT   #b4c2e8
+#define GTK_SURFACE_FG_LIGHT   #1e1e2e
+#define GTK_ACCENT_BG_LIGHT    #cba6f7
+#define GTK_ACCENT_FG_LIGHT    #1e1e2e
+
 #define GTK_THEME       Mint-Y-Pink
 #define GTK_ICON        Mint-Y-Pink
 #define GTK_FONT        Noto Sans 11
 #define DARK_THEME      1
 #define YAZI_DARK       catppuccin-mocha
 #define YAZI_LIGHT      catppuccin-latte
-#define ROFI_SEL_FG     #11111b
+#define NVIM_THEME      catppuccin
+#define NVIM_PRE_SETUP  require("catppuccin").setup({flavour="mocha"})
+
 
 ! dwm 窗口颜色 - 未选中，无客户端
 dwm.col_norm_fg:        BLACK
@@ -61,8 +80,9 @@ dwm.col_titlesel_bg:    BG
 dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   TAG_UL
+dwm.col_tagunderline:   MAGENTA_LIGHT
 dwm.tagunderline: 1
+dwm.tagicons: 1
 
 ! slstatus 状态栏颜色
 slstatus.sep:   BLACK
@@ -77,10 +97,18 @@ slstatus.time:  WHITE
 
 ! slock 锁屏颜色
 slock.init:     BG
-slock.input:    LOCK_INPUT
+slock.input:    MAGENTA_DARK
 slock.fail:     RED
 slock.text:     WHITE
 
 ! wallpick 配色
 wallpick.background: BG
 wallpick.borderSelected: MAGENTA
+
+! sysmenu 配色
+sysmenu.background: BG
+sysmenu.foreground: FG
+sysmenu.backgroundSelected: MAGENTA
+sysmenu.foregroundSelected: WHITER
+sysmenu.backgroundHover: BORDER
+sysmenu.countdown: 5

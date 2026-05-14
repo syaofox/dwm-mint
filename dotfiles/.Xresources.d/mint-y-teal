@@ -4,26 +4,44 @@
 #define RED             #E74C3C
 #define GREEN           #2ECC71
 #define YELLOW          #E7B448
-#define BLUE            #25bdce
+#define BLUE            #25acce
 #define MAGENTA         #1A8693
 #define CYAN            #25bdce
-#define WHITE           #FFFFFF
+#define WHITE           #eeeff0
 
 #define BG              #162124
 #define FG              #E4E4E4
 #define BORDER          #5D6D72
 #define SEL_BG          #1A8693
-#define TAG_UL          #FFFFFF
 
-#define LOCK_INPUT      #d8f4f7
-#define PS1_BRANCH      #868686
+#define WHITER          #FFFFFF
+#define MAGENTA_LIGHT   #23acbb
+#define MAGENTA_DARK    #1a8593
+
+#define GTK_WIN_BG       #162124
+#define GTK_WIN_FG       #E4E4E4
+#define GTK_SURFACE_BG   #1b282c
+#define GTK_SURFACE_FG   #E4E4E4
+#define GTK_ACCENT_BG    #1A8693
+#define GTK_ACCENT_FG    #FFFFFF
+#define GTK_ERROR_BG     #f2b8b5
+#define GTK_ERROR_FG     #601410
+
+#define GTK_WIN_BG_LIGHT       #E4E4E4
+#define GTK_WIN_FG_LIGHT       #162124
+#define GTK_SURFACE_BG_LIGHT   #c8c8c8
+#define GTK_SURFACE_FG_LIGHT   #162124
+#define GTK_ACCENT_BG_LIGHT    #1A8693
+#define GTK_ACCENT_FG_LIGHT    #FFFFFF
+
 #define GTK_THEME       Mint-Y-Teal
 #define GTK_ICON        Mint-Y-Teal
 #define GTK_FONT        Noto Sans 11
 #define DARK_THEME      0
 #define YAZI_DARK       flexoki-dark
 #define YAZI_LIGHT      flexoki-light
-#define ROFI_SEL_FG     #FFFFFF
+#define NVIM_THEME      everforest
+
 
 ! dwm 窗口颜色 - 未选中，无客户端
 dwm.col_norm_fg:        BLACK
@@ -61,26 +79,35 @@ dwm.col_titlesel_bg:    BG
 dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   TAG_UL
+dwm.col_tagunderline:   MAGENTA_LIGHT
 dwm.tagunderline: 0
+dwm.tagicons: 1
 
 ! slstatus 状态栏颜色
 slstatus.sep:   BLACK
 slstatus.net:   WHITE
-slstatus.cpu:   WHITE
-slstatus.ram:   WHITE
-slstatus.gpu:   WHITE
-slstatus.temp:  WHITE
+slstatus.cpu:   GREEN
+slstatus.ram:   GREEN
+slstatus.temp:  GREEN
+slstatus.gpu:   BLUE
 slstatus.kbd:   RED
-slstatus.swap:  WHITE
-slstatus.time:  WHITE
+slstatus.swap:  YELLOW
+slstatus.time:  CYAN
 
 ! slock 锁屏颜色
 slock.init:     BG
-slock.input:    LOCK_INPUT
+slock.input:    MAGENTA_DARK
 slock.fail:     RED
 slock.text:     WHITE
 
 ! wallpick 配色
 wallpick.background: BG
 wallpick.borderSelected: MAGENTA
+
+! sysmenu 配色
+sysmenu.background: BG
+sysmenu.foreground: FG
+sysmenu.backgroundSelected: MAGENTA
+sysmenu.foregroundSelected: WHITER
+sysmenu.backgroundHover: BORDER
+sysmenu.countdown: 5

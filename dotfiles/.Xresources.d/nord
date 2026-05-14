@@ -13,17 +13,35 @@
 #define FG              #d8dee9
 #define BORDER          #4c566a
 #define SEL_BG          #434c5e
-#define TAG_UL          #88c0d0
 
-#define LOCK_INPUT      #5e81ac
-#define PS1_BRANCH      #4c566a
+#define WHITER          #FFFFFF
+#define MAGENTA_LIGHT   #88c0d0
+#define MAGENTA_DARK    #5e81ac
+
+#define GTK_WIN_BG       #2e3440
+#define GTK_WIN_FG       #d8dee9
+#define GTK_SURFACE_BG   #3b4252
+#define GTK_SURFACE_FG   #d8dee9
+#define GTK_ACCENT_BG    #b48ead
+#define GTK_ACCENT_FG    #2e3440
+#define GTK_ERROR_BG     #f2b8b5
+#define GTK_ERROR_FG     #601410
+
+#define GTK_WIN_BG_LIGHT       #d8dee9
+#define GTK_WIN_FG_LIGHT       #2e3440
+#define GTK_SURFACE_BG_LIGHT   #c2ccdc
+#define GTK_SURFACE_FG_LIGHT   #2e3440
+#define GTK_ACCENT_BG_LIGHT    #b48ead
+#define GTK_ACCENT_FG_LIGHT    #2e3440
+
 #define GTK_THEME       Mint-Y-Teal
 #define GTK_ICON        Mint-Y-Teal
 #define GTK_FONT        Noto Sans 11
 #define DARK_THEME      0
 #define YAZI_DARK       nord
 #define YAZI_LIGHT      nord
-#define ROFI_SEL_FG     #FFFFFF
+#define NVIM_THEME      nord
+
 
 ! dwm 窗口颜色 - 未选中，无客户端
 dwm.col_norm_fg:        BLACK
@@ -61,8 +79,9 @@ dwm.col_titlesel_bg:    BG
 dwm.col_titlesel_border: BG
 
 ! dwm Tag 标签下划线颜色
-dwm.col_tagunderline:   TAG_UL
+dwm.col_tagunderline:   MAGENTA_LIGHT
 dwm.tagunderline: 1
+dwm.tagicons: 1
 
 ! slstatus 状态栏颜色
 slstatus.sep:   BLACK
@@ -77,10 +96,18 @@ slstatus.time:  WHITE
 
 ! slock 锁屏颜色
 slock.init:     BG
-slock.input:    LOCK_INPUT
+slock.input:    MAGENTA_DARK
 slock.fail:     RED
 slock.text:     WHITE
 
 ! wallpick 配色
 wallpick.background: BG
 wallpick.borderSelected: MAGENTA
+
+! sysmenu 配色
+sysmenu.background: BG
+sysmenu.foreground: FG
+sysmenu.backgroundSelected: MAGENTA
+sysmenu.foregroundSelected: WHITER
+sysmenu.backgroundHover: BORDER
+sysmenu.countdown: 5
